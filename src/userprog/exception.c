@@ -148,7 +148,7 @@ page_fault (struct intr_frame *f)
   intr_enable ();
 
 
-  printf("fault_addr(%p)\n", fault_addr);
+  // printf("fault_addr(%p)\n", fault_addr);
 
 
   void *esp = NULL;
@@ -189,6 +189,7 @@ page_fault (struct intr_frame *f)
 
   /* check whether the frame mapped to the page has swapped out */
   if(result == NULL) {
+    // printf("fault 4\n");
     goto BA;
   }
 

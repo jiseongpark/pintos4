@@ -35,7 +35,7 @@ bool frame_set_fte(uint32_t *upage, uint32_t *kpage)
 	new_fte->paddr = kpage;
 	new_fte->uaddr = upage;
 	// new_fte->is_swapped_out = false;
-	new_fte->ut = thread_current();
+	new_fte->usertid = thread_current()->tid;
 
 	hash_insert(&frame_table, &new_fte->helem);
 	list_push_back(&fte_list, &new_fte->elem);
@@ -59,7 +59,16 @@ void frame_remove_fte(uint32_t* upage)
 
 FTE* frame_fifo_fte(void)
 {
-	return list_entry(list_begin(&fte_list), FTE, elem);
+	int currtid = thread_current()->tid;
+	struct list_elem *e = list_begin(&fte_list);
+	for(; e != list_end(&fte_list); e = list_next(e))
+	{
+		FTE *fte = list_entry(e, FTE, elem);
+		if(fte->usertid == currtid)
+			return fte;
+	}
+	printf("No frame for the current thread(%d) to swap out\n", currtid);
+	NOT_REACHED();
 }
 
 FTE* frame_fte_lookup(uint32_t *addr)
@@ -68,6 +77,7 @@ FTE* frame_fte_lookup(uint32_t *addr)
 	struct hash_elem *helem;
 
 	fte.uaddr = addr;
+	fte.usertid = thread_current()->tid;
 	helem = hash_find(&frame_table, &fte.helem);
 
 	return helem!=NULL ? hash_entry(helem, FTE, helem) : NULL;

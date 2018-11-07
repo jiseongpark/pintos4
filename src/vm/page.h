@@ -16,11 +16,12 @@ typedef struct page_table_entry
 	uint32_t *uaddr;          /* virtual address of the page */
 	uint32_t *paddr;          /* physical address of the page */
 
-	struct thread *ut;        /* process that use this frame */
+	int usertid;              /* process tid that use this frame */
 	bool is_swapped_out;      /* flag for swapped out */
 	bool dirty;               /* dirty bit flag */
 	bool writable;            /* writable flag */
 	bool load;				  /* for load segment page */
+	
 	struct hash_elem helem;   /* hash element */
 } PTE;
 

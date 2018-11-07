@@ -61,7 +61,7 @@ void page_map(uint32_t *upage, uint32_t *kpage, bool writable)
 	new_pte->dirty = false;
 	new_pte->is_swapped_out = false;
 	new_pte->writable = writable;
-	new_pte->ut = t;
+	new_pte->usertid = t->tid;
 	new_pte->load = false;
 	hash_insert(&t->pt, &new_pte->helem);
 	
@@ -86,6 +86,7 @@ PTE* page_pte_lookup(uint32_t *addr)
 	struct hash_elem *helem;
 
 	pte.uaddr = addr;
+	pte.usertid = thread_current()->tid;
 	helem = hash_find(&thread_current()->pt, &pte.helem);
 
 	return helem!=NULL ? hash_entry(helem, PTE, helem) : NULL;
