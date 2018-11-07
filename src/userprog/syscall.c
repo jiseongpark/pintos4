@@ -191,6 +191,7 @@ void syscall_exit(int status)
 
    printf("%s: ", thread_current()->name);
    printf("exit(%d)\n", status);
+   printf("exit tid : %d\n", thread_current()->tid);
 
    thread_current()->exit_status = status;
 

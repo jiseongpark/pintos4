@@ -63,7 +63,6 @@ bool swap_in(uint32_t *uaddr)
 
 	/* add to frame table */
 	paddr = frame_get_fte(uaddr, PAL_USER | PAL_ZERO);
-	printf("PADDR : %x\n", paddr);
 
 	if(paddr == NULL) return false;
 
@@ -72,7 +71,6 @@ bool swap_in(uint32_t *uaddr)
 	int i=0;
 	for(; i<8; i++)
 	{
-		printf("JUN HWA\n");
 		ASSERT(ste->sec_no[i] != -1);
 		disk_read(disk_get(1,1), ste->sec_no[i], paddr + i*512);
 		// memcpy(paddr + i * 512, contents, 512);
@@ -83,20 +81,15 @@ bool swap_in(uint32_t *uaddr)
 	// free(contents);
 
 	/* install page */
-	printf("UADDR : %x\n", uaddr);
-
-	// pagedir_clear_page(thread_current()->pagedir, uaddr);
 	ASSERT(pagedir_get_page(thread_current()->pagedir, uaddr) == NULL);
 	ASSERT(pagedir_set_page(thread_current()->pagedir, uaddr, paddr, true));
 
 	/* update mapping info in page table*/
 	pte->paddr = paddr;
 	pte->is_swapped_out = false;
-	printf("PTE UADDR : %x\n", pte->uaddr);
 
 	/* erase info from swap table */
 	swap_remove_ste(uaddr);
-	printf("SWAP IN END\n");
 	return true;
 }
 
@@ -128,7 +121,7 @@ bool swap_out(uint32_t *uaddr)
 		ASSERT(ste->sec_no[i] != -1);
 		// memcpy(contents, pte->paddr + i * 512, 512);
 		// ASSERT(!memcmp(pte->paddr + i * 512, contents, 512));
-		disk_write(disk_get(1,1), ste->sec_no[i], pte->paddr + i*512);
+		disk_write(disk_get(1,1), ste->sec_no[i], pte->paddr + i*512/4);
 		// memset(contents, 0, 512);
 		bitmap_set(swapdisk_bitmap, ste->sec_no[i], true);
 	}

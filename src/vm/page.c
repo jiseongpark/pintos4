@@ -62,6 +62,7 @@ void page_map(uint32_t *upage, uint32_t *kpage, bool writable)
 	new_pte->is_swapped_out = false;
 	new_pte->writable = writable;
 	new_pte->ut = t;
+	new_pte->load = false;
 	hash_insert(&t->pt, &new_pte->helem);
 	
 

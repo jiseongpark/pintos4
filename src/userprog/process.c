@@ -18,6 +18,7 @@
 #include "threads/thread.h"
 #include "threads/vaddr.h"
 #include "vm/frame.h"
+#include "vm/page.h"
 
 static thread_func start_process NO_RETURN;
 static bool load (const char *cmdline, void (**eip) (void), void **esp);
@@ -95,7 +96,6 @@ start_process (void *f_name)
   /* If load failed, quit. */
   palloc_free_page (file_name);
   
-  printf("IF : %x\n", if_.eip);
   /* Start the user process by simulating a return from an
      interrupt, implemented by intr_exit (in
      threads/intr-stubs.S).  Because intr_exit takes all of its
@@ -578,6 +578,8 @@ load_segment (struct file *file, off_t ofs, uint8_t *upage,
           return false; 
         }
         page_map(upage, kpage, writable);
+        PTE * temp = page_pte_lookup(pg_round_down(upage));
+        temp->load = true;
 
       /* Advance. */
       read_bytes -= page_read_bytes;
@@ -605,7 +607,6 @@ setup_stack (void **esp, char *file_name)
     // printf("UADDR : %x\n", fte->uaddr);
     swap_out(fte->uaddr);
     kpage = frame_get_fte(((uint8_t *) PHYS_BASE) - PGSIZE, PAL_USER | PAL_ZERO);
-    printf("KPAGE : %x\n", kpage);
   }
   
   // kpage = palloc_get_page ();
@@ -683,9 +684,6 @@ setup_stack (void **esp, char *file_name)
 
   free(argv);
   free(copy);
-
-  printf("SETUP STACK COMPLETE\n");
-  hex_dump(*esp, *esp ,100, true);
 
   return success;
 }

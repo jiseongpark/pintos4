@@ -156,11 +156,14 @@ page_fault (struct intr_frame *f)
   else esp = thread_current()->esp;
   // printf("ESP : %x\n", esp);
   /* check whether the case is stack growth */
+  PTE* result = page_pte_lookup(pg_round_down(fault_addr));
+
   if(PHYS_BASE-STACK_MAX <= fault_addr 
     && PHYS_BASE > fault_addr 
     && (esp <= fault_addr 
       || fault_addr == f->esp - 4 
-      || fault_addr == f->esp - 32))
+      || fault_addr == f->esp - 32)
+    && result == NULL)
   {
     
     uint32_t *kpage;
@@ -185,7 +188,6 @@ page_fault (struct intr_frame *f)
 
 
   /* check whether the frame mapped to the page has swapped out */
-  PTE* result = page_pte_lookup(pg_round_down(fault_addr));
   if(result == NULL) {
     goto BA;
   }
@@ -194,12 +196,11 @@ page_fault (struct intr_frame *f)
   {
     
     uint32_t *temp;
-    printf("EVICTION OCCUR\n");
+    // printf("EVICTION OCCUR\n");
     /* check whether there is no free frame */
     temp = palloc_get_page(PAL_USER | PAL_ZERO);
     if(temp == NULL)
     {
-      printf("!!!!!!!!!!!!!!!!1\n");
       /* find some frame that occupies PM by eviction policy */
       FTE *fte = frame_fifo_fte();
 
@@ -223,7 +224,6 @@ BA:
     // printf("fault 1\n");
     syscall_exit(-1);
   }
-  // printf("entered eviction\n");
 
   
   
@@ -234,6 +234,10 @@ BA:
   not_present = (f->error_code & PF_P) == 0;
   write = (f->error_code & PF_W) != 0;
   user = (f->error_code & PF_U) != 0;
+
+  if(write == 1 && result->load == true){
+    syscall_exit(-1);
+  }
 
   /* To implement virtual memory, delete the rest of the function
      body, and replace it with code that brings in the page to

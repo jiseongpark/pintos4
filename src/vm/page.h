@@ -20,7 +20,7 @@ typedef struct page_table_entry
 	bool is_swapped_out;      /* flag for swapped out */
 	bool dirty;               /* dirty bit flag */
 	bool writable;            /* writable flag */
-
+	bool load;				  /* for load segment page */
 	struct hash_elem helem;   /* hash element */
 } PTE;
 

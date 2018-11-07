@@ -1,12 +1,12 @@
-Copying tests/vm/pt-write-code2 into /tmp/PZye7MB7Cc.dsk...
-Copying ../../tests/vm/sample.txt into /tmp/PZye7MB7Cc.dsk...
-Writing command line to /tmp/1WuN6Ece2u.dsk...
-qemu -hda /tmp/1WuN6Ece2u.dsk -hdb /tmp/v3f7DD9dC8.dsk -hdc /tmp/PZye7MB7Cc.dsk -hdd /tmp/xBicjAUnQ8.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/pt-write-code2 into /tmp/zGNZhtLvEd.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/zGNZhtLvEd.dsk...
+Writing command line to /tmp/n7C0uTUcRS.dsk...
+qemu -hda /tmp/n7C0uTUcRS.dsk -hdb /tmp/GYcWnXax5a.dsk -hdc /tmp/zGNZhtLvEd.dsk -hdd /tmp/E8hmfCLeUW.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put pt-write-code2 put sample.txt run pt-write-code2
 Pintos booting with 4,088 kB RAM...
 373 pages available in kernel pool.
 372 pages available in user pool.
-Calibrating timer...  419,020,800 loops/s.
+Calibrating timer...  419,430,400 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 107 sector (53 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -18,137 +18,15 @@ Putting 'sample.txt' into the file system...
 Executing 'pt-write-code2':
 (pt-write-code2) begin
 (pt-write-code2) open "sample.txt"
-Page fault at 0x80480a0: rights violation error writing page in kernel context.
-Interrupt 0x0e (#PF Page-Fault Exception) at eip=0xc0106bac
- cr2=080480a0 error=00000003
- eax=0000003d ebx=00000001 ecx=c011b20c edx=00000000
- esi=080480a0 edi=080480a0 esp=c011286c ebp=c011dec4
- cs=0008 ds=0010 es=0010 ss=dfb0
-Kernel PANIC at ../../userprog/exception.c:105 in kill(): Kernel bug - unexpected interrupt in kernel
-Call stack: 0xc011ddb8Kernel PANIC recursion at ../../threads/thread.c:278 in thread_current().
-Kernel command line: -q -f put pt-write-code2 put sample.txt run pt-write-code2
-Pintos booting with 4,088 kB RAM...
-373 pages available in kernel pool.
-372 pages available in user pool.
-Calibrating timer...  471,040,000 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 107 sector (53 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'pt-write-code2' into the file system...
-Putting 'sample.txt' into the file system...
-Executing 'pt-write-code2':
-(pt-write-code2) begin
-(pt-write-code2) open "sample.txt"
-Page fault at 0x80480a0: rights violation error writing page in kernel context.
-Interrupt 0x0e (#PF Page-Fault Exception) at eip=0xc0106bac
- cr2=080480a0 error=00000003
- eax=0000003d ebx=00000001 ecx=c011b20c edx=00000000
- esi=080480a0 edi=080480a0 esp=c011286c ebp=c011dec4
- cs=0008 ds=0010 es=0010 ss=dfb0
-Kernel PANIC at ../../userprog/exception.c:105 in kill(): Kernel bug - unexpected interrupt in kernel
-Call stack: 0xc011ddb8Kernel PANIC recursion at ../../threads/thread.c:278 in thread_current().
-Kernel command line: -q -f put pt-write-code2 put sample.txt run pt-write-code2
-Pintos booting with 4,088 kB RAM...
-373 pages available in kernel pool.
-372 pages available in user pool.
-Calibrating timer...  419,020,800 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 107 sector (53 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'pt-write-code2' into the file system...
-Putting 'sample.txt' into the file system...
-Executing 'pt-write-code2':
-(pt-write-code2) begin
-(pt-write-code2) open "sample.txt"
-Page fault at 0x80480a0: rights violation error writing page in kernel context.
-Interrupt 0x0e (#PF Page-Fault Exception) at eip=0xc0106bac
- cr2=080480a0 error=00000003
- eax=0000003d ebx=00000001 ecx=c011b20c edx=00000000
- esi=080480a0 edi=080480a0 esp=c011286c ebp=c011dec4
- cs=0008 ds=0010 es=0010 ss=dfb0
-Kernel PANIC at ../../userprog/exception.c:105 in kill(): Kernel bug - unexpected interrupt in kernel
-Call stack: 0xc011ddb8Kernel PANIC recursion at ../../threads/thread.c:278 in thread_current().
-Kernel command line: -q -f put pt-write-code2 put sample.txt run pt-write-code2
-Pintos booting with 4,088 kB RAM...
-373 pages available in kernel pool.
-372 pages available in user pool.
-Calibrating timer...  419,020,800 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 107 sector (53 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'pt-write-code2' into the file system...
-Putting 'sample.txt' into the file system...
-Executing 'pt-write-code2':
-(pt-write-code2) begin
-(pt-write-code2) open "sample.txt"
-Page fault at 0x80480a0: rights violation error writing page in kernel context.
-Interrupt 0x0e (#PF Page-Fault Exception) at eip=0xc0106bac
- cr2=080480a0 error=00000003
- eax=0000003d ebx=00000001 ecx=c011b20c edx=00000000
- esi=080480a0 edi=080480a0 esp=c011286c ebp=c011dec4
- cs=0008 ds=0010 es=0010 ss=dfb0
-Kernel PANIC at ../../userprog/exception.c:105 in kill(): Kernel bug - unexpected interrupt in kernel
-Call stack: 0xc011ddb8Kernel PANIC recursion at ../../threads/thread.c:278 in thread_current().
-Kernel command line: -q -f put pt-write-code2 put sample.txt run pt-write-code2
-Pintos booting with 4,088 kB RAM...
-373 pages available in kernel pool.
-372 pages available in user pool.
-Calibrating timer...  419,020,800 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 107 sector (53 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'pt-write-code2' into the file system...
-Putting 'sample.txt' into the file system...
-Executing 'pt-write-code2':
-(pt-write-code2) begin
-(pt-write-code2) open "sample.txt"
-Page fault at 0x80480a0: rights violation error writing page in kernel context.
-Interrupt 0x0e (#PF Page-Fault Exception) at eip=0xc0106bac
- cr2=080480a0 error=00000003
- eax=0000003d ebx=00000001 ecx=c011b20c edx=00000000
- esi=080480a0 edi=080480a0 esp=c011286c ebp=c011dec4
- cs=0008 ds=0010 es=0010 ss=dfb0
-Kernel PANIC at ../../userprog/exception.c:105 in kill(): Kernel bug - unexpected interrupt in kernel
-Call stack: 0xc011ddb8Kernel PANIC recursion at ../../threads/thread.c:278 in thread_current().
-Kernel command line: -q -f put pt-write-code2 put sample.txt run pt-write-code2
-Pintos booting with 4,088 kB RAM...
-373 pages available in kernel pool.
-372 pages available in user pool.
-Calibrating timer...  419,020,800 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 107 sector (53 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'pt-write-code2' into the file system...
-Putting 'sample.txt' into the file system...
-Executing 'pt-write-code2':
-(pt-write-code2) begin
-(pt-write-code2) open "sample.txt"
-Page fault at 0x80480a0: rights violation error writing page in kernel context.
-Interrupt 0x0e (#PF Page-Fault Exception) at eip=0xc0106bac
- cr2=080480a0 error=00000003
- eax=0000003d ebx=00000001 ecx=c011b20c edx=00000000
- esi=080480a0 edi=080480a0 esp=c011286c ebp=c011dec4
- cs=0008 ds=0010 es=0010 ss=dfb0
-Kernel PANIC at ../../userprog/exception.c:105 in kill(): Kernel bug - unexpected interrupt in kernel
-Call stack: 0xc011ddb8Kernel PANIC recursion at ../../threads/thread.c:278 in thread_current().
-Kernel command line: -q -f put pt-write-code2 put sample.txt run pt-write-code2
-Pintos booting with 4,088 kB RAM...
-373 pages available in kernel pool.
-372 pages available in user pool.
-Calibrating timer...  
-TIMEOUT after 5 seconds of host CPU time
+pt-write-code2: exit(-1)
+Execution of 'pt-write-code2' complete.
+Timer: 68 ticks
+Thread: 6 idle ticks, 62 kernel ticks, 0 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 108 reads, 224 writes
+hd1:0: 107 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 1020 characters output
+Keyboard: 0 keys pressed
+Exception: 1 page faults
+Powering off...

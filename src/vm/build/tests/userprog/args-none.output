@@ -1,11 +1,11 @@
-Copying tests/userprog/args-none into /tmp/uxHFC4NQs7.dsk...
-Writing command line to /tmp/VXDAStrwqf.dsk...
-qemu -hda /tmp/VXDAStrwqf.dsk -hdb /tmp/Dr71LWrKHh.dsk -hdc /tmp/uxHFC4NQs7.dsk -hdd /tmp/isJgOVTwAO.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/args-none into /tmp/ETuL2aQoMW.dsk...
+Writing command line to /tmp/xlDorw6bSo.dsk...
+qemu -hda /tmp/xlDorw6bSo.dsk -hdb /tmp/R_D8pLkZMN.dsk -hdc /tmp/ETuL2aQoMW.dsk -hdd /tmp/aVJnyIJLee.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put args-none run args-none
 Pintos booting with 4,088 kB RAM...
 373 pages available in kernel pool.
 372 pages available in user pool.
-Calibrating timer...  419,020,800 loops/s.
+Calibrating timer...  445,644,800 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 103 sector (51 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -14,15 +14,6 @@ Formatting file system...done.
 Boot complete.
 Putting 'args-none' into the file system...
 Executing 'args-none':
-SETUP STACK COMPLETE
-bfffffd0              00 00 00 00-01 00 00 00 e0 ff ff bf |    ............|
-bfffffe0  ea ff ff bf 00 00 00 00-00 00 61 72 67 73 2d 6e |..........args-n|
-bffffff0  6f 6e 65 00 00 00 00 00-00 00 00 00 00 00 00 00 |one.............|
-c0000000  53 ff 00 f0 53 ff 00 f0-c3 e2 00 f0 53 ff 00 f0 |S...S.......S...|
-c0000010  53 ff 00 f0 53 ff 00 f0-53 ff 00 f0 53 ff 00 f0 |S...S...S...S...|
-c0000020  a5 fe 00 f0 87 e9 00 f0-df d5 00 f0 df d5 00 f0 |................|
-c0000030  df d5 00 f0 df d5 00 f0-                        |........        |
-IF : 8048726
 (args) begin
 (args) argc = 1
 (args) argv[0] = 'args-none'
@@ -30,13 +21,13 @@ IF : 8048726
 (args) end
 args-none: exit(0)
 Execution of 'args-none' complete.
-Timer: 59 ticks
-Thread: 3 idle ticks, 53 kernel ticks, 3 user ticks
+Timer: 72 ticks
+Thread: 1 idle ticks, 71 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 76 reads, 214 writes
 hd1:0: 103 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1534 characters output
+Console: 961 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...
