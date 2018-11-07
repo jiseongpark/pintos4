@@ -86,8 +86,9 @@ PTE* page_pte_lookup(uint32_t *addr)
 	struct hash_elem *helem;
 
 	pte.uaddr = addr;
-	pte.usertid = thread_current()->tid;
 	helem = hash_find(&thread_current()->pt, &pte.helem);
+
+	// ASSERT(helem != NULL);
 
 	return helem!=NULL ? hash_entry(helem, PTE, helem) : NULL;
 }

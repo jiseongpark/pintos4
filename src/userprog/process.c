@@ -90,7 +90,6 @@ start_process (void *f_name)
   if_.eflags = FLAG_IF | FLAG_MBS;
   success = load (file_name, &if_.eip, &if_.esp);
 
-  
     
   // printf("SUCCESS : %d\n", success);
   /* If load failed, quit. */
@@ -547,11 +546,11 @@ load_segment (struct file *file, off_t ofs, uint8_t *upage,
 
       if(kpage == NULL)
       {
-        
+        // printf("fifo occur proc(551) for tid(%d)\n", thread_current()->tid);
         FTE *fte = frame_fifo_fte();
         // printf("UADDR : %x\n", fte->uaddr);
         swap_out(fte->uaddr);
-
+        // printf("swap out pass\n");
         kpage = frame_get_fte(upage, PAL_USER | PAL_ZERO);
         // printf("KPAGE : %x\n", kpage);
       }
@@ -564,7 +563,7 @@ load_segment (struct file *file, off_t ofs, uint8_t *upage,
       // printf("UPAGE : %x\n", upage);  
       if (file_read (file, kpage, page_read_bytes) != (int) page_read_bytes)
         {
-          frame_remove_fte(upage);
+          frame_remove_fte(kpage);
           page_remove_pte(upage);
           return false; 
         }
@@ -573,7 +572,7 @@ load_segment (struct file *file, off_t ofs, uint8_t *upage,
       /* Add the page to the process's address space. */
       if (!install_page (upage, kpage, writable)) 
         {
-          frame_remove_fte(upage);
+          frame_remove_fte(kpage);
           page_remove_pte(upage);
           return false; 
         }
@@ -602,9 +601,8 @@ setup_stack (void **esp, char *file_name)
   // printf("KPAGE : %x\n", kpage);
   if(kpage == NULL)
   {
-
+    // printf("fifo occur proc(606)\n");
     FTE *fte = frame_fifo_fte();
-    // printf("UADDR : %x\n", fte->uaddr);
     swap_out(fte->uaddr);
     kpage = frame_get_fte(((uint8_t *) PHYS_BASE) - PGSIZE, PAL_USER | PAL_ZERO);
   }
@@ -621,7 +619,7 @@ setup_stack (void **esp, char *file_name)
       }
       else
       {
-        frame_remove_fte(((uint8_t *) PHYS_BASE) - PGSIZE);
+        frame_remove_fte(kpage);
         page_remove_pte(((uint8_t *) PHYS_BASE) - PGSIZE);
       }
     }
@@ -698,6 +696,7 @@ void* stack_growth(uint32_t *esp)
 
   if(kpage == NULL)
   {
+    // printf("fifo occur proc(702)\n");
     FTE *fte = frame_fifo_fte();
     swap_out(fte->uaddr);
     kpage = frame_get_fte(resp, PAL_USER | PAL_ZERO);

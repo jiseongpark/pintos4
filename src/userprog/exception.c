@@ -155,6 +155,7 @@ page_fault (struct intr_frame *f)
   if((f->error_code & PF_U) != 0) esp = f->esp;
   else esp = thread_current()->esp;
   // printf("ESP : %x\n", esp);
+  // printf("here here here here here\n");
   /* check whether the case is stack growth */
   PTE* result = page_pte_lookup(pg_round_down(fault_addr));
 
@@ -203,6 +204,7 @@ page_fault (struct intr_frame *f)
     if(temp == NULL)
     {
       /* find some frame that occupies PM by eviction policy */
+      // printf("fifo occur (exn 207)\n");
       FTE *fte = frame_fifo_fte();
 
       // printf("UADDR : %x\n", fte->uaddr);

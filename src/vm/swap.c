@@ -72,6 +72,7 @@ bool swap_in(uint32_t *uaddr)
 	for(; i<8; i++)
 	{
 		ASSERT(ste->sec_no[i] != -1);
+		// printf("SWAP IN PADDR : %p\n", paddr + i*512);
 		disk_read(disk_get(1,1), ste->sec_no[i], paddr + i*512);
 		// memcpy(paddr + i * 512, contents, 512);
 		// ASSERT(!memcmp(paddr + i * 512, contents, 512));
@@ -127,7 +128,7 @@ bool swap_out(uint32_t *uaddr)
 	}
 	
 	/* remvoe from frame table */
-	frame_remove_fte(uaddr);
+	frame_remove_fte(pte->paddr);
 	// free(contents);
 
 	return true;	
