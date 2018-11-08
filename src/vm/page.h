@@ -21,8 +21,9 @@ typedef struct page_table_entry
 	bool dirty;               /* dirty bit flag */
 	bool writable;            /* writable flag */
 	bool load;				  /* for load segment page */
-	
+
 	struct hash_elem helem;   /* hash element */
+	struct list_elem elem;    /* list element */
 } PTE;
 
 // struct hash page_table;       /* page table */

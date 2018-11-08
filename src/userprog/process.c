@@ -94,7 +94,7 @@ start_process (void *f_name)
   // printf("SUCCESS : %d\n", success);
   /* If load failed, quit. */
   palloc_free_page (file_name);
-  
+
   /* Start the user process by simulating a return from an
      interrupt, implemented by intr_exit (in
      threads/intr-stubs.S).  Because intr_exit takes all of its
@@ -183,6 +183,8 @@ process_exit (void)
 
 
   pd = curr->pagedir;
+
+  // page_clear_all(&curr->pt);
 
   if (pd != NULL) 
     {
@@ -542,7 +544,7 @@ load_segment (struct file *file, off_t ofs, uint8_t *upage,
       /* Get a page of memory. */
 
       uint8_t *kpage = frame_get_fte(upage, PAL_USER|PAL_ZERO);
-      // printf("KPAGE : %x\n", kpage);
+      // printf("UPAGE: %p KPAGE : %p\n", upage,kpage);
 
       if(kpage == NULL)
       {

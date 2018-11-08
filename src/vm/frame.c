@@ -18,8 +18,21 @@ uint8_t* frame_get_fte(uint32_t *upage, enum palloc_flags flag)
 {
 	if(upage == NULL) return NULL;
 
-	sema_down(&frame_sema);
 	uint32_t *kpage = palloc_get_page(flag);
+	printf("KPAGE : %p\n", kpage);
+	
+	if(frame_fte_lookup(kpage) != NULL)
+	{
+		printf("entered\n");
+		palloc_free_page(kpage);
+		FTE *fte = frame_fifo_fte();
+		swap_out(fte->uaddr);
+		kpage = palloc_get_page(flag);
+	}
+
+
+	sema_down(&frame_sema);
+
 	if(kpage == NULL)
 	{
 		sema_up(&frame_sema); 
@@ -27,6 +40,7 @@ uint8_t* frame_get_fte(uint32_t *upage, enum palloc_flags flag)
 	}
 	frame_set_fte(upage, kpage);
 	sema_up(&frame_sema);
+
 	return kpage;
 }
 
@@ -47,11 +61,12 @@ void frame_remove_fte(uint32_t* kpage)
 {
 	ASSERT(kpage!=NULL);
 	sema_down(&frame_sema);
-
+	// printf("REMOVE KPAGE : %p\n", kpage);
 	FTE* fte = frame_fte_lookup(kpage);
 
 	ASSERT(fte->paddr == kpage);
 	ASSERT(fte->usertid == thread_current()->tid);
+	
 
 	pagedir_clear_page(thread_current()->pagedir, fte->uaddr);
 	hash_delete(&frame_table, &fte->helem);
@@ -87,9 +102,11 @@ FTE* frame_fte_lookup(uint32_t *addr)
 	fte.paddr = addr;
 	helem = hash_find(&frame_table, &fte.helem);
 
-	ASSERT(helem != NULL);
-	// printf("lookup result : %p\n", hash_entry(helem, FTE, helem)->uaddr);
-	ASSERT(hash_entry(helem, FTE, helem)->usertid == thread_current()->tid);
+	// ASSERT(helem != NULL);
+	// printf("lookup result : %p, %p\n", hash_entry(helem, FTE, helem)->uaddr, addr);
+	// printf("USERTID : %d, tid : %d\n",hash_entry(helem, FTE, helem)->usertid, thread_current()->tid);
+
+	// ASSERT(hash_entry(helem, FTE, helem)->usertid == thread_current()->tid);
 
 	return helem!=NULL ? hash_entry(helem, FTE, helem) : NULL;
 }

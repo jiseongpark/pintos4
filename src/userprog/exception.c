@@ -148,7 +148,7 @@ page_fault (struct intr_frame *f)
   intr_enable ();
 
 
-  // printf("fault_addr(%p)\n", fault_addr);
+  printf("fault_addr(%p) - tid(%d)\n", fault_addr, thread_current()->tid);
 
 
   void *esp = NULL;
@@ -166,7 +166,7 @@ page_fault (struct intr_frame *f)
       || fault_addr == f->esp - 32)
     && result == NULL)
   {
-    
+    printf("stack growth\n");
     uint32_t *kpage;
     struct file *file = thread_current()->file;
     kpage = stack_growth(fault_addr);
@@ -179,24 +179,24 @@ page_fault (struct intr_frame *f)
 
   /* PJ2 consideration */
   if(fault_addr == NULL){
-    // printf("fault 2\n");
+    printf("fault 2\n");
     syscall_exit(-1);
   }
   if(is_kernel_vaddr(fault_addr)){
-    // printf("fault 3\n");
+    printf("fault 3\n");
     syscall_exit(-1); 
   }
 
 
   /* check whether the frame mapped to the page has swapped out */
   if(result == NULL) {
-    // printf("fault 4\n");
+    printf("fault 4\n");
     goto BA;
   }
 
   if( result->is_swapped_out )
   {
-    
+    printf("eviction\n");
     uint32_t *temp;
     // printf("EVICTION OCCUR\n");
     /* check whether there is no free frame */
@@ -224,7 +224,7 @@ BA:
   /* accessed address is not in pagedir */
   if(pagedir_get_page(thread_current()->pagedir, fault_addr) == NULL)
   {
-    // printf("fault 1\n");
+    printf("fault 1\n");
     syscall_exit(-1);
   }
 

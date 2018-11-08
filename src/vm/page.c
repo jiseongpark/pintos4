@@ -93,7 +93,37 @@ PTE* page_pte_lookup(uint32_t *addr)
 	return helem!=NULL ? hash_entry(helem, PTE, helem) : NULL;
 }
 
+void page_clear_all(struct hash* page_table)
+{
+	ASSERT(page_table != NULL);
 
+	struct list del_list;
+	list_init(&del_list);
+
+	struct hash_iterator i;
+	// printf("HERE\n");
+	hash_first(&i, page_table);
+	// printf("HERE HERE\n");
+
+	while(hash_next(&i))
+	{
+		PTE *pte = hash_entry(hash_cur(&i), FTE, helem);
+		list_push_back(&del_list, &pte->elem);
+	}
+
+	struct list_elem *del_elem;
+
+	while(!list_empty(&del_list))
+	{
+		del_elem = list_pop_front(&del_elem);
+		PTE *pte = list_entry(del_elem, PTE, elem);
+		frame_remove_fte(pte->paddr);
+		page_remove_pte(pte->uaddr);
+		swap_remove_ste(pte->uaddr);
+	}
+	hash_destroy(page_table, NULL);
+	hash_destroy(&thread_current()->st, NULL);
+}
 
 unsigned page_hash_hash_helper(const struct hash_elem * element, void * aux)
 {

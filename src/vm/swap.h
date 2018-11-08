@@ -22,13 +22,14 @@ typedef struct swap_table_entry
 	struct hash_elem helem;       /* Hash element. */
 } STE;
 
-struct hash swap_table;           /* Swap table. */
+// struct hash swap_table;           /* Swap table. */
 
 struct semaphore swap_sema;       /* Swap table semaphore */
 
 struct bitmap *swapdisk_bitmap;   /* bitmap for managing swap disk */
 
 void swap_init(void);
+void swap_table_init(struct hash* h);
 STE* swap_set_ste(uint32_t *upage);
 void swap_remove_ste(uint32_t* upage);
 STE* swap_ste_lookup(uint32_t *addr);

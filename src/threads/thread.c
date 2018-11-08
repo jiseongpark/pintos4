@@ -206,6 +206,7 @@ thread_create (const char *name, int priority,
   // enum intr_level old_level = intr_disable();
   list_push_back(&thread_current()->child_list, &t->elem);
   page_table_init(&t->pt);
+  swap_table_init(&t->st);
   t->parent->child_num += 1;
 
   // sema_up(&t->parent->sema);

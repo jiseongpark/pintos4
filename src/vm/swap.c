@@ -7,9 +7,17 @@ void swap_init(void)
 {
 	sema_init(&swap_sema, 1);
 
+	// sema_down(&swap_sema);
+	// hash_init(&swap_table, swap_hash_hash_helper, swap_hash_less_helper, NULL);
+	// sema_up(&swap_sema);
+}
+
+void swap_table_init(struct hash* h)
+{
+	if(h == NULL) return
 	sema_down(&swap_sema);
-	hash_init(&swap_table, swap_hash_hash_helper, swap_hash_less_helper, NULL);
-	sema_up(&swap_sema);
+  	hash_init(h, swap_hash_hash_helper, swap_hash_less_helper, NULL);
+  	sema_up(&swap_sema);
 }
 
 void swapdisk_bitmap_init(void)
@@ -19,13 +27,15 @@ void swapdisk_bitmap_init(void)
 
 STE* swap_set_ste(uint32_t *upage)
 {
+	struct thread *t = thread_current();
+
 	sema_down(&swap_sema);
 	STE* new_ste = (STE*)malloc(sizeof(STE));
 	new_ste->uaddr = upage;
 	int i=0;
 	for(; i<8; i++) new_ste->sec_no[i] = -1;
 
-	hash_insert(&swap_table, &new_ste->helem);
+	hash_insert(&t->st, &new_ste->helem);
 	sema_up(&swap_sema);
 
 	return new_ste;
@@ -33,10 +43,12 @@ STE* swap_set_ste(uint32_t *upage)
 
 void swap_remove_ste(uint32_t* upage)
 {
+	struct thread *t = thread_current();
+
 	if(upage==NULL) return;
 	sema_down(&swap_sema);
 	STE* ste = swap_ste_lookup(upage);
-	hash_delete(&swap_table, &ste->helem);
+	hash_delete(&t->st, &ste->helem);
 	free(ste);
 
 	sema_up(&swap_sema);
@@ -46,9 +58,10 @@ STE* swap_ste_lookup(uint32_t *addr)
 {
 	STE ste;
 	struct hash_elem *helem;
+	struct thread *t = thread_current();
 
 	ste.uaddr = addr;
-	helem = hash_find(&swap_table, &ste.helem);
+	helem = hash_find(&t->st, &ste.helem);
 
 	return helem!=NULL ? hash_entry(helem, STE, helem) : NULL;
 }
