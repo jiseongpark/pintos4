@@ -19,16 +19,9 @@ uint8_t* frame_get_fte(uint32_t *upage, enum palloc_flags flag)
 	if(upage == NULL) return NULL;
 
 	uint32_t *kpage = palloc_get_page(flag);
-	printf("KPAGE : %p\n", kpage);
+	// printf("KPAGE : %p\n", kpage);
 	
-	if(frame_fte_lookup(kpage) != NULL)
-	{
-		printf("entered\n");
-		palloc_free_page(kpage);
-		FTE *fte = frame_fifo_fte();
-		swap_out(fte->uaddr);
-		kpage = palloc_get_page(flag);
-	}
+	// ASSERT(frame_fte_lookup(kpage) != NULL);
 
 
 	sema_down(&frame_sema);
@@ -63,18 +56,47 @@ void frame_remove_fte(uint32_t* kpage)
 	sema_down(&frame_sema);
 	// printf("REMOVE KPAGE : %p\n", kpage);
 	FTE* fte = frame_fte_lookup(kpage);
+	if(fte == NULL){
+		sema_up(&frame_sema);
+		return;
+	}
+	ASSERT(fte->paddr == kpage);
+	ASSERT(fte->usertid == thread_current()->tid);
+
+	
+	
+	hash_delete(&frame_table, &fte->helem);
+	list_remove(&fte->elem);
+	
+	// printf("REMOVE KPAGE : %p\n", kpage);
+	palloc_free_page(kpage);
+	pagedir_clear_page(thread_current()->pagedir, fte->uaddr);
+	free(fte);
+
+	sema_up(&frame_sema);
+}
+
+void remove_fte(uint32_t* kpage)
+{
+	ASSERT(kpage!=NULL);
+	sema_down(&frame_sema);
+	// printf("REMOVE KPAGE : %p\n", kpage);
+	FTE* fte = frame_fte_lookup(kpage);
+	if(fte == NULL){
+		sema_up(&frame_sema);
+		return;
+	}
 
 	ASSERT(fte->paddr == kpage);
 	ASSERT(fte->usertid == thread_current()->tid);
 	
 
-	pagedir_clear_page(thread_current()->pagedir, fte->uaddr);
+	// pagedir_clear_page(thread_current()->pagedir, fte->uaddr);
 	hash_delete(&frame_table, &fte->helem);
 	list_remove(&fte->elem);
 	free(fte);
 	// printf("REMOVE KPAGE : %p\n", kpage);
-	palloc_free_page(kpage);
-
+	// palloc_free_page(kpage);
 	sema_up(&frame_sema);
 }
 

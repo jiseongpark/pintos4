@@ -1,12 +1,12 @@
-Copying tests/vm/mmap-over-stk into /tmp/hkTHhfSQj3.dsk...
-Copying ../../tests/vm/sample.txt into /tmp/hkTHhfSQj3.dsk...
-Writing command line to /tmp/xleQviC3k8.dsk...
-qemu -hda /tmp/xleQviC3k8.dsk -hdb /tmp/0751bATFR1.dsk -hdc /tmp/hkTHhfSQj3.dsk -hdd /tmp/HNFk3qxwYn.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/mmap-over-stk into /tmp/mM2bJfZtfn.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/mM2bJfZtfn.dsk...
+Writing command line to /tmp/aeUMzJfW7H.dsk...
+qemu -hda /tmp/aeUMzJfW7H.dsk -hdb /tmp/h3IHe4CRVT.dsk -hdc /tmp/mM2bJfZtfn.dsk -hdd /tmp/JZYWr0wECS.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put mmap-over-stk put sample.txt run mmap-over-stk
 Pintos booting with 4,088 kB RAM...
 373 pages available in kernel pool.
 372 pages available in user pool.
-Calibrating timer...  419,020,800 loops/s.
+Calibrating timer...  471,040,000 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 107 sector (53 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -22,8 +22,8 @@ Executing 'mmap-over-stk':
 (mmap-over-stk) try to mmap over stack segment: FAILED
 mmap-over-stk: exit(1)
 Execution of 'mmap-over-stk' complete.
-Timer: 57 ticks
-Thread: 4 idle ticks, 52 kernel ticks, 1 user ticks
+Timer: 62 ticks
+Thread: 5 idle ticks, 56 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 107 reads, 224 writes
 hd1:0: 107 reads, 0 writes

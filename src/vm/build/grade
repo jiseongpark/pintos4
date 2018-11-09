@@ -1,4 +1,3 @@
-../../tests/make-grade ../.. results ../../tests/vm/Grading | tee grade
 TOTAL TESTING SCORE: 58.6%
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 

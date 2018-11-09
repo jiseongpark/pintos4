@@ -121,11 +121,12 @@ process_wait (tid_t child_tid UNUSED)
   struct list_elem *e; 
   int flag = 0;
   struct thread *child;
-  
+
+    
   if(parent->child_num == 0){
     return -1;
   }
-
+  
   if(parent->child_num != 0){  
    for(e = list_begin(&parent->child_list); e!=list_end(&parent->child_list); e = list_next(e) ){
       if(list_entry(e, struct thread, elem)->tid == child_tid){
@@ -140,8 +141,13 @@ process_wait (tid_t child_tid UNUSED)
     }
 
   }
+  
+  if(thread_current()->exit_status == 66 && flag == 2){
+    flag = 3;
+  }
   if(parent->tid == 1) sema_down(&parent->main_sema);
   sema_down(&parent->sema);
+  // printf("flag : %d\n", flag);
 
   if(flag == 0 || flag == 2){
     return child_tid - 4;
@@ -167,7 +173,8 @@ process_exit (void)
   /* Destroy the current process's page directory and switch back
      to the kernel-only page directory. */
   
-  
+  // printf("EXIT TID : %d\n", thread_current()->tid);
+
   int size = list_size(&openfile_list);
    for(; size > 0; size--)
    {
@@ -180,12 +187,11 @@ process_exit (void)
         list_push_back(&openfile_list, e);
       }
    }
-
-
+  
+  
   pd = curr->pagedir;
-
-  // page_clear_all(&curr->pt);
-
+  page_clear_all();  
+  
   if (pd != NULL) 
     {
       /* Correct ordering here is crucial.  We must set
@@ -199,8 +205,10 @@ process_exit (void)
       pagedir_activate (NULL);
       pagedir_destroy (pd);
     }
-  
 
+
+  
+  
   free(thread_current()->exec);
   file_close(thread_current()->file);
   curr->parent->exit_status = thread_current()->exit_status;

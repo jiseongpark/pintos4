@@ -1,6 +1,6 @@
-Copying tests/vm/pt-bad-addr into /tmp/y2hmyrU1dw.dsk...
-Writing command line to /tmp/rpLf6n0m7c.dsk...
-qemu -hda /tmp/rpLf6n0m7c.dsk -hdb /tmp/LDtsbVzQeJ.dsk -hdc /tmp/y2hmyrU1dw.dsk -hdd /tmp/VbhwADO4pd.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/pt-bad-addr into /tmp/zf7pegCTyG.dsk...
+Writing command line to /tmp/qBJgkg3KZI.dsk...
+qemu -hda /tmp/qBJgkg3KZI.dsk -hdb /tmp/LlpNj0UiIj.dsk -hdc /tmp/zf7pegCTyG.dsk -hdd /tmp/yvXZZZo8A8.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put pt-bad-addr run pt-bad-addr
 Pintos booting with 4,088 kB RAM...
 373 pages available in kernel pool.
@@ -17,8 +17,8 @@ Executing 'pt-bad-addr':
 (pt-bad-addr) begin
 pt-bad-addr: exit(-1)
 Execution of 'pt-bad-addr' complete.
-Timer: 57 ticks
-Thread: 4 idle ticks, 53 kernel ticks, 0 user ticks
+Timer: 62 ticks
+Thread: 6 idle ticks, 54 kernel ticks, 2 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 76 reads, 216 writes
 hd1:0: 104 reads, 0 writes

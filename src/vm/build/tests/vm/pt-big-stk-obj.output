@@ -1,11 +1,11 @@
-Copying tests/vm/pt-big-stk-obj into /tmp/GMVO4YB3dw.dsk...
-Writing command line to /tmp/ZVWekIB6Tg.dsk...
-qemu -hda /tmp/ZVWekIB6Tg.dsk -hdb /tmp/UKRvB1EtU5.dsk -hdc /tmp/GMVO4YB3dw.dsk -hdd /tmp/vFBo7PboUp.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/pt-big-stk-obj into /tmp/Pr2zrHXKA5.dsk...
+Writing command line to /tmp/RAw6p3HFoW.dsk...
+qemu -hda /tmp/RAw6p3HFoW.dsk -hdb /tmp/rttHHc_7FM.dsk -hdc /tmp/Pr2zrHXKA5.dsk -hdd /tmp/fvVNB1Ys2T.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put pt-big-stk-obj run pt-big-stk-obj
 Pintos booting with 4,088 kB RAM...
 373 pages available in kernel pool.
 372 pages available in user pool.
-Calibrating timer...  419,020,800 loops/s.
+Calibrating timer...  471,040,000 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 113 sector (56 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -19,8 +19,8 @@ Executing 'pt-big-stk-obj':
 (pt-big-stk-obj) end
 pt-big-stk-obj: exit(0)
 Execution of 'pt-big-stk-obj' complete.
-Timer: 60 ticks
-Thread: 5 idle ticks, 54 kernel ticks, 1 user ticks
+Timer: 65 ticks
+Thread: 4 idle ticks, 59 kernel ticks, 2 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 204 reads, 234 writes
 hd1:0: 113 reads, 0 writes

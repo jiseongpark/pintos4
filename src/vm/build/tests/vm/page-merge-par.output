@@ -1,39 +1,7 @@
-Copying tests/vm/page-merge-par into /tmp/zcpezzcnJF.dsk...
-Copying tests/vm/child-sort into /tmp/zcpezzcnJF.dsk...
-Writing command line to /tmp/QffnMrDrW6.dsk...
-qemu -hda /tmp/QffnMrDrW6.dsk -hdb /tmp/bFgcamrGkM.dsk -hdc /tmp/zcpezzcnJF.dsk -hdd /tmp/bbwkUpJ1w0.dsk -m 4 -net none -nographic -monitor null
-Kernel command line: -q -f put page-merge-par put child-sort run page-merge-par
-Pintos booting with 4,088 kB RAM...
-373 pages available in kernel pool.
-372 pages available in user pool.
-Calibrating timer...  419,020,800 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 220 sector (110 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'page-merge-par' into the file system...
-Putting 'child-sort' into the file system...
-Executing 'page-merge-par':
-Kernel PANIC at ../../threads/thread.c:278 in thread_current(): assertion `is_thread (t)' failed.
-Call stack: 0xc011d134Kernel PANIC recursion at ../../threads/thread.c:278 in thread_current().
-Kernel command line: -q -f put page-merge-par put child-sort run page-merge-par
-Pintos booting with 4,088 kB RAM...
-373 pages available in kernel pool.
-372 pages available in user pool.
-Calibrating timer...  419,020,800 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 220 sector (110 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'page-merge-par' into the file system...
-Putting 'child-sort' into the file system...
-Executing 'page-merge-par':
-Kernel PANIC at ../../threads/thread.c:278 in thread_current(): assertion `is_thread (t)' failed.
-Call stack: 0xc011d134Kernel PANIC recursion at ../../threads/thread.c:278 in thread_current().
+Copying tests/vm/page-merge-par into /tmp/m32xgIlmEq.dsk...
+Copying tests/vm/child-sort into /tmp/m32xgIlmEq.dsk...
+Writing command line to /tmp/cPQiZBate9.dsk...
+qemu -hda /tmp/cPQiZBate9.dsk -hdb /tmp/ngp1kbgR1g.dsk -hdc /tmp/m32xgIlmEq.dsk -hdd /tmp/56_jEDu2Gc.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-merge-par put child-sort run page-merge-par
 Pintos booting with 4,088 kB RAM...
 373 pages available in kernel pool.
@@ -48,8 +16,21 @@ Boot complete.
 Putting 'page-merge-par' into the file system...
 Putting 'child-sort' into the file system...
 Executing 'page-merge-par':
-Kernel PANIC at ../../threads/thread.c:278 in thread_current(): assertion `is_thread (t)' failed.
-Call stack: 0xc011d134Kernel PANIC recursion at ../../threads/thread.c:278 in thread_current().
+(page-merge-par) begin
+(page-merge-par) init
+(page-merge-par) sort chunk 0
+No frame for the current thread(4) to swap out
+Kernel PANIC at ../../vm/frame.c:116 in frame_fifo_fte(): executed an unreachable statement
+Call stack: 0xc012fe70child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+cðÀ¬OÀà': exit(-1)
+Kernel PANIC recursion at ../../threads/thread.c:279 in thread_current().
 Kernel command line: -q -f put page-merge-par put child-sort run page-merge-par
 Pintos booting with 4,088 kB RAM...
 373 pages available in kernel pool.
@@ -64,36 +45,20 @@ Boot complete.
 Putting 'page-merge-par' into the file system...
 Putting 'child-sort' into the file system...
 Executing 'page-merge-par':
-Kernel PANIC at ../../threads/thread.c:278 in thread_current(): assertion `is_thread (t)' failed.
-Call stack: 0xc011d134Kernel PANIC recursion at ../../threads/thread.c:278 in thread_current().
-Kernel command line: -q -f put page-merge-par put child-sort run page-merge-par
-Pintos booting with 4,088 kB RAM...
-373 pages available in kernel pool.
-372 pages available in user pool.
-Calibrating timer...  413,286,400 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 220 sector (110 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'page-merge-par' into the file system...
-Putting 'child-sort' into the file system...
-Executing 'page-merge-par':
-Kernel PANIC at ../../threads/thread.c:278 in thread_current(): assertion `is_thread (t)' failed.
-Call stack: 0xc011d134Kernel PANIC recursion at ../../threads/thread.c:278 in thread_current().
-Kernel command line: -q -f put page-merge-par put child-sort run page-merge-par
-Pintos booting with 4,088 kB RAM...
-373 pages available in kernel pool.
-372 pages available in user pool.
-Calibrating timer...  419,020,800 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 220 sector (110 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'page-merge-par' into the file system...
-Putting 'child-sort' into the file system...
-Executing 'page-merge-par':
-Simulation terminated due to kernel panic.
+(page-merge-par) begin
+(page-merge-par) init
+(page-merge-par) sort chunk 0
+No frame for the current thread(4) to swap out
+Kernel PANIC at ../../vm/frame.c:116 in frame_fifo_fte(): executed an unreachable statement
+Call stack: 0xc012fe70child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+cðÀ¬OÀà': exit(-1)
+Kernel PANIC recursion at ../../threads/thread.c:279 in thread_current().
+
+TIMEOUT after 6 seconds of host CPU time

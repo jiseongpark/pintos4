@@ -1,5 +1,21 @@
 FAIL
-Kernel panic in run: PANIC at ../../threads/thread.c:278 in thread_current(): assertion `is_thread (t)' failed.
-Call stack: 0xc011d05c
-Translation of call stack:
-0xc011d05c: (unknown)
+Test output failed to match any acceptable form.
+
+Acceptable output:
+  (mmap-remove) begin
+  (mmap-remove) open "sample.txt"
+  (mmap-remove) mmap "sample.txt"
+  (mmap-remove) remove "sample.txt"
+  (mmap-remove) try to open "sample.txt"
+  (mmap-remove) create "another"
+  (mmap-remove) end
+Differences in `diff -u' format:
+  (mmap-remove) begin
+  (mmap-remove) open "sample.txt"
+  (mmap-remove) mmap "sample.txt"
+  (mmap-remove) remove "sample.txt"
+  (mmap-remove) try to open "sample.txt"
+  (mmap-remove) create "another"
+- (mmap-remove) end
+
+(Process exit codes are excluded for matching purposes.)

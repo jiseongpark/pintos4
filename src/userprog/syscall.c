@@ -8,6 +8,7 @@
 #include "threads/vaddr.h"
 #include "filesys/filesys.h"
 #include "userprog/exception.h"
+#include "vm/page.h"
 #include <string.h>
 
 // int num = 0;
@@ -188,7 +189,6 @@ void syscall_exit(int status)
 {
 
    struct thread * parent = thread_current()->parent;
-
    printf("%s: ", thread_current()->name);
    printf("exit(%d)\n", status);
    // printf("exit tid : %d\n", thread_current()->tid);
@@ -197,7 +197,7 @@ void syscall_exit(int status)
 
    list_remove(&thread_current()->elem);
    thread_current()->parent->child_num -= 1;
-
+   
    process_exit();
 }
 

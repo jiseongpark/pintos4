@@ -48,8 +48,10 @@ void swap_remove_ste(uint32_t* upage)
 	if(upage==NULL) return;
 	sema_down(&swap_sema);
 	STE* ste = swap_ste_lookup(upage);
-	hash_delete(&t->st, &ste->helem);
-	free(ste);
+	if(ste != NULL) {
+		hash_delete(&t->st, &ste->helem);
+		free(ste);
+	}
 
 	sema_up(&swap_sema);
 }

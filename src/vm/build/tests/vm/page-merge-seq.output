@@ -1,0 +1,125 @@
+Copying tests/vm/page-merge-seq into /tmp/pVFbqd_Y5D.dsk...
+Copying tests/vm/child-sort into /tmp/pVFbqd_Y5D.dsk...
+Writing command line to /tmp/b611fzhZgo.dsk...
+qemu -hda /tmp/b611fzhZgo.dsk -hdb /tmp/QaTzaPxVTu.dsk -hdc /tmp/pVFbqd_Y5D.dsk -hdd /tmp/JWcBfgwEBZ.dsk -m 4 -net none -nographic -monitor null
+Kernel command line: -q -f put page-merge-seq put child-sort run page-merge-seq
+Pintos booting with 4,088 kB RAM...
+373 pages available in kernel pool.
+372 pages available in user pool.
+Calibrating timer...  419,020,800 loops/s.
+hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 218 sector (109 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'page-merge-seq' into the file system...
+Putting 'child-sort' into the file system...
+Executing 'page-merge-seq':
+(page-merge-seq) begin
+(page-merge-seq) init
+(page-merge-seq) sort chunk 0
+No frame for the current thread(4) to swap out
+Kernel PANIC at ../../vm/frame.c:116 in frame_fifo_fte(): executed an unreachable statement
+Call stack: 0xc012de70child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+c–¿¨O¿‡': exit(-1)
+Kernel PANIC recursion at ../../threads/thread.c:279 in thread_current().
+Kernel command line: -q -f put page-merge-seq put child-sort run page-merge-seq
+Pintos booting with 4,088 kB RAM...
+373 pages available in kernel pool.
+372 pages available in user pool.
+Calibrating timer...  421,888,000 loops/s.
+hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 218 sector (109 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'page-merge-seq' into the file system...
+Putting 'child-sort' into the file system...
+Executing 'page-merge-seq':
+(page-merge-seq) begin
+(page-merge-seq) init
+(page-merge-seq) sort chunk 0
+No frame for the current thread(4) to swap out
+Kernel PANIC at ../../vm/frame.c:116 in frame_fifo_fte(): executed an unreachable statement
+Call stack: 0xc012de70child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+c–¿¨O¿‡': exit(-1)
+Kernel PANIC recursion at ../../threads/thread.c:279 in thread_current().
+Kernel command line: -q -f put page-merge-seq put child-sort run page-merge-seq
+Pintos booting with 4,088 kB RAM...
+373 pages available in kernel pool.
+372 pages available in user pool.
+Calibrating timer...  444,825,600 loops/s.
+hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 218 sector (109 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'page-merge-seq' into the file system...
+Putting 'child-sort' into the file system...
+Executing 'page-merge-seq':
+(page-merge-seq) begin
+(page-merge-seq) init
+(page-merge-seq) sort chunk 0
+No frame for the current thread(4) to swap out
+Kernel PANIC at ../../vm/frame.c:116 in frame_fifo_fte(): executed an unreachable statement
+Call stack: 0xc012de70child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+c–¿¨O¿‡': exit(-1)
+Kernel PANIC recursion at ../../threads/thread.c:279 in thread_current().
+Kernel command line: -q -f put page-merge-seq put child-sort run page-merge-seq
+Pintos booting with 4,088 kB RAM...
+373 pages available in kernel pool.
+372 pages available in user pool.
+Calibrating timer...  471,040,000 loops/s.
+hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 218 sector (109 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Formatting file system...done.
+Boot complete.
+Putting 'page-merge-seq' into the file system...
+Putting 'child-sort' into the file system...
+Executing 'page-merge-seq':
+(page-merge-seq) begin
+(page-merge-seq) init
+(page-merge-seq) sort chunk 0
+No frame for the current thread(4) to swap out
+Kernel PANIC at ../../vm/frame.c:116 in frame_fifo_fte(): executed an unreachable statement
+Call stack: 0xc012de70child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+child-sort: exit(-1)
+c–¿¨O¿‡': exit(-1)
+Kernel PANIC recursion at ../../threads/thread.c:279 in thread_current().
+Kernel command line: -q -f put page-merge-seq put child-sort run page-merge-seq
+Pintos booting with 4,088 kB RAM...
+373 pages available in kernel pool.
+372 pages available in user pool.
+Calibrating timer...  Simulation terminated due to kernel panic.

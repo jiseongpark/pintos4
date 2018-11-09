@@ -145,6 +145,7 @@ struct hash_elem *
 hash_delete (struct hash *h, struct hash_elem *e)
 {
   struct hash_elem *found = find_elem (h, find_bucket (h, e), e);
+  // printf("HERE\n");
   if (found != NULL) 
     {
       remove_elem (h, found);

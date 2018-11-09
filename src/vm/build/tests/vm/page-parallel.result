@@ -1,5 +1,1 @@
-FAIL
-Kernel panic in run: PANIC at ../../vm/frame.c:92 in frame_fte_lookup(): assertion `hash_entry(helem, FTE, helem)->usertid == thread_current()->tid' failed.
-Call stack: 0xc012ee74c
-Translation of call stack:
-0xc012ee74c: (unknown)
+PASS

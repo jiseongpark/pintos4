@@ -10,4 +10,5 @@ userprog/syscall.o: ../../userprog/syscall.c ../../userprog/syscall.h \
   ../../threads/palloc.h ../../userprog/pagedir.h ../../threads/vaddr.h \
   ../../threads/loader.h ../../userprog/process.h \
   ../../userprog/exception.h ../../threads/vaddr.h \
-  ../../filesys/filesys.h ../../lib/string.h
+  ../../filesys/filesys.h ../../vm/page.h ../../vm/swap.h \
+  ../../lib/string.h

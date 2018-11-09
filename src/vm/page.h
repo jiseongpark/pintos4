@@ -10,6 +10,7 @@
 #include "threads/palloc.h"
 #include "userprog/pagedir.h"
 #include "threads/vaddr.h"
+#include "vm/swap.h"
 
 typedef struct page_table_entry
 {
@@ -32,12 +33,15 @@ struct semaphore page_sema;   /* page semaphore */
 
 
 void page_init(void);
+void page_clear_all(void);
 // PTE* page_get_pte(uint32_t *upage);
 // PTE* page_set_pte(uint32_t *upage, uint32_t *kpage);
 void page_map(uint32_t *upage, uint32_t *kpage, bool writable);
 void page_remove_pte(uint32_t *upage);
 PTE* page_pte_lookup(uint32_t *addr);
 void page_table_init(struct hash* h);
+void page_destroy_all(void);
+
 unsigned page_hash_hash_helper(const struct hash_elem * element, void * aux);
 bool page_hash_less_helper(const struct hash_elem *a, const struct hash_elem *b, void *aux);
 

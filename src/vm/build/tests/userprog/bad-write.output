@@ -1,11 +1,11 @@
-Copying tests/userprog/bad-write into /tmp/lT8ZcCO29F.dsk...
-Writing command line to /tmp/4JzSjkrHvR.dsk...
-qemu -hda /tmp/4JzSjkrHvR.dsk -hdb /tmp/G9yGLbtrpX.dsk -hdc /tmp/lT8ZcCO29F.dsk -hdd /tmp/MVZk5pGJDj.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/bad-write into /tmp/yIznMjStvy.dsk...
+Writing command line to /tmp/M3h2Uurlde.dsk...
+qemu -hda /tmp/M3h2Uurlde.dsk -hdb /tmp/DuHITWZZcX.dsk -hdc /tmp/yIznMjStvy.dsk -hdd /tmp/lmDoy1eJ0P.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put bad-write run bad-write
 Pintos booting with 4,088 kB RAM...
 373 pages available in kernel pool.
 372 pages available in user pool.
-Calibrating timer...  419,020,800 loops/s.
+Calibrating timer...  471,040,000 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 104 sector (52 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -17,8 +17,8 @@ Executing 'bad-write':
 (bad-write) begin
 bad-write: exit(-1)
 Execution of 'bad-write' complete.
-Timer: 57 ticks
-Thread: 3 idle ticks, 54 kernel ticks, 0 user ticks
+Timer: 63 ticks
+Thread: 5 idle ticks, 57 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 76 reads, 216 writes
 hd1:0: 104 reads, 0 writes

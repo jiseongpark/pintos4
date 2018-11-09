@@ -4,4 +4,5 @@ vm/page.o: ../../vm/page.c ../../vm/page.h ../../lib/stdbool.h \
   ../../lib/debug.h ../../threads/synch.h ../../vm/frame.h \
   ../../threads/thread.h ../../threads/interrupt.h ../../filesys/file.h \
   ../../filesys/off_t.h ../../threads/synch.h ../../threads/palloc.h \
-  ../../userprog/pagedir.h ../../threads/vaddr.h ../../threads/loader.h
+  ../../userprog/pagedir.h ../../threads/vaddr.h ../../threads/loader.h \
+  ../../vm/swap.h

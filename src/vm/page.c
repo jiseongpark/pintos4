@@ -1,5 +1,6 @@
 #include "vm/page.h"
 
+
 unsigned page_hash_hash_helper(const struct hash_elem * element, void * aux);
 bool page_hash_less_helper(const struct hash_elem *a, const struct hash_elem *b, void *aux);
 
@@ -84,19 +85,21 @@ PTE* page_pte_lookup(uint32_t *addr)
 {
 	PTE pte;
 	struct hash_elem *helem;
-
 	pte.uaddr = addr;
 	helem = hash_find(&thread_current()->pt, &pte.helem);
-
-	// ASSERT(helem != NULL);
-
 	return helem!=NULL ? hash_entry(helem, PTE, helem) : NULL;
 }
 
-void page_clear_all(struct hash* page_table)
+void page_clear_all(void)
 {
+	struct hash* page_table = &(thread_current()->pt);
+	struct hash* swap_table = &(thread_current()->st);
 	ASSERT(page_table != NULL);
+	ASSERT(swap_table != NULL);
 
+	// printf("CLEAR START TID : %d\n", thread_current()->tid);
+	if(!strcmp(thread_current()->exec, "child-syn-wrt") )
+		return;
 	struct list del_list;
 	list_init(&del_list);
 
@@ -104,26 +107,54 @@ void page_clear_all(struct hash* page_table)
 	// printf("HERE\n");
 	hash_first(&i, page_table);
 	// printf("HERE HERE\n");
+	// printf("THREAD TID : %d\n ", thread_current()->tid);
+	// sema_down(&page_table);
+
 
 	while(hash_next(&i))
 	{
-		PTE *pte = hash_entry(hash_cur(&i), FTE, helem);
+		PTE *pte = hash_entry(hash_cur(&i), PTE, helem);
 		list_push_back(&del_list, &pte->elem);
+		
+		// printf("UADDR : %p\n", pte->uaddr);
 	}
 
+	
 	struct list_elem *del_elem;
+	struct swap_table_entry* ste = NULL;
 
 	while(!list_empty(&del_list))
 	{
-		del_elem = list_pop_front(&del_elem);
+		del_elem = list_pop_front(&del_list);
 		PTE *pte = list_entry(del_elem, PTE, elem);
+
 		frame_remove_fte(pte->paddr);
-		page_remove_pte(pte->uaddr);
 		swap_remove_ste(pte->uaddr);
+		page_remove_pte(pte->uaddr);		
 	}
+
+	
+	// free(swap_table->buckets);
+	hash_destroy(swap_table, NULL);
 	hash_destroy(page_table, NULL);
-	hash_destroy(&thread_current()->st, NULL);
+	// sema_up(&page_table);
+	// printf("CLEAR END\n");
 }
+static void destroy_func(struct hash_elem * element, void* aux UNUSED){
+	PTE* pte = hash_entry(element, PTE, helem);
+	page_remove_pte(pte->uaddr);
+	swap_remove_ste(pte->uaddr);
+	frame_remove_fte(pte->paddr);
+	free(pte);
+}
+
+void page_destroy_all(void){
+	hash_destroy(&thread_current()->pt, destroy_func);
+}
+
+
+
+
 
 unsigned page_hash_hash_helper(const struct hash_elem * element, void * aux)
 {

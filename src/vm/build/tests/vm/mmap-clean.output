@@ -1,12 +1,12 @@
-Copying tests/vm/mmap-clean into /tmp/kYLaN58P4B.dsk...
-Copying ../../tests/vm/sample.txt into /tmp/kYLaN58P4B.dsk...
-Writing command line to /tmp/xT0sahNsaf.dsk...
-qemu -hda /tmp/xT0sahNsaf.dsk -hdb /tmp/BP1wAdu1qZ.dsk -hdc /tmp/kYLaN58P4B.dsk -hdd /tmp/toOUj4LK3U.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/mmap-clean into /tmp/B71eBbdo4T.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/B71eBbdo4T.dsk...
+Writing command line to /tmp/nhs1awNe0S.dsk...
+qemu -hda /tmp/nhs1awNe0S.dsk -hdb /tmp/BZXMJmKdqp.dsk -hdc /tmp/B71eBbdo4T.dsk -hdd /tmp/lN1GUDo1QA.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put mmap-clean put sample.txt run mmap-clean
 Pintos booting with 4,088 kB RAM...
 373 pages available in kernel pool.
 372 pages available in user pool.
-Calibrating timer...  471,040,000 loops/s.
+Calibrating timer...  423,526,400 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 111 sector (55 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -19,106 +19,15 @@ Executing 'mmap-clean':
 (mmap-clean) begin
 (mmap-clean) open "sample.txt"
 (mmap-clean) mmap "sample.txt"
-Kernel PANIC at ../../threads/thread.c:278 in thread_current(): assertion `is_thread (t)' failed.
-Call stack: 0xc011d05cKernel PANIC recursion at ../../threads/thread.c:278 in thread_current().
-Kernel command line: -q -f put mmap-clean put sample.txt run mmap-clean
-Pintos booting with 4,088 kB RAM...
-373 pages available in kernel pool.
-372 pages available in user pool.
-Calibrating timer...  471,040,000 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 111 sector (55 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'mmap-clean' into the file system...
-Putting 'sample.txt' into the file system...
-Executing 'mmap-clean':
-(mmap-clean) begin
-(mmap-clean) open "sample.txt"
-(mmap-clean) mmap "sample.txt"
-Kernel PANIC at ../../threads/thread.c:278 in thread_current(): assertion `is_thread (t)' failed.
-Call stack: 0xc011d05cKernel PANIC recursion at ../../threads/thread.c:278 in thread_current().
-Kernel command line: -q -f put mmap-clean put sample.txt run mmap-clean
-Pintos booting with 4,088 kB RAM...
-373 pages available in kernel pool.
-372 pages available in user pool.
-Calibrating timer...  471,040,000 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 111 sector (55 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'mmap-clean' into the file system...
-Putting 'sample.txt' into the file system...
-Executing 'mmap-clean':
-(mmap-clean) begin
-(mmap-clean) open "sample.txt"
-(mmap-clean) mmap "sample.txt"
-Kernel PANIC at ../../threads/thread.c:278 in thread_current(): assertion `is_thread (t)' failed.
-Call stack: 0xc011d05cKernel PANIC recursion at ../../threads/thread.c:278 in thread_current().
-Kernel command line: -q -f put mmap-clean put sample.txt run mmap-clean
-Pintos booting with 4,088 kB RAM...
-373 pages available in kernel pool.
-372 pages available in user pool.
-Calibrating timer...  471,040,000 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 111 sector (55 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'mmap-clean' into the file system...
-Putting 'sample.txt' into the file system...
-Executing 'mmap-clean':
-(mmap-clean) begin
-(mmap-clean) open "sample.txt"
-(mmap-clean) mmap "sample.txt"
-Kernel PANIC at ../../threads/thread.c:278 in thread_current(): assertion `is_thread (t)' failed.
-Call stack: 0xc011d05cKernel PANIC recursion at ../../threads/thread.c:278 in thread_current().
-Kernel command line: -q -f put mmap-clean put sample.txt run mmap-clean
-Pintos booting with 4,088 kB RAM...
-373 pages available in kernel pool.
-372 pages available in user pool.
-Calibrating timer...  471,040,000 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 111 sector (55 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'mmap-clean' into the file system...
-Putting 'sample.txt' into the file system...
-Executing 'mmap-clean':
-(mmap-clean) begin
-(mmap-clean) open "sample.txt"
-(mmap-clean) mmap "sample.txt"
-Kernel PANIC at ../../threads/thread.c:278 in thread_current(): assertion `is_thread (t)' failed.
-Call stack: 0xc011d05cKernel PANIC recursion at ../../threads/thread.c:278 in thread_current().
-Kernel command line: -q -f put mmap-clean put sample.txt run mmap-clean
-Pintos booting with 4,088 kB RAM...
-373 pages available in kernel pool.
-372 pages available in user pool.
-Calibrating timer...  471,040,000 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
-hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
-hd1:0: detected 111 sector (55 kB) disk, model "QEMU HARDDISK", serial "QM00003"
-hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
-Formatting file system...done.
-Boot complete.
-Putting 'mmap-clean' into the file system...
-Putting 'sample.txt' into the file system...
-Executing 'mmap-clean':
-(mmap-clean) begin
-(mmap-clean) open "sample.txt"
-(mmap-clean) mmap "sample.txt"
-Kernel PANIC at ../../threads/thread.c:278 in thread_current(): assertion `is_thread (t)' failed.
-Call stack: 0xc011d05cKernel PANIC recursion at ../../threads/thread.c:278 in thread_current().
-Kernel command line: -q -f put mmap-clean put sample.txt run mmap-clean
-Pintos booting with 4,088 kB RAM...
-373 pages available in kernel pool.
-372 pages available in user pool.
-Calibrating timer...  
-TIMEOUT after 5 seconds of host CPU time
+mmap-clean: exit(-1)
+Execution of 'mmap-clean' complete.
+Timer: 67 ticks
+Thread: 5 idle ticks, 62 kernel ticks, 0 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 117 reads, 232 writes
+hd1:0: 111 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 1019 characters output
+Keyboard: 0 keys pressed
+Exception: 0 page faults
+Powering off...
