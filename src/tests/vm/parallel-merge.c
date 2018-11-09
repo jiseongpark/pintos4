@@ -59,9 +59,9 @@ sort_chunks (const char *subprocess, int exit_status)
       
       /* Sort with subprocess. */
       snprintf (cmd, sizeof cmd, "%s %s", subprocess, fn);
-      printf("HERE ALSO PASS\n");
+      // printf("HERE ALSO PASS\n");
       CHECK ((children[i] = exec (cmd)) != -1, "exec \"%s\"", cmd);
-      printf("HERE PASS\n");
+      // printf("HERE PASS\n");
       quiet = false;
 
     }

@@ -567,7 +567,6 @@ load_segment (struct file *file, off_t ofs, uint8_t *upage,
       }
 
       
-
       if(kpage == NULL)
         return false;
       /* Load this page. */

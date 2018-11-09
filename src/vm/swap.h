@@ -36,6 +36,6 @@ STE* swap_ste_lookup(uint32_t *addr);
 bool swap_in(uint32_t *uaddr);
 bool swap_out(uint32_t *uaddr);
 
-void swap_parent(struct frame_table_entry* fte, struct thread* parent);
+void swap_parent(uint32_t * uaddr);
 
 #endif /* vm/swap.h */

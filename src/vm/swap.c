@@ -54,6 +54,7 @@ STE* parent_swap_set(uint32_t* upage, struct thread * parent)
 	for(; i<8; i++) ste->sec_no[i] = -1;
 	hash_insert(&parent->st, &ste->helem);
 	sema_up(&swap_sema);
+	return ste;
 }
 
 
@@ -161,20 +162,26 @@ bool swap_out(uint32_t *uaddr)
 	return true;	
 }
 
-void swap_parent(struct frame_table_entry* fte, struct thread* parent){
+void swap_parent(uint32_t* uaddr){
 	/* page_pte_lookup*/
-	PTE* pte = parent_page_lookup(fte->uaddr,parent);
-	STE* ste = parent_swap_set(fte->uaddr, parent);
+	printf("UADDR : %p\n", uaddr);
+	struct thread* parent = thread_current()->parent;
+	PTE* pte = parent_page_lookup(uaddr,parent);
+	STE* ste = parent_swap_set(uaddr, parent);
 	/* swap_ste_lookup*/
-	
+	// printf("PTE : %p, STE : %p\n", pte->uaddr, ste->uaddr);
 	/* disk get */
+
+	printf("PARENT TID : %d\n", parent->tid);
 	int i = 0, cnt = 0;
 	while(cnt<8)
 	{
-		if(!bitmap_test(swapdisk_bitmap, i))
+		if(!bitmap_test(swapdisk_bitmap, i)){
 			ste->sec_no[cnt++] = i;
+		}
 		i++;
 	}
+
 
 	pte->is_swapped_out = true;
 
@@ -183,10 +190,11 @@ void swap_parent(struct frame_table_entry* fte, struct thread* parent){
 	for(; i<8; i++)
 	{
 		ASSERT(ste->sec_no[i] != -1);
+		// printf("SEC_NO : %d, %p\n", ste->sec_no[i], pte->paddr+i*512/4);
 		disk_write(disk_get(1,1), ste->sec_no[i], pte->paddr + i*512/4);
 		bitmap_set(swapdisk_bitmap, ste->sec_no[i], true);
 	}
-
+	// printf("HERE\n");
 	/* remvoe from frame table */
 	frame_remove_fte(pte->paddr);
 }

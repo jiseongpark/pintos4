@@ -62,44 +62,21 @@ void frame_remove_fte(uint32_t* kpage)
 		return;
 	}
 	ASSERT(fte->paddr == kpage);
-	ASSERT(fte->usertid == thread_current()->tid);
+	// ASSERT(fte->usertid == thread_current()->tid);
 
-	
-	
 	hash_delete(&frame_table, &fte->helem);
 	list_remove(&fte->elem);
 	
 	// printf("REMOVE KPAGE : %p\n", kpage);
 	palloc_free_page(kpage);
 	pagedir_clear_page(thread_current()->pagedir, fte->uaddr);
+
 	free(fte);
 
 	sema_up(&frame_sema);
 }
 
-void remove_fte(uint32_t* kpage)
-{
-	ASSERT(kpage!=NULL);
-	sema_down(&frame_sema);
-	// printf("REMOVE KPAGE : %p\n", kpage);
-	FTE* fte = frame_fte_lookup(kpage);
-	if(fte == NULL){
-		sema_up(&frame_sema);
-		return;
-	}
 
-	ASSERT(fte->paddr == kpage);
-	ASSERT(fte->usertid == thread_current()->tid);
-	
-
-	// pagedir_clear_page(thread_current()->pagedir, fte->uaddr);
-	hash_delete(&frame_table, &fte->helem);
-	list_remove(&fte->elem);
-	free(fte);
-	// printf("REMOVE KPAGE : %p\n", kpage);
-	// palloc_free_page(kpage);
-	sema_up(&frame_sema);
-}
 
 FTE* frame_fifo_fte(void)
 {
@@ -112,20 +89,22 @@ FTE* frame_fifo_fte(void)
 		if(fte->usertid == currtid)
 			return fte;
 	}
-
+	// NOT_REACHED();
+	printf("PASS HERE\n");
 	int partid = thread_current()->parent->tid;
-	FTE *fte;
+
+	FTE *fte = NULL;
+	e = list_begin(&fte_list);
 	for(; e != list_end(&fte_list); e = list_next(e))
 	{
 		fte = list_entry(e, FTE, elem);
-		// printf("fifo fte->tid : %d , curr tid : %d ", fte->usertid, currtid);
 		if(fte->usertid == partid)
 			break;
 	}	
-	if(fte == NULL) NOT_REACHED();
+	printf("FTE UADDR : %p\n", fte->uaddr);
+	
 
-	swap_parent(fte, thread_current()->parent);
-
+	swap_parent(fte->uaddr);
 	return NULL;
 }
 
