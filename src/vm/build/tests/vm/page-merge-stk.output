@@ -1,7 +1,7 @@
-Copying tests/vm/page-merge-stk into /tmp/dw9pwM5efU.dsk...
-Copying tests/vm/child-qsort into /tmp/dw9pwM5efU.dsk...
-Writing command line to /tmp/pcW5EzueLa.dsk...
-qemu -hda /tmp/pcW5EzueLa.dsk -hdb /tmp/mXw5QcSz6_.dsk -hdc /tmp/dw9pwM5efU.dsk -hdd /tmp/p3fIAMXoYP.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-merge-stk into /tmp/el74aEeE8y.dsk...
+Copying tests/vm/child-qsort into /tmp/el74aEeE8y.dsk...
+Writing command line to /tmp/d1aOD745Ex.dsk...
+qemu -hda /tmp/d1aOD745Ex.dsk -hdb /tmp/cBoMibHDLT.dsk -hdc /tmp/el74aEeE8y.dsk -hdd /tmp/SaHs18ERze.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-merge-stk put child-qsort run page-merge-stk
 Pintos booting with 4,088 kB RAM...
 373 pages available in kernel pool.
@@ -19,16 +19,7 @@ Executing 'page-merge-stk':
 (page-merge-stk) begin
 (page-merge-stk) init
 (page-merge-stk) sort chunk 0
-No frame for the current thread(4) to swap out
-Kernel PANIC at ../../vm/frame.c:116 in frame_fifo_fte(): executed an unreachable statement
-Call stack: 0xc012fe70child-qsort: exit(-1)
+(page-merge-stk) sort chunk 1
 child-qsort: exit(-1)
-child-qsort: exit(-1)
-child-qsort: exit(-1)
-child-qsort: exit(-1)
-child-qsort: exit(-1)
-child-qsort: exit(-1)
-child-qsort: exit(-1)
-cðÀ¬OÀà': exit(-1)
-Kernel PANIC recursion at ../../threads/thread.c:279 in thread_current().
-Simulation terminated due to kernel panic.
+
+TIMEOUT after 61 seconds of wall-clock time - load average: 0.17, 0.15, 0.08

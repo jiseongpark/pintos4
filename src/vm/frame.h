@@ -36,6 +36,7 @@ FTE* frame_fifo_fte(void);
 void frame_remove_fte(uint32_t* upage);
 FTE* frame_fte_lookup(uint32_t *addr);
 void remove_fte(uint32_t* kpage);
+void parent_remove_fte(uint32_t* kpage, struct thread* parent);
 
 
 

@@ -1,5 +1,2 @@
 FAIL
-Kernel panic in run: PANIC at ../../vm/frame.c:116 in frame_fifo_fte(): executed an unreachable statement
-Call stack: 0xc012fe70c
-Translation of call stack:
-0xc012fe70c: (unknown)
+run: open "buf0": FAILED

@@ -115,14 +115,17 @@ static void syscall_handler (struct intr_frame *f UNUSED)
 
    if(pagedir_get_page(thread_current()->pagedir, *(p+2))==NULL)
      {
-        // printf("P + 2 :%x\n", *(p+2));
-        // printf("ALIGN : %x\n", pg_round_down(*(p+2)));
-        // printf("STACK END : %x\n", thread_current()->stack_end);
+
+        PTE* result = page_pte_lookup(pg_round_down(*(p+2)));
+
+        if(result != NULL)
+          goto N;
         if(PHYS_BASE-STACK_MAX <= *(p+2) 
             && PHYS_BASE > *(p+2) 
             && (thread_current()->esp <= *(p+2) 
               || *(p+2) == f->esp - 4 
-              || *(p+2) == f->esp - 32))
+              || *(p+2) == f->esp - 32)
+            && result == NULL)
         {
           stack_growth(*(p+2));
           stack_growth(*(p+2)+PGSIZE);
@@ -151,11 +154,16 @@ static void syscall_handler (struct intr_frame *f UNUSED)
      case SYS_WRITE:   /* 9 */
      if(pagedir_get_page(thread_current()->pagedir, *(p+7))==NULL)
      {
+        PTE* result = page_pte_lookup(pg_round_down(*(p+7)));
+
+        if(result != NULL)
+          goto writeyame;
         f->eax=0;
         // printf("aaaaaaaaaaaaa\n");
         syscall_exit(-1);
         break;
      }
+     writeyame:
      f->eax = syscall_write(*(p+6), *(p+7), *(p+8));
      
      break;
@@ -191,6 +199,7 @@ void syscall_exit(int status)
    struct thread * parent = thread_current()->parent;
    printf("%s: ", thread_current()->name);
    printf("exit(%d)\n", status);
+   // printf("exit by tid : %d\n", thread_current()->tid);
    // printf("exit tid : %d\n", thread_current()->tid);
 
    thread_current()->exit_status = status;
@@ -206,15 +215,16 @@ int syscall_open(const char * file)
 
    int fd;
    struct file_info *new_file = malloc(sizeof(struct file_info));
-   
+
    if(file == NULL){
       free(new_file);
       return -1;
    }
    
-
-
-   new_file->file = filesys_open(file);
+   do{
+    new_file->file = filesys_open(file);
+   }while(new_file->file == NULL);
+    
 
    // file_deny_write(new_file->file);
    
@@ -233,7 +243,7 @@ int syscall_open(const char * file)
          new_file->deny_flag = 1;
       }
       
-      list_push_back(&openfile_list, &new_file->elem);
+      list_push_front(&openfile_list, &new_file->elem);
       // printf("list size : %d\n", list_size(&openfile_list));
       // printf("OPEN : %d\n", fd);
       return fd;
@@ -245,7 +255,9 @@ bool syscall_create(const char *file, unsigned initial_size)
    if(file==NULL){
       syscall_exit(-1);
    }
-   return filesys_create(file, initial_size);
+
+   bool success = filesys_create(file, initial_size);
+   return success;
 }
 
 pid_t syscall_exec(const char *cmd_line)
@@ -311,20 +323,7 @@ int syscall_read(int fd, void *buffer, unsigned size)
          of = list_entry(e, struct file_info, elem);
          if(of->fd == fd)
          {
-            // sema_down(&of->sema);
-            // of->read_count++;
-            // if(of->read_count ==1)
-            //    sema_down(&of->rw_sema);
-            // sema_up(&of->sema);
-            // printf("READ SIZE : %x\n", file_length(of->file));
             ret_size = file_read(of->file, buffer, size);
-            
-            // sema_down(&of->sema);
-            // of->read_count--;
-            // if(of->read_count == 0)
-            //    sema_up(&of->rw_sema);
-            // sema_up(&of->sema);
-
             return ret_size;
          }
       }

@@ -89,7 +89,7 @@ start_process (void *f_name)
   if_.cs = SEL_UCSEG;
   if_.eflags = FLAG_IF | FLAG_MBS;
   success = load (file_name, &if_.eip, &if_.esp);
-  printf("load complete %d\n", success);
+  // printf("load complete %d\n", success);
     
   // printf("SUCCESS : %d\n", success);
   /* If load failed, quit. */
@@ -122,13 +122,15 @@ process_wait (tid_t child_tid UNUSED)
   int flag = 0;
   struct thread *child;
 
-    
+  // printf("CHILD TID : %d\n", child_tid);
   if(parent->child_num == 0){
+
     return -1;
   }
-  
+  int num = 0;
   if(parent->child_num != 0){  
    for(e = list_begin(&parent->child_list); e!=list_end(&parent->child_list); e = list_next(e) ){
+      num++;
       if(list_entry(e, struct thread, elem)->tid == child_tid){
         child = list_entry(e, struct thread, elem);
         flag =1;
@@ -138,25 +140,29 @@ process_wait (tid_t child_tid UNUSED)
         flag = 2;
         break;
       }
+      if(num == parent->child_num){
+        flag = 3;
+        break;
+      }
     }
-
+    
   }
   
   if(thread_current()->exit_status == 66 && flag == 2){
     flag = 3;
   }
+
   if(parent->tid == 1) sema_down(&parent->main_sema);
   sema_down(&parent->sema);
-  // printf("flag : %d\n", flag);
-
+  
   if(flag == 0 || flag == 2){
+
     return child_tid - 4;
   }
   if(child_tid <= 0){
-
     return -1;
   }
-  
+  // printf("PARENT EXIT STATUS : %d\n", parent->exit_status);
   
   return parent->exit_status;
 }
@@ -563,6 +569,7 @@ load_segment (struct file *file, off_t ofs, uint8_t *upage,
           swap_out(fte->uaddr);
         // printf("swap out pass\n");
         kpage = frame_get_fte(upage, PAL_USER | PAL_ZERO);
+        ASSERT(kpage != NULL);
         // printf("KPAGE : %x\n", kpage);
       }
 
@@ -616,6 +623,7 @@ setup_stack (void **esp, char *file_name)
     if(fte != NULL)
       swap_out(fte->uaddr);
     kpage = frame_get_fte(((uint8_t *) PHYS_BASE) - PGSIZE, PAL_USER | PAL_ZERO);
+    ASSERT(kpage != NULL);
   }
   
   // kpage = palloc_get_page ();
@@ -712,6 +720,7 @@ void* stack_growth(uint32_t *esp)
     if(fte != NULL)
       swap_out(fte->uaddr);
     kpage = frame_get_fte(resp, PAL_USER | PAL_ZERO);
+    ASSERT(kpage != NULL);
   }
 
   

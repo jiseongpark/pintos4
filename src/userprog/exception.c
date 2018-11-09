@@ -148,7 +148,7 @@ page_fault (struct intr_frame *f)
   intr_enable ();
 
 
-  printf("fault_addr(%p) - tid(%d)\n", fault_addr, thread_current()->tid);
+  // printf("fault_addr(%p) - tid(%d)\n", fault_addr, thread_current()->tid);
 
 
   void *esp = NULL;
@@ -158,7 +158,6 @@ page_fault (struct intr_frame *f)
   // printf("here here here here here\n");
   /* check whether the case is stack growth */
   PTE* result = page_pte_lookup(pg_round_down(fault_addr));
-  printf("RESULT : %p\n", result->uaddr);
 
   if(PHYS_BASE-STACK_MAX <= fault_addr 
     && PHYS_BASE > fault_addr 
@@ -170,13 +169,16 @@ page_fault (struct intr_frame *f)
     // printf("stack growth\n");
     uint32_t *kpage;
     struct file *file = thread_current()->file;
+    // printf("file size : %x\n", file_length(file));
     kpage = stack_growth(fault_addr);
-    thread_current()->stack_end = pg_round_down(fault_addr);
-    int size = file_read(file, kpage, PGSIZE);
-    
+    // printf("stack growth kpage : %p\n", kpage);
+    // file_read(file, kpage, PGSIZE);
+    // printf("read size : %x\n", size);
+  
     // printf("P : %x\n", fault_addr);
     return;
   }
+
 
   /* PJ2 consideration */
   if(fault_addr == NULL){
@@ -197,7 +199,8 @@ page_fault (struct intr_frame *f)
 
   if( result->is_swapped_out )
   {
-    printf("eviction\n");
+
+    // printf("esp  viction\n");
     uint32_t *temp;
     // printf("EVICTION OCCUR\n");
     /* check whether there is no free frame */
@@ -207,10 +210,11 @@ page_fault (struct intr_frame *f)
       /* find some frame that occupies PM by eviction policy */
       // printf("fifo occur (exn 207)\n");
       FTE *fte = frame_fifo_fte();
-        
+      
       // printf("UADDR : %x\n", fte->uaddr);
       /* swap out the frame to disk and record it to swap table */ 
-      swap_out(fte->uaddr);
+      if(fte != NULL)
+        swap_out(fte->uaddr);
     }
     if(temp !=NULL){
          palloc_free_page(temp);

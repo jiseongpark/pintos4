@@ -125,6 +125,7 @@ bool swap_in(uint32_t *uaddr)
 
 	/* erase info from swap table */
 	swap_remove_ste(uaddr);
+	// printf("swap in complete, uaddr(%p)\n", uaddr);
 	return true;
 }
 
@@ -164,7 +165,7 @@ bool swap_out(uint32_t *uaddr)
 
 void swap_parent(uint32_t* uaddr){
 	/* page_pte_lookup*/
-	printf("UADDR : %p\n", uaddr);
+	// printf("UADDR : %p\n", uaddr);
 	struct thread* parent = thread_current()->parent;
 	PTE* pte = parent_page_lookup(uaddr,parent);
 	STE* ste = parent_swap_set(uaddr, parent);
@@ -172,7 +173,7 @@ void swap_parent(uint32_t* uaddr){
 	// printf("PTE : %p, STE : %p\n", pte->uaddr, ste->uaddr);
 	/* disk get */
 
-	printf("PARENT TID : %d\n", parent->tid);
+	// printf("PARENT TID : %d\n", parent->tid);
 	int i = 0, cnt = 0;
 	while(cnt<8)
 	{
@@ -196,7 +197,7 @@ void swap_parent(uint32_t* uaddr){
 	}
 	// printf("HERE\n");
 	/* remvoe from frame table */
-	frame_remove_fte(pte->paddr);
+	parent_remove_fte(pte->paddr, parent);
 }
 
 unsigned swap_hash_hash_helper(const struct hash_elem * element, void * aux)

@@ -20,6 +20,7 @@ uint8_t* frame_get_fte(uint32_t *upage, enum palloc_flags flag)
 	if(upage == NULL) return NULL;
 
 	uint32_t *kpage = palloc_get_page(flag);
+	// if(kpage==NULL) printf("palloc failed\n");
 	// printf("KPAGE : %p\n", kpage);
 	
 	// ASSERT(frame_fte_lookup(kpage) != NULL);
@@ -82,18 +83,37 @@ FTE* frame_fifo_fte(void)
 {
 	int currtid = thread_current()->tid;
 	struct list_elem *e = list_begin(&fte_list);
+	int partid = thread_current()->parent->tid;
+	FTE *fte = NULL;
+
+	int num = 0;
+	for(; e != list_end(&fte_list); e = list_next(e)){
+		FTE *fte = list_entry(e, FTE, elem);
+		// printf("fifo fte->tid : %d , curr tid : %d ", fte->usertid, currtid);
+		if(fte->usertid == currtid){
+			num++;
+		}
+
+	}
+	// print("NUM : %d\n", num);
+	if(num < 5){
+		goto PARENT_SWAP;
+	}
+	e = list_begin(&fte_list);
 	for(; e != list_end(&fte_list); e = list_next(e))
 	{
 		FTE *fte = list_entry(e, FTE, elem);
+		
 		// printf("fifo fte->tid : %d , curr tid : %d ", fte->usertid, currtid);
-		if(fte->usertid == currtid)
+		if(fte->usertid == currtid){
 			return fte;
+		}
 	}
+PARENT_SWAP:
 	// NOT_REACHED();
-	printf("PASS HERE\n");
-	int partid = thread_current()->parent->tid;
+	
 
-	FTE *fte = NULL;
+	
 	e = list_begin(&fte_list);
 	for(; e != list_end(&fte_list); e = list_next(e))
 	{
@@ -101,11 +121,35 @@ FTE* frame_fifo_fte(void)
 		if(fte->usertid == partid)
 			break;
 	}	
-	printf("FTE UADDR : %p\n", fte->uaddr);
+	// printf("FTE UADDR : %p\n", fte->uaddr);
 	
 
 	swap_parent(fte->uaddr);
 	return NULL;
+}
+
+void parent_remove_fte(uint32_t* kpage, struct thread* parent)
+{
+	ASSERT(kpage!=NULL);
+	sema_down(&frame_sema);
+
+	FTE* fte = frame_fte_lookup(kpage);
+	if(fte == NULL){
+		sema_up(&frame_sema);
+		return;
+	}
+	ASSERT(fte->paddr == kpage);
+	ASSERT(fte->usertid == parent->tid);
+
+	hash_delete(&frame_table, &fte->helem);
+	list_remove(&fte->elem);
+	
+	palloc_free_page(kpage);
+	pagedir_clear_page(parent->pagedir, fte->uaddr);
+
+	free(fte);
+
+	sema_up(&frame_sema);
 }
 
 
