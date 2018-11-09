@@ -8,7 +8,7 @@ userprog/syscall.o: ../../userprog/syscall.c ../../userprog/syscall.h \
   ../../lib/kernel/list.h ../../threads/init.h ../../vm/frame.h \
   ../../threads/init.h ../../threads/thread.h ../../threads/synch.h \
   ../../threads/palloc.h ../../userprog/pagedir.h ../../threads/vaddr.h \
-  ../../threads/loader.h ../../userprog/process.h \
-  ../../userprog/exception.h ../../threads/vaddr.h \
-  ../../filesys/filesys.h ../../vm/page.h ../../vm/swap.h \
+  ../../threads/loader.h ../../vm/swap.h ../../vm/page.h \
+  ../../userprog/process.h ../../userprog/exception.h \
+  ../../threads/vaddr.h ../../filesys/filesys.h ../../vm/page.h \
   ../../lib/string.h

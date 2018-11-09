@@ -6,4 +6,5 @@ userprog/pagedir.o: ../../userprog/pagedir.c ../../userprog/pagedir.h \
   ../../threads/thread.h ../../threads/interrupt.h ../../filesys/file.h \
   ../../filesys/off_t.h ../../threads/synch.h ../../threads/palloc.h \
   ../../userprog/pagedir.h ../../threads/vaddr.h ../../threads/loader.h \
-  ../../threads/pte.h ../../threads/vaddr.h ../../threads/palloc.h
+  ../../vm/swap.h ../../vm/page.h ../../threads/pte.h \
+  ../../threads/vaddr.h ../../threads/palloc.h

@@ -1,5 +1,6 @@
 #include "vm/frame.h"
 #include "vm/page.h"
+#include "vm/swap.h"
 
 unsigned frame_hash_hash_helper(const struct hash_elem * element, void * aux);
 bool frame_hash_less_helper(const struct hash_elem *a, const struct hash_elem *b, void *aux);
@@ -112,9 +113,23 @@ FTE* frame_fifo_fte(void)
 			return fte;
 	}
 
-	printf("No frame for the current thread(%d) to swap out\n", currtid);
-	NOT_REACHED();
+	int partid = thread_current()->parent->tid;
+	FTE *fte;
+	for(; e != list_end(&fte_list); e = list_next(e))
+	{
+		fte = list_entry(e, FTE, elem);
+		// printf("fifo fte->tid : %d , curr tid : %d ", fte->usertid, currtid);
+		if(fte->usertid == partid)
+			break;
+	}	
+	if(fte == NULL) NOT_REACHED();
+
+	swap_parent(fte, thread_current()->parent);
+
+	return NULL;
 }
+
+
 
 FTE* frame_fte_lookup(uint32_t *addr)
 {

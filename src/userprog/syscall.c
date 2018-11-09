@@ -28,7 +28,7 @@ static void syscall_handler (struct intr_frame *f UNUSED)
   int i = 0;
   thread_current()->esp = p;
   
-  // printf("SYSCALL : %x\n", p);
+  // printf("SYSCALL : %x\n", *p);
   
   if(pagedir_get_page(thread_current()->pagedir, f->esp)==NULL){
      // printf("11111111111111111111\n");
@@ -252,6 +252,7 @@ pid_t syscall_exec(const char *cmd_line)
 {
    int tid = 0;
    tid = process_execute(cmd_line);
+
    if(thread_current()->executable == 1){
       return -1;
    }

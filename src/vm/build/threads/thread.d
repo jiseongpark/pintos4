@@ -9,5 +9,5 @@ threads/thread.o: ../../threads/thread.c ../../threads/thread.h \
   ../../threads/loader.h ../../userprog/process.h ../../threads/thread.h \
   ../../userprog/exception.h ../../vm/frame.h ../../threads/init.h \
   ../../threads/thread.h ../../threads/synch.h ../../threads/palloc.h \
-  ../../userprog/pagedir.h ../../threads/vaddr.h ../../vm/page.h \
-  ../../vm/swap.h
+  ../../userprog/pagedir.h ../../threads/vaddr.h ../../vm/swap.h \
+  ../../vm/page.h ../../vm/page.h

@@ -1,4 +1,7 @@
 #include "vm/swap.h"
+#include "vm/frame.h"
+#include "vm/page.h"
+#include "threads/thread.h"
 
 unsigned swap_hash_hash_helper(const struct hash_elem * element, void * aux);
 bool swap_hash_less_helper(const struct hash_elem *a, const struct hash_elem *b, void *aux);
@@ -41,6 +44,20 @@ STE* swap_set_ste(uint32_t *upage)
 	return new_ste;
 }
 
+
+STE* parent_swap_set(uint32_t* upage, struct thread * parent)
+{
+	sema_down(&swap_sema);
+	STE* ste = (STE*)malloc(sizeof(STE));
+	ste->uaddr = upage;
+	int i=0;
+	for(; i<8; i++) ste->sec_no[i] = -1;
+	hash_insert(&parent->st, &ste->helem);
+	sema_up(&swap_sema);
+}
+
+
+
 void swap_remove_ste(uint32_t* upage)
 {
 	struct thread *t = thread_current();
@@ -55,6 +72,7 @@ void swap_remove_ste(uint32_t* upage)
 
 	sema_up(&swap_sema);
 }
+
 
 STE* swap_ste_lookup(uint32_t *addr)
 {
@@ -129,24 +147,48 @@ bool swap_out(uint32_t *uaddr)
 	pte->is_swapped_out = true;
 
 	/* store file data to disk */
-	// void *contents = calloc(512, 1);
 	i=0;
 	for(; i<8; i++)
 	{
-		// printf("!!!!!!!!\n");
 		ASSERT(ste->sec_no[i] != -1);
-		// memcpy(contents, pte->paddr + i * 512, 512);
-		// ASSERT(!memcmp(pte->paddr + i * 512, contents, 512));
 		disk_write(disk_get(1,1), ste->sec_no[i], pte->paddr + i*512/4);
-		// memset(contents, 0, 512);
 		bitmap_set(swapdisk_bitmap, ste->sec_no[i], true);
 	}
 	
 	/* remvoe from frame table */
 	frame_remove_fte(pte->paddr);
-	// free(contents);
 
 	return true;	
+}
+
+void swap_parent(struct frame_table_entry* fte, struct thread* parent){
+	/* page_pte_lookup*/
+	PTE* pte = parent_page_lookup(fte->uaddr,parent);
+	STE* ste = parent_swap_set(fte->uaddr, parent);
+	/* swap_ste_lookup*/
+	
+	/* disk get */
+	int i = 0, cnt = 0;
+	while(cnt<8)
+	{
+		if(!bitmap_test(swapdisk_bitmap, i))
+			ste->sec_no[cnt++] = i;
+		i++;
+	}
+
+	pte->is_swapped_out = true;
+
+	/* store file data to disk */
+	i=0;
+	for(; i<8; i++)
+	{
+		ASSERT(ste->sec_no[i] != -1);
+		disk_write(disk_get(1,1), ste->sec_no[i], pte->paddr + i*512/4);
+		bitmap_set(swapdisk_bitmap, ste->sec_no[i], true);
+	}
+
+	/* remvoe from frame table */
+	frame_remove_fte(pte->paddr);
 }
 
 unsigned swap_hash_hash_helper(const struct hash_elem * element, void * aux)

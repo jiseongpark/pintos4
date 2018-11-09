@@ -90,6 +90,17 @@ PTE* page_pte_lookup(uint32_t *addr)
 	return helem!=NULL ? hash_entry(helem, PTE, helem) : NULL;
 }
 
+PTE* parent_page_lookup(uint32_t* uaddr, struct thread* parent)
+{
+	PTE finding;
+	struct hash_elem *helem;
+	finding.uaddr = uaddr;
+	helem = hash_find(&parent->pt, &finding.helem);
+	ASSERT(helem != NULL);
+	PTE *pte = hash_entry(helem, PTE, helem);
+	return pte;
+}
+
 void page_clear_all(void)
 {
 	struct hash* page_table = &(thread_current()->pt);
@@ -140,20 +151,6 @@ void page_clear_all(void)
 	// sema_up(&page_table);
 	// printf("CLEAR END\n");
 }
-static void destroy_func(struct hash_elem * element, void* aux UNUSED){
-	PTE* pte = hash_entry(element, PTE, helem);
-	page_remove_pte(pte->uaddr);
-	swap_remove_ste(pte->uaddr);
-	frame_remove_fte(pte->paddr);
-	free(pte);
-}
-
-void page_destroy_all(void){
-	hash_destroy(&thread_current()->pt, destroy_func);
-}
-
-
-
 
 
 unsigned page_hash_hash_helper(const struct hash_elem * element, void * aux)

@@ -40,8 +40,7 @@ void page_map(uint32_t *upage, uint32_t *kpage, bool writable);
 void page_remove_pte(uint32_t *upage);
 PTE* page_pte_lookup(uint32_t *addr);
 void page_table_init(struct hash* h);
-void page_destroy_all(void);
-
+PTE* parent_page_lookup(uint32_t* uaddr, struct thread* parent);
 unsigned page_hash_hash_helper(const struct hash_elem * element, void * aux);
 bool page_hash_less_helper(const struct hash_elem *a, const struct hash_elem *b, void *aux);
 

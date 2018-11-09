@@ -56,11 +56,14 @@ sort_chunks (const char *subprocess, int exit_status)
       CHECK ((handle = open (fn)) > 1, "open \"%s\"", fn);
       write (handle, buf1 + CHUNK_SIZE * i, CHUNK_SIZE);
       close (handle);
-
+      
       /* Sort with subprocess. */
       snprintf (cmd, sizeof cmd, "%s %s", subprocess, fn);
+      printf("HERE ALSO PASS\n");
       CHECK ((children[i] = exec (cmd)) != -1, "exec \"%s\"", cmd);
+      printf("HERE PASS\n");
       quiet = false;
+
     }
 
   for (i = 0; i < CHUNK_CNT; i++) 

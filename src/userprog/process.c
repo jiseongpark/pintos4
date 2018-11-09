@@ -89,7 +89,7 @@ start_process (void *f_name)
   if_.cs = SEL_UCSEG;
   if_.eflags = FLAG_IF | FLAG_MBS;
   success = load (file_name, &if_.eip, &if_.esp);
-
+  printf("load complete %d\n", success);
     
   // printf("SUCCESS : %d\n", success);
   /* If load failed, quit. */
@@ -559,7 +559,8 @@ load_segment (struct file *file, off_t ofs, uint8_t *upage,
         // printf("fifo occur proc(551) for tid(%d)\n", thread_current()->tid);
         FTE *fte = frame_fifo_fte();
         // printf("UADDR : %x\n", fte->uaddr);
-        swap_out(fte->uaddr);
+        if(fte != NULL)
+          swap_out(fte->uaddr);
         // printf("swap out pass\n");
         kpage = frame_get_fte(upage, PAL_USER | PAL_ZERO);
         // printf("KPAGE : %x\n", kpage);
@@ -613,7 +614,8 @@ setup_stack (void **esp, char *file_name)
   {
     // printf("fifo occur proc(606)\n");
     FTE *fte = frame_fifo_fte();
-    swap_out(fte->uaddr);
+    if(fte != NULL)
+      swap_out(fte->uaddr);
     kpage = frame_get_fte(((uint8_t *) PHYS_BASE) - PGSIZE, PAL_USER | PAL_ZERO);
   }
   
@@ -708,7 +710,8 @@ void* stack_growth(uint32_t *esp)
   {
     // printf("fifo occur proc(702)\n");
     FTE *fte = frame_fifo_fte();
-    swap_out(fte->uaddr);
+    if(fte != NULL)
+      swap_out(fte->uaddr);
     kpage = frame_get_fte(resp, PAL_USER | PAL_ZERO);
   }
 

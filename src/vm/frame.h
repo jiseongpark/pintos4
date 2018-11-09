@@ -10,7 +10,8 @@
 #include "threads/palloc.h"
 #include "userprog/pagedir.h"
 #include "threads/vaddr.h"
-
+#include "vm/swap.h"
+#include "vm/page.h"
 typedef struct frame_table_entry
 {
 	uint32_t *uaddr;          /* virtual address of the page */
