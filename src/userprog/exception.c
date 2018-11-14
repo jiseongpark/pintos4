@@ -150,7 +150,6 @@ page_fault (struct intr_frame *f)
 
   // printf("fault_addr(%p) - tid(%d)\n", fault_addr, thread_current()->tid);
 
-
   void *esp = NULL;
   if((f->error_code & PF_U) != 0) esp = f->esp;
   else esp = thread_current()->esp;

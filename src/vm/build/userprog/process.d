@@ -7,7 +7,8 @@ userprog/process.o: ../../userprog/process.c ../../userprog/process.h \
   ../../lib/stdio.h ../../lib/stdarg.h ../../lib/kernel/stdio.h \
   ../../lib/stdlib.h ../../lib/string.h ../../userprog/gdt.h \
   ../../threads/loader.h ../../userprog/pagedir.h ../../userprog/tss.h \
-  ../../filesys/directory.h ../../devices/disk.h ../../filesys/file.h \
+  ../../userprog/syscall.h ../../lib/syscall-nr.h ../../lib/ctype.h \
+  ../../filesys/file.h ../../filesys/directory.h ../../devices/disk.h \
   ../../filesys/filesys.h ../../threads/flags.h ../../threads/init.h \
   ../../vm/frame.h ../../threads/init.h ../../threads/thread.h \
   ../../threads/synch.h ../../threads/palloc.h ../../userprog/pagedir.h \

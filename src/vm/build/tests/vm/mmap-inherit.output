@@ -1,8 +1,8 @@
-Copying tests/vm/mmap-inherit into /tmp/vY92JSbJQ2.dsk...
-Copying ../../tests/vm/sample.txt into /tmp/vY92JSbJQ2.dsk...
-Copying tests/vm/child-inherit into /tmp/vY92JSbJQ2.dsk...
-Writing command line to /tmp/WqkYRZupvS.dsk...
-qemu -hda /tmp/WqkYRZupvS.dsk -hdb /tmp/32JrYtNilH.dsk -hdc /tmp/vY92JSbJQ2.dsk -hdd /tmp/W85QvOf3qv.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/mmap-inherit into /tmp/VPJQxRQ7z0.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/VPJQxRQ7z0.dsk...
+Copying tests/vm/child-inherit into /tmp/VPJQxRQ7z0.dsk...
+Writing command line to /tmp/oENjbiFHi2.dsk...
+qemu -hda /tmp/oENjbiFHi2.dsk -hdb /tmp/6ZYrFPwS9B.dsk -hdc /tmp/VPJQxRQ7z0.dsk -hdd /tmp/8CQPzqogLX.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put mmap-inherit put sample.txt put child-inherit run mmap-inherit
 Pintos booting with 4,088 kB RAM...
 373 pages available in kernel pool.
@@ -21,15 +21,20 @@ Executing 'mmap-inherit':
 (mmap-inherit) begin
 (mmap-inherit) open "sample.txt"
 (mmap-inherit) mmap "sample.txt"
-mmap-inherit: exit(-1)
+(mmap-inherit) exec "child-inherit"
+(child-inherit) begin
+child-inherit: exit(-1)
+(mmap-inherit) checking that mmap'd file still has same data
+(mmap-inherit) end
+mmap-inherit: exit(0)
 Execution of 'mmap-inherit' complete.
-Timer: 62 ticks
-Thread: 8 idle ticks, 53 kernel ticks, 1 user ticks
+Timer: 64 ticks
+Thread: 8 idle ticks, 54 kernel ticks, 2 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 145 reads, 444 writes
+hd0:1: 204 reads, 446 writes
 hd1:0: 216 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1104 characters output
+Console: 1265 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

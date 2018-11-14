@@ -473,6 +473,7 @@ init_thread (struct thread *t, const char *name, int priority)
   sema_init(&t->main_sema, 0);
 
   t->esp = PHYS_BASE - 4;
+  list_init(&t->mmf_list);
 }
 
 /* Allocates a SIZE-byte frame at the top of thread T's stack and

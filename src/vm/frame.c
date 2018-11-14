@@ -68,7 +68,6 @@ void frame_remove_fte(uint32_t* kpage)
 	hash_delete(&frame_table, &fte->helem);
 	list_remove(&fte->elem);
 	
-	// printf("REMOVE KPAGE : %p\n", kpage);
 	palloc_free_page(kpage);
 	pagedir_clear_page(thread_current()->pagedir, fte->uaddr);
 
@@ -85,7 +84,7 @@ FTE* frame_fifo_fte(void)
 	struct list_elem *e = list_begin(&fte_list);
 	int partid = thread_current()->parent->tid;
 	FTE *fte = NULL;
-
+	
 	int num = 0;
 	for(; e != list_end(&fte_list); e = list_next(e)){
 		FTE *fte = list_entry(e, FTE, elem);
@@ -103,7 +102,6 @@ FTE* frame_fifo_fte(void)
 	for(; e != list_end(&fte_list); e = list_next(e))
 	{
 		FTE *fte = list_entry(e, FTE, elem);
-		
 		// printf("fifo fte->tid : %d , curr tid : %d ", fte->usertid, currtid);
 		if(fte->usertid == currtid){
 			return fte;

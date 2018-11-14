@@ -1,2 +1,2 @@
 FAIL
-run: open "buf0": FAILED
+run: TIMEOUT after 7 seconds of wall-clock time - load average: 0.70, 0.27, 0.13

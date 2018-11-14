@@ -6,8 +6,19 @@
 #include <list.h>
 #include <ctype.h>
 #include <stdint.h>
+#include "filesys/file.h"
 
 typedef int pid_t;
+typedef int mapid_t;
+
+struct mmf
+{
+	struct file *file;        /* memory mapped file */
+	void *addr;               /* starting address */
+	mapid_t mapid;            /* map id */
+	size_t filelen;           /* file size */
+	struct list_elem elem;    /* list element */
+};
 
 void syscall_init (void);
 void syscall_halt(void);
@@ -23,6 +34,9 @@ int syscall_write(int fd, const void *buffer, unsigned size);
 void syscall_seek(int fd, unsigned position);
 unsigned syscall_tell(int fd);
 void syscall_close(int fd);
+mapid_t syscall_mmap(int fd, void *addr);
+void syscall_munmap(mapid_t mapping);
+// void syscall_munmap_exit(mapid_t mapping);
 
 
 #endif /* userprog/syscall.h */

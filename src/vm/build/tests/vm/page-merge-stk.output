@@ -1,12 +1,12 @@
-Copying tests/vm/page-merge-stk into /tmp/el74aEeE8y.dsk...
-Copying tests/vm/child-qsort into /tmp/el74aEeE8y.dsk...
-Writing command line to /tmp/d1aOD745Ex.dsk...
-qemu -hda /tmp/d1aOD745Ex.dsk -hdb /tmp/cBoMibHDLT.dsk -hdc /tmp/el74aEeE8y.dsk -hdd /tmp/SaHs18ERze.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-merge-stk into /tmp/pwyZtzHMPt.dsk...
+Copying tests/vm/child-qsort into /tmp/pwyZtzHMPt.dsk...
+Writing command line to /tmp/GmzTzplSc0.dsk...
+qemu -hda /tmp/GmzTzplSc0.dsk -hdb /tmp/pKTacYaN0N.dsk -hdc /tmp/pwyZtzHMPt.dsk -hdd /tmp/DT0RUrcKXS.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-merge-stk put child-qsort run page-merge-stk
 Pintos booting with 4,088 kB RAM...
 373 pages available in kernel pool.
 372 pages available in user pool.
-Calibrating timer...  471,040,000 loops/s.
+Calibrating timer...  419,020,800 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 225 sector (112 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -20,6 +20,30 @@ Executing 'page-merge-stk':
 (page-merge-stk) init
 (page-merge-stk) sort chunk 0
 (page-merge-stk) sort chunk 1
-child-qsort: exit(-1)
-
-TIMEOUT after 61 seconds of wall-clock time - load average: 0.17, 0.15, 0.08
+child-qsort: exit(72)
+(page-merge-stk) sort chunk 2
+child-qsort: exit(72)
+(page-merge-stk) sort chunk 3
+child-qsort: exit(72)
+(page-merge-stk) sort chunk 4
+child-qsort: exit(72)
+(page-merge-stk) sort chunk 5
+child-qsort: exit(72)
+(page-merge-stk) sort chunk 6
+child-qsort: exit(72)
+(page-merge-stk) sort chunk 7
+child-qsort: exit(72)
+(page-merge-stk) wait for child 0
+(page-merge-stk) open "buf0": FAILED
+page-merge-stk: exit(1)
+Execution of 'page-merge-stk' complete.
+Timer: 707 ticks
+Thread: 350 idle ticks, 55 kernel ticks, 302 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 2622 reads, 6380 writes
+hd1:0: 225 reads, 0 writes
+hd1:1: 18104 reads, 20608 writes
+Console: 1489 characters output
+Keyboard: 0 keys pressed
+Exception: 0 page faults
+Powering off...

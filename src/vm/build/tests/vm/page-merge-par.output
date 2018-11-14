@@ -1,7 +1,7 @@
-Copying tests/vm/page-merge-par into /tmp/fpbntOCx3g.dsk...
-Copying tests/vm/child-sort into /tmp/fpbntOCx3g.dsk...
-Writing command line to /tmp/HMiaHT7Cd6.dsk...
-qemu -hda /tmp/HMiaHT7Cd6.dsk -hdb /tmp/IRZ8nzpJ0b.dsk -hdc /tmp/fpbntOCx3g.dsk -hdd /tmp/qT1KNM9JlT.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-merge-par into /tmp/1BJHEiAxW2.dsk...
+Copying tests/vm/child-sort into /tmp/1BJHEiAxW2.dsk...
+Writing command line to /tmp/bXtjjmgbvB.dsk...
+qemu -hda /tmp/bXtjjmgbvB.dsk -hdb /tmp/3Zc4E84WT6.dsk -hdc /tmp/1BJHEiAxW2.dsk -hdd /tmp/Q5aO_bKMQY.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-merge-par put child-sort run page-merge-par
 Pintos booting with 4,088 kB RAM...
 373 pages available in kernel pool.
@@ -22,28 +22,7 @@ Executing 'page-merge-par':
 (page-merge-par) sort chunk 1
 child-sort: exit(123)
 (page-merge-par) sort chunk 2
-child-sort: exit(123)
 (page-merge-par) sort chunk 3
 child-sort: exit(123)
-(page-merge-par) sort chunk 4
-child-sort: exit(123)
-(page-merge-par) sort chunk 5
-child-sort: exit(123)
-(page-merge-par) sort chunk 6
-child-sort: exit(123)
-(page-merge-par) sort chunk 7
-child-sort: exit(123)
-(page-merge-par) wait for child 0
-(page-merge-par) open "buf0": FAILED
-page-merge-par: exit(1)
-Execution of 'page-merge-par' complete.
-Timer: 453 ticks
-Thread: 166 idle ticks, 62 kernel ticks, 225 user ticks
-hd0:0: 0 reads, 0 writes
-hd0:1: 2607 reads, 6370 writes
-hd1:0: 220 reads, 0 writes
-hd1:1: 11104 reads, 14200 writes
-Console: 1487 characters output
-Keyboard: 0 keys pressed
-Exception: 0 page faults
-Powering off...
+
+TIMEOUT after 7 seconds of wall-clock time - load average: 0.70, 0.27, 0.13

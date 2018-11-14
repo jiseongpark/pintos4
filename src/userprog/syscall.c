@@ -7,6 +7,7 @@
 #include "userprog/process.h"
 #include "threads/vaddr.h"
 #include "filesys/filesys.h"
+#include "filesys/file.h"
 #include "userprog/exception.h"
 #include "vm/page.h"
 #include <string.h>
@@ -180,11 +181,18 @@ static void syscall_handler (struct intr_frame *f UNUSED)
      syscall_close(*(p+1));
      break;
      
+     case SYS_MMAP:   /* D */
+     f->eax = syscall_mmap(*(p+1), *(p+2));
+     break;
+
+     case SYS_MUNMAP: /* E */
+     syscall_munmap(*(p+1));
+     break;
+
      default:
      // printf("ERROR at syscall_handler\n");
      break;
   }
-
 
 }
 
@@ -221,9 +229,9 @@ int syscall_open(const char * file)
       return -1;
    }
    
-   do{
-    new_file->file = filesys_open(file);
-   }while(new_file->file == NULL);
+   
+   new_file->file = filesys_open(file);
+   
     
 
    // file_deny_write(new_file->file);
@@ -319,6 +327,7 @@ int syscall_read(int fd, void *buffer, unsigned size)
 
       default:
 
+
       for(; e != list_end(&openfile_list); e = list_next(e)){
          of = list_entry(e, struct file_info, elem);
          if(of->fd == fd)
@@ -327,6 +336,7 @@ int syscall_read(int fd, void *buffer, unsigned size)
             return ret_size;
          }
       }
+
       return -1;
    }
 }
@@ -424,4 +434,131 @@ void syscall_close(int fd)
    file_close(of->file);
    
    free(of);
+}
+
+mapid_t syscall_mmap(int fd, void *addr)
+{
+  if(fd == STDIN || fd == STDOUT || fd == STDERR)
+    return -1;
+
+  if(addr == NULL)
+    return -1;
+
+  if(pg_ofs(addr) != 0)
+    return -1;
+
+  if(!is_user_vaddr(addr))
+    syscall_exit(-1);
+
+  struct file_info *fi = NULL;
+  struct list_elem *e = list_begin(&openfile_list);
+  bool found = false;
+  int filelen = 0, i;
+
+  for(; e != list_end(&openfile_list); e = list_next(e))
+  {
+    fi = list_entry(e, struct file_info, elem);
+    if(fi->fd == fd)
+    {
+      found = true;
+      break;
+    }
+  }
+
+  if(!found)
+    syscall_exit(-1);
+
+  filelen = file_length(fi->file);
+
+  if(filelen == 0)
+    return -1;
+
+  for(i = 0; i < filelen/PGSIZE + 1; i++)
+  {
+    if(page_pte_lookup(addr + PGSIZE * i) != NULL)
+      return -1;
+  }
+
+  struct mmf *new_mmf = malloc(sizeof(struct mmf));
+  new_mmf->file = file_reopen(fi->file);
+  new_mmf->mapid = list_size(&thread_current()->mmf_list) + 1;
+  new_mmf->addr = addr;
+  new_mmf->filelen = filelen;
+  list_push_front(&thread_current()->mmf_list, &new_mmf->elem);
+
+  file_seek(fi->file, 0);
+  for(i = 0; i < filelen/PGSIZE + 1; i++)
+  {
+    uint32_t *upage = addr + PGSIZE * i;
+    uint32_t *kpage = frame_get_fte(upage, PAL_USER | PAL_ZERO);
+    if(kpage == NULL)
+      {
+        FTE *fte = frame_fifo_fte();
+        if(fte != NULL)
+          swap_out(fte->uaddr);
+        kpage = frame_get_fte(upage, PAL_USER | PAL_ZERO);
+        ASSERT(kpage != NULL);
+      }
+    file_read(fi->file, kpage, PGSIZE);
+    file_seek(fi->file, 0);
+    page_map(upage, kpage, true);
+    page_pte_lookup(upage)->dirty = true;
+    ASSERT(pagedir_get_page(thread_current()->pagedir, upage) == NULL);
+    ASSERT(pagedir_set_page(thread_current()->pagedir, upage, kpage, true));
+  }
+
+  return new_mmf->mapid;
+}
+
+void syscall_munmap(mapid_t mapping)
+{
+  struct list_elem *e = list_begin(&thread_current()->mmf_list);
+  struct mmf *mmf;
+  bool found = false;
+  int i=0;
+
+
+
+  for(; e != list_end(&thread_current()->mmf_list); e = list_next(e))
+  {
+    mmf = list_entry(e, struct mmf, elem); 
+    if(mmf->mapid == mapping)
+    {
+      found = true;
+      break;
+    }
+  }
+
+  if(!found)
+    printf("syscall_munmap: mmf not found\n");
+  
+  for(i = 0; i < mmf->filelen/PGSIZE + 1; i++)
+  {
+    uint32_t *upage = mmf->addr + PGSIZE * i;
+    uint32_t *kpage = page_pte_lookup(upage)->paddr;
+    int size = mmf->filelen - file_tell(mmf->file);
+    size = size > PGSIZE ? PGSIZE : size;
+    
+    if(page_pte_lookup(upage)->is_swapped_out)
+    {
+      FTE *fte = frame_fifo_fte();
+      if(fte!=NULL)
+        swap_out(fte->uaddr);
+      // kpage = frame_get_fte(upage, PAL_USER | PAL_ZERO);
+      // ASSERT(kpage != NULL);
+    }
+    file_write(mmf->file, kpage, size);
+  }
+
+  for(i = 0; i < mmf->filelen/PGSIZE + 1; i++)
+  {
+    uint32_t *upage = mmf->addr + PGSIZE * i;
+    ASSERT(page_pte_lookup(upage));
+    frame_remove_fte(page_pte_lookup(upage)->paddr);
+    page_remove_pte(upage);
+  }
+
+  file_close(mmf->file);
+  list_remove(&mmf->elem);
+  free(mmf);
 }

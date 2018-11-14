@@ -1,12 +1,12 @@
-Copying tests/filesys/base/syn-read into /tmp/QGw7eUCzu3.dsk...
-Copying tests/filesys/base/child-syn-read into /tmp/QGw7eUCzu3.dsk...
-Writing command line to /tmp/UQtiYiUWhV.dsk...
-qemu -hda /tmp/UQtiYiUWhV.dsk -hdb /tmp/5NU26XbMl3.dsk -hdc /tmp/QGw7eUCzu3.dsk -hdd /tmp/OooVQ61_uQ.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/base/syn-read into /tmp/JtxX89at2f.dsk...
+Copying tests/filesys/base/child-syn-read into /tmp/JtxX89at2f.dsk...
+Writing command line to /tmp/gqIQLOMX1g.dsk...
+qemu -hda /tmp/gqIQLOMX1g.dsk -hdb /tmp/xfrQs5XyQQ.dsk -hdc /tmp/JtxX89at2f.dsk -hdd /tmp/XcwZvpMUCB.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put syn-read put child-syn-read run syn-read
 Pintos booting with 4,088 kB RAM...
 373 pages available in kernel pool.
 372 pages available in user pool.
-Calibrating timer...  471,040,000 loops/s.
+Calibrating timer...  419,020,800 loops/s.
 hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 229 sector (114 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -40,17 +40,27 @@ child-syn-read: exit(6)
 child-syn-read: exit(7)
 (syn-read) exec child 10 of 10: "child-syn-read 9"
 child-syn-read: exit(8)
-(syn-read) wait for child 1 of 10 returned 8 (expected 0)
-(syn-read) wait for child 1 of 10 returned 8 (expected 0): FAILED
-syn-read: exit(1)
+(syn-read) wait for child 1 of 10 returned 0 (expected 0)
+(syn-read) wait for child 2 of 10 returned 1 (expected 1)
+(syn-read) wait for child 3 of 10 returned 2 (expected 2)
+(syn-read) wait for child 4 of 10 returned 3 (expected 3)
+(syn-read) wait for child 5 of 10 returned 4 (expected 4)
+(syn-read) wait for child 6 of 10 returned 5 (expected 5)
+(syn-read) wait for child 7 of 10 returned 6 (expected 6)
+(syn-read) wait for child 8 of 10 returned 7 (expected 7)
+(syn-read) wait for child 9 of 10 returned 8 (expected 8)
+child-syn-read: exit(9)
+(syn-read) wait for child 10 of 10 returned 9 (expected 9)
+(syn-read) end
+syn-read: exit(0)
 Execution of 'syn-read' complete.
-Timer: 170 ticks
-Thread: 66 idle ticks, 58 kernel ticks, 46 user ticks
+Timer: 197 ticks
+Thread: 80 idle ticks, 53 kernel ticks, 64 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 9860 reads, 476 writes
+hd0:1: 10905 reads, 476 writes
 hd1:0: 229 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1892 characters output
+Console: 2389 characters output
 Keyboard: 0 keys pressed
 Exception: 0 page faults
 Powering off...

@@ -8,6 +8,7 @@
 #include "userprog/gdt.h"
 #include "userprog/pagedir.h"
 #include "userprog/tss.h"
+#include "userprog/syscall.h"
 #include "filesys/directory.h"
 #include "filesys/file.h"
 #include "filesys/filesys.h"
@@ -122,7 +123,7 @@ process_wait (tid_t child_tid UNUSED)
   int flag = 0;
   struct thread *child;
 
-  // printf("CHILD TID : %d\n", child_tid);
+  
   if(parent->child_num == 0){
 
     return -1;
@@ -160,10 +161,11 @@ process_wait (tid_t child_tid UNUSED)
     return child_tid - 4;
   }
   if(child_tid <= 0){
+    
     return -1;
   }
   // printf("PARENT EXIT STATUS : %d\n", parent->exit_status);
-  
+  // printf("CHILD TID : %d\n", child_tid);
   return parent->exit_status;
 }
 
@@ -194,6 +196,13 @@ process_exit (void)
       }
    }
   
+  size = list_size(&thread_current()->mmf_list);
+  for(; size > 0; size--)
+  {
+    struct list_elem *e = list_begin(&thread_current()->mmf_list);
+    struct mmf *mmf = list_entry(e, struct mmf, elem);
+    syscall_munmap(mmf->mapid); 
+  }
   
   pd = curr->pagedir;
   page_clear_all();  

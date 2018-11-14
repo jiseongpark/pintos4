@@ -116,6 +116,7 @@ struct thread
     struct hash pt;                     /* Page table. */
     struct hash st;                     /* Swap table. */
     uint32_t *esp;                      /* Saved ESP register value */
+    struct list mmf_list;               /* memory mapped file list */
   };
 
 
