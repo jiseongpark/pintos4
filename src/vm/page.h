@@ -4,6 +4,7 @@
 #include <stdbool.h>
 #include <list.h>
 #include <hash.h>
+#include <stddef.h>
 #include "threads/init.h"
 #include "threads/thread.h"
 #include "threads/synch.h"
@@ -11,6 +12,7 @@
 #include "userprog/pagedir.h"
 #include "threads/vaddr.h"
 #include "vm/swap.h"
+#include "filesys/off_t.h"
 
 typedef struct page_table_entry
 {
@@ -23,6 +25,13 @@ typedef struct page_table_entry
 	bool writable;            /* writable flag */
 	bool load;				  /* for load segment page */
 
+	/* Lazy Loading */
+	struct file *file;        /* loading file */
+	off_t ofs;                /* file position offset */
+	size_t page_read_bytes;   /* read bytes */
+	size_t page_zero_bytes;   /* zero bytes */
+	bool load_result;         /* actually loaded */
+
 	struct hash_elem helem;   /* hash element */
 	struct list_elem elem;    /* list element */
 } PTE;
@@ -34,8 +43,8 @@ struct semaphore page_sema;   /* page semaphore */
 
 void page_init(void);
 void page_clear_all(void);
-// PTE* page_get_pte(uint32_t *upage);
-// PTE* page_set_pte(uint32_t *upage, uint32_t *kpage);
+bool lazy_load(uint32_t *upage, struct file *file, off_t ofs, size_t page_read_bytes, size_t page_zero_bytes, bool writable);
+bool actual_load(uint32_t *upage);
 void page_map(uint32_t *upage, uint32_t *kpage, bool writable);
 void page_remove_pte(uint32_t *upage);
 PTE* page_pte_lookup(uint32_t *addr);

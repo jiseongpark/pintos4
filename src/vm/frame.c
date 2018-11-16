@@ -54,7 +54,7 @@ bool frame_set_fte(uint32_t *upage, uint32_t *kpage)
 
 void frame_remove_fte(uint32_t* kpage)
 {
-	ASSERT(kpage!=NULL);
+	if(kpage==NULL) return;
 	sema_down(&frame_sema);
 	// printf("REMOVE KPAGE : %p\n", kpage);
 	FTE* fte = frame_fte_lookup(kpage);

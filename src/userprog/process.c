@@ -39,7 +39,6 @@ process_execute (const char *file_name)
   FTE *fte_temp;
   char * real_file, *save_ptr;
   tid_t tid  = 0;
-
   if(process_num > 31){
     return -1;
   }
@@ -149,23 +148,31 @@ process_wait (tid_t child_tid UNUSED)
     
   }
   
+  
   if(thread_current()->exit_status == 66 && flag == 2){
-    flag = 3;
+    flag = 4;
+    // printf("child num : %d\n", parent->child_num);
   }
-
+  // printf("FLAG : %d\n", flag);
+  
   if(parent->tid == 1) sema_down(&parent->main_sema);
   sema_down(&parent->sema);
+
+  
   
   if(flag == 0 || flag == 2){
-
     return child_tid - 4;
   }
   if(child_tid <= 0){
     
     return -1;
   }
+  if(flag == 3){
+    return child_tid -4;
+  }
   // printf("PARENT EXIT STATUS : %d\n", parent->exit_status);
   // printf("CHILD TID : %d\n", child_tid);
+
   return parent->exit_status;
 }
 
@@ -196,6 +203,7 @@ process_exit (void)
       }
    }
   
+  
   size = list_size(&thread_current()->mmf_list);
   for(; size > 0; size--)
   {
@@ -206,7 +214,7 @@ process_exit (void)
   
   pd = curr->pagedir;
   page_clear_all();  
-  
+    
   if (pd != NULL) 
     {
       /* Correct ordering here is crucial.  We must set
@@ -222,16 +230,18 @@ process_exit (void)
     }
 
 
-  
+    
   
   free(thread_current()->exec);
   file_close(thread_current()->file);
   curr->parent->exit_status = thread_current()->exit_status;
+  // printf("SEMA BEFORE\n");
   if(parent->tid==1) sema_up(&parent->main_sema);
   sema_up(&parent->sema);
+  // printf("SEMA AFTER\n");
 
   process_num--;
-
+  
   thread_exit(); 
 }
 
@@ -565,53 +575,56 @@ load_segment (struct file *file, off_t ofs, uint8_t *upage,
       size_t page_zero_bytes = PGSIZE - page_read_bytes;
 
       /* Get a page of memory. */
+      if(!lazy_load(upage, file, ofs, page_read_bytes, page_zero_bytes, writable))
+        return false;
 
-      uint8_t *kpage = frame_get_fte(upage, PAL_USER|PAL_ZERO);
-      // printf("UPAGE: %p KPAGE : %p\n", upage,kpage);
+      // uint8_t *kpage = frame_get_fte(upage, PAL_USER|PAL_ZERO);
+      // // printf("UPAGE: %p KPAGE : %p\n", upage,kpage);
 
-      if(kpage == NULL)
-      {
-        // printf("fifo occur proc(551) for tid(%d)\n", thread_current()->tid);
-        FTE *fte = frame_fifo_fte();
-        // printf("UADDR : %x\n", fte->uaddr);
-        if(fte != NULL)
-          swap_out(fte->uaddr);
-        // printf("swap out pass\n");
-        kpage = frame_get_fte(upage, PAL_USER | PAL_ZERO);
-        ASSERT(kpage != NULL);
-        // printf("KPAGE : %x\n", kpage);
-      }
+      // if(kpage == NULL)
+      // {
+      //   // printf("fifo occur proc(551) for tid(%d)\n", thread_current()->tid);
+      //   FTE *fte = frame_fifo_fte();
+      //   // printf("UADDR : %x\n", fte->uaddr);
+      //   if(fte != NULL)
+      //     swap_out(fte->uaddr);
+      //   // printf("swap out pass\n");
+      //   kpage = frame_get_fte(upage, PAL_USER | PAL_ZERO);
+      //   ASSERT(kpage != NULL);
+      //   // printf("KPAGE : %x\n", kpage);
+      // }
 
       
-      if(kpage == NULL)
-        return false;
-      /* Load this page. */
-      // printf("UPAGE : %x\n", upage);  
-      if (file_read (file, kpage, page_read_bytes) != (int) page_read_bytes)
-        {
-          frame_remove_fte(kpage);
-          page_remove_pte(upage);
-          return false; 
-        }
-      memset (kpage + page_read_bytes, 0, page_zero_bytes);
+      // if(kpage == NULL)
+      //   return false;
+      // /* Load this page. */
+      // // printf("UPAGE : %x\n", upage);  
+      // if (file_read (file, kpage, page_read_bytes) != (int) page_read_bytes)
+      //   {
+      //     frame_remove_fte(kpage);
+      //     page_remove_pte(upage);
+      //     return false; 
+      //   }
+      // memset (kpage + page_read_bytes, 0, page_zero_bytes);
 
-      /* Add the page to the process's address space. */
-      if (!install_page (upage, kpage, writable)) 
-        {
-          frame_remove_fte(kpage);
-          page_remove_pte(upage);
-          return false; 
-        }
-        page_map(upage, kpage, writable);
-        PTE * temp = page_pte_lookup(pg_round_down(upage));
-        temp->load = true;
+      // /* Add the page to the process's address space. */
+      // if (!install_page (upage, kpage, writable)) 
+      //   {
+      //     frame_remove_fte(kpage);
+      //     page_remove_pte(upage);
+      //     return false; 
+      //   }
+      //   page_map(upage, kpage, writable);
+      //   PTE * temp = page_pte_lookup(pg_round_down(upage));
+      //   temp->load = true;
 
       /* Advance. */
       read_bytes -= page_read_bytes;
       zero_bytes -= page_zero_bytes;
       upage += PGSIZE;
+      ofs += page_read_bytes;
     }
-  // printf("EXIT WHILE\n");
+  // printf("EXIT WHILE, TID : %d\n",thread_current()->tid);
 
   return true;
 }

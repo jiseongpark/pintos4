@@ -517,8 +517,6 @@ void syscall_munmap(mapid_t mapping)
   bool found = false;
   int i=0;
 
-
-
   for(; e != list_end(&thread_current()->mmf_list); e = list_next(e))
   {
     mmf = list_entry(e, struct mmf, elem); 
@@ -538,15 +536,19 @@ void syscall_munmap(mapid_t mapping)
     uint32_t *kpage = page_pte_lookup(upage)->paddr;
     int size = mmf->filelen - file_tell(mmf->file);
     size = size > PGSIZE ? PGSIZE : size;
-    
+
     if(page_pte_lookup(upage)->is_swapped_out)
     {
       FTE *fte = frame_fifo_fte();
       if(fte!=NULL)
         swap_out(fte->uaddr);
-      // kpage = frame_get_fte(upage, PAL_USER | PAL_ZERO);
-      // ASSERT(kpage != NULL);
+      swap_in(upage);
+      kpage = page_pte_lookup(upage)->paddr;
     }
+
+    if(pagedir_is_dirty(thread_current()->pagedir, upage) == false)
+      continue;
+
     file_write(mmf->file, kpage, size);
   }
 

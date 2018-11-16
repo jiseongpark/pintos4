@@ -92,7 +92,7 @@ bool swap_in(uint32_t *uaddr)
 	PTE *pte = page_pte_lookup(uaddr);
 	STE *ste = swap_ste_lookup(uaddr);
 	uint8_t *paddr = NULL;
-
+	// printf("SWAP IN COME\n");
 	ASSERT(pte->uaddr == uaddr);
 
 	/* add to frame table */
@@ -132,7 +132,7 @@ bool swap_in(uint32_t *uaddr)
 bool swap_out(uint32_t *uaddr)
 {	
 	PTE *pte = page_pte_lookup(uaddr);
-
+	
 	/* Put to swap table */
 	STE *ste = swap_set_ste(uaddr);
 	
@@ -165,7 +165,7 @@ bool swap_out(uint32_t *uaddr)
 
 void swap_parent(uint32_t* uaddr){
 	/* page_pte_lookup*/
-	// printf("UADDR : %p\n", uaddr);
+	printf("UADDR : %p\n", uaddr);
 	struct thread* parent = thread_current()->parent;
 	PTE* pte = parent_page_lookup(uaddr,parent);
 	STE* ste = parent_swap_set(uaddr, parent);

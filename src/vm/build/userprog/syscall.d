@@ -9,6 +9,6 @@ userprog/syscall.o: ../../userprog/syscall.c ../../userprog/syscall.h \
   ../../threads/init.h ../../threads/thread.h ../../threads/synch.h \
   ../../threads/palloc.h ../../userprog/pagedir.h ../../threads/vaddr.h \
   ../../threads/loader.h ../../vm/swap.h ../../vm/page.h \
-  ../../userprog/process.h ../../userprog/exception.h \
-  ../../threads/vaddr.h ../../filesys/filesys.h ../../vm/page.h \
-  ../../lib/string.h
+  ../../filesys/off_t.h ../../userprog/process.h \
+  ../../userprog/exception.h ../../threads/vaddr.h \
+  ../../filesys/filesys.h ../../vm/page.h ../../lib/string.h

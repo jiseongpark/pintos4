@@ -153,31 +153,16 @@ page_fault (struct intr_frame *f)
   void *esp = NULL;
   if((f->error_code & PF_U) != 0) esp = f->esp;
   else esp = thread_current()->esp;
+
+  page_fault_cnt++;
+
+  /* Determine cause. */
+  not_present = (f->error_code & PF_P) == 0;
+  write = (f->error_code & PF_W) != 0;
+  user = (f->error_code & PF_U) != 0;
+
   // printf("ESP : %x\n", esp);
   // printf("here here here here here\n");
-  /* check whether the case is stack growth */
-  PTE* result = page_pte_lookup(pg_round_down(fault_addr));
-
-  if(PHYS_BASE-STACK_MAX <= fault_addr 
-    && PHYS_BASE > fault_addr 
-    && (esp <= fault_addr 
-      || fault_addr == f->esp - 4 
-      || fault_addr == f->esp - 32)
-    && result == NULL)
-  {
-    // printf("stack growth\n");
-    uint32_t *kpage;
-    struct file *file = thread_current()->file;
-    // printf("file size : %x\n", file_length(file));
-    kpage = stack_growth(fault_addr);
-    // printf("stack growth kpage : %p\n", kpage);
-    // file_read(file, kpage, PGSIZE);
-    // printf("read size : %x\n", size);
-  
-    // printf("P : %x\n", fault_addr);
-    return;
-  }
-
 
   /* PJ2 consideration */
   if(fault_addr == NULL){
@@ -189,6 +174,41 @@ page_fault (struct intr_frame *f)
     syscall_exit(-1); 
   }
 
+  if(fault_addr < (void*)0x8048000)
+    syscall_exit(-1);
+
+  if(!not_present)
+    syscall_exit(-1);
+
+  /* check whether the case is stack growth */
+
+  PTE* result = page_pte_lookup(pg_round_down(fault_addr));
+  // printf("WRITE : %d USER : %d not_present : %d \n", write, user, not_present);
+  // printf("UADDR : %p\n", result->uaddr);
+  
+
+  if(result != NULL && !result->load_result && result->load)
+  {
+    if(!actual_load(result->uaddr))
+      printf("actual_load: FAILED");
+    // printf("COME HERE\n");
+    return;
+  }
+
+  if(PHYS_BASE-STACK_MAX <= fault_addr 
+    && PHYS_BASE > fault_addr 
+    && (esp <= fault_addr 
+      || fault_addr == f->esp - 4 
+      || fault_addr == f->esp - 32)
+    && result == NULL)
+  {
+    uint32_t *kpage;
+    struct file *file = thread_current()->file;
+
+    kpage = stack_growth(fault_addr);
+
+    return;
+  }
 
   /* check whether the frame mapped to the page has swapped out */
   if(result == NULL) {
@@ -235,16 +255,8 @@ BA:
   
   
   /* Count page faults. */
-  page_fault_cnt++;
 
-  /* Determine cause. */
-  not_present = (f->error_code & PF_P) == 0;
-  write = (f->error_code & PF_W) != 0;
-  user = (f->error_code & PF_U) != 0;
-
-  if(write == 1 && result->load == true){
-    syscall_exit(-1);
-  }
+  
 
   /* To implement virtual memory, delete the rest of the function
      body, and replace it with code that brings in the page to

@@ -1,12 +1,12 @@
-Copying tests/vm/pt-bad-addr into /tmp/OqT4VR4GHG.dsk...
-Writing command line to /tmp/rKYlItE9px.dsk...
-qemu -hda /tmp/rKYlItE9px.dsk -hdb /tmp/FCdaxZPAoE.dsk -hdc /tmp/OqT4VR4GHG.dsk -hdd /tmp/xVcFeM42zN.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/pt-bad-addr into /tmp/6byqBWSNPo.dsk...
+Writing command line to /tmp/v0aJthS7bc.dsk...
+qemu -hda /tmp/v0aJthS7bc.dsk -hdb /tmp/8sRUrLxQHx.dsk -hdc /tmp/6byqBWSNPo.dsk -hdd /tmp/wI7KG23LQx.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put pt-bad-addr run pt-bad-addr
 Pintos booting with 4,088 kB RAM...
-373 pages available in kernel pool.
+372 pages available in kernel pool.
 372 pages available in user pool.
-Calibrating timer...  419,020,800 loops/s.
-hd0:0: detected 145 sector (72 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+Calibrating timer...  444,825,600 loops/s.
+hd0:0: detected 153 sector (76 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 104 sector (52 kB) disk, model "QEMU HARDDISK", serial "QM00003"
 hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
@@ -17,13 +17,13 @@ Executing 'pt-bad-addr':
 (pt-bad-addr) begin
 pt-bad-addr: exit(-1)
 Execution of 'pt-bad-addr' complete.
-Timer: 57 ticks
-Thread: 2 idle ticks, 54 kernel ticks, 1 user ticks
+Timer: 63 ticks
+Thread: 2 idle ticks, 61 kernel ticks, 0 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 76 reads, 216 writes
 hd1:0: 104 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 903 characters output
 Keyboard: 0 keys pressed
-Exception: 0 page faults
+Exception: 6 page faults
 Powering off...

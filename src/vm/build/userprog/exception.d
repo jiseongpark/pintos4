@@ -11,4 +11,5 @@ userprog/exception.o: ../../userprog/exception.c \
   ../../userprog/process.h ../../vm/page.h ../../threads/init.h \
   ../../vm/frame.h ../../threads/thread.h ../../threads/synch.h \
   ../../threads/palloc.h ../../userprog/pagedir.h ../../threads/vaddr.h \
-  ../../vm/swap.h ../../vm/page.h ../../devices/disk.h
+  ../../vm/swap.h ../../vm/page.h ../../filesys/off_t.h \
+  ../../devices/disk.h

@@ -31,13 +31,17 @@ test_main (void)
      didn't modify it via the mapping. */
   msg ("munmap \"sample.txt\"");
   munmap (map);
-
+  
   /* Read file back. */
   msg ("seek \"sample.txt\"");
   seek (handle, 0);
   CHECK (read (handle, buffer, sizeof buffer) == sizeof buffer,
          "read \"sample.txt\"");
 
+
+  // hex_dump(buffer, buffer, sizeof buffer, true);
+  // printf("\n\n");
+  // hex_dump(overwrite, overwrite, strlen(overwrite), true);
   /* Verify that file overwrite worked. */
   if (memcmp (buffer, overwrite, strlen (overwrite))
       || memcmp (buffer + strlen (overwrite), sample + strlen (overwrite),
