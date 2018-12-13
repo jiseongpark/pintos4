@@ -1,0 +1,34 @@
+Copying tests/vm/mmap-close into /tmp/O1QkSpkeym.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/O1QkSpkeym.dsk...
+Writing command line to /tmp/CiTTtmrtWL.dsk...
+qemu -hda /tmp/CiTTtmrtWL.dsk -hdb /tmp/g5bx_mSWBn.dsk -hdc /tmp/O1QkSpkeym.dsk -hdd /tmp/IhxkoCGcTm.dsk -m 4 -net none -nographic -monitor null
+Kernel command line: -q -f put mmap-close put sample.txt run mmap-close
+0xc002f000
+Pintos booting with 4,088 kB RAM...
+367 pages available in kernel pool.
+367 pages available in user pool.
+Calibrating timer...  419,020,800 loops/s.
+hd0:0: detected 161 sector (80 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 109 sector (54 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Boot complete.
+Putting 'mmap-close' into the file system...
+Putting 'sample.txt' into the file system...
+Executing 'mmap-close':
+(mmap-close) begin
+(mmap-close) open "sample.txt"
+(mmap-close) mmap "sample.txt"
+(mmap-close) end
+mmap-close: exit(0)
+Execution of 'mmap-close' complete.
+Timer: 63 ticks
+Thread: 0 idle ticks, 62 kernel ticks, 1 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 467 reads, 222 writes
+hd1:0: 109 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 1015 characters output
+Keyboard: 0 keys pressed
+Exception: 5 page faults
+Powering off...

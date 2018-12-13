@@ -1,0 +1,1 @@
+../../tests/make-grade ../.. results ../../tests/filesys/Grading.with-vm | tee grade

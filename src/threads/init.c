@@ -37,6 +37,7 @@
 #endif
 #include "vm/frame.h"
 #include "vm/page.h"
+#include "filesys/cache.h"
 
 /* Amount of physical memory, in 4 kB pages. */
 size_t ram_pages;
@@ -97,6 +98,7 @@ main (void)
   swap_init();
   swapdisk_bitmap_init();
 
+
   /* Segmentation. */
 #ifdef USERPROG
   tss_init ();
@@ -120,18 +122,26 @@ main (void)
 
 #ifdef FILESYS
   /* Initialize file system. */
+
   disk_init ();
+  
   filesys_init (format_filesys);
+  thread_create("periodic", PRI_DEFAULT, periodic_flush_all, NULL);
+  
+
+
 #endif
 
   printf ("Boot complete.\n");
   
   /* Run actions specified on kernel command line. */
   run_actions (argv);
-
+  
   /* Finish up. */
-  if (power_off_when_done)
+  if (power_off_when_done){
     power_off ();
+  }
+  
   thread_exit ();
 
 }
@@ -377,6 +387,8 @@ power_off (void)
 
 #ifdef FILESYS
   filesys_done ();
+  
+
 #endif
 
   print_stats ();

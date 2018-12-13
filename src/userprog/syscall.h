@@ -20,6 +20,9 @@ struct mmf
 	struct list_elem elem;    /* list element */
 };
 
+
+
+
 void syscall_init (void);
 void syscall_halt(void);
 void syscall_exit(int status);
@@ -36,7 +39,10 @@ unsigned syscall_tell(int fd);
 void syscall_close(int fd);
 mapid_t syscall_mmap(int fd, void *addr);
 void syscall_munmap(mapid_t mapping);
-// void syscall_munmap_exit(mapid_t mapping);
-
+bool syscall_chdir(const char *dir);
+bool syscall_mkdir(const char *dir);
+bool syscall_readdir(int fd, char *name);
+bool syscall_isdir(int fd);
+int syscall_inumber(int fd);
 
 #endif /* userprog/syscall.h */

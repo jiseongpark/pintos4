@@ -1,0 +1,47 @@
+Copying tests/vm/page-merge-stk into /tmp/Lrh1B4oWrE.dsk...
+Copying tests/vm/child-qsort into /tmp/Lrh1B4oWrE.dsk...
+Writing command line to /tmp/PB9GO2RiDV.dsk...
+qemu -hda /tmp/PB9GO2RiDV.dsk -hdb /tmp/_h4PLGeVES.dsk -hdc /tmp/Lrh1B4oWrE.dsk -hdd /tmp/3dDOeVyY4z.dsk -m 4 -net none -nographic -monitor null
+Kernel command line: -q -f put page-merge-stk put child-qsort run page-merge-stk
+0xc002f000
+Pintos booting with 4,088 kB RAM...
+367 pages available in kernel pool.
+367 pages available in user pool.
+Calibrating timer...  419,430,400 loops/s.
+hd0:0: detected 161 sector (80 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 225 sector (112 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Boot complete.
+Putting 'page-merge-stk' into the file system...
+Putting 'child-qsort' into the file system...
+Executing 'page-merge-stk':
+(page-merge-stk) begin
+(page-merge-stk) init
+(page-merge-stk) sort chunk 0
+(page-merge-stk) sort chunk 1
+child-qsort: exit(72)
+(page-merge-stk) sort chunk 2
+child-qsort: exit(72)
+(page-merge-stk) sort chunk 3
+child-qsort: exit(72)
+(page-merge-stk) sort chunk 4
+child-qsort: exit(72)
+(page-merge-stk) sort chunk 5
+child-qsort: exit(72)
+(page-merge-stk) sort chunk 6
+(page-merge-stk) sort chunk 7
+child-qsort: exit(72)
+(page-merge-stk) exec "child-qsort buf7": FAILED
+page-merge-stk: exit(1)
+Execution of 'page-merge-stk' complete.
+Timer: 416 ticks
+Thread: 43 idle ticks, 115 kernel ticks, 258 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 14466 reads, 6403 writes
+hd1:0: 225 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 1418 characters output
+Keyboard: 0 keys pressed
+Exception: 514 page faults
+Powering off...

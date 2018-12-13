@@ -1,0 +1,37 @@
+Copying tests/filesys/base/lg-full into /tmp/BDh8JEy3vz.dsk...
+Writing command line to /tmp/S0ygZbce7G.dsk...
+qemu -hda /tmp/S0ygZbce7G.dsk -hdb /tmp/MQxwV91Jt_.dsk -hdc /tmp/BDh8JEy3vz.dsk -hdd /tmp/6B6VgFAitl.dsk -m 4 -net none -nographic -monitor null
+Kernel command line: -q -f put lg-full run lg-full
+0xc002f000
+Pintos booting with 4,088 kB RAM...
+367 pages available in kernel pool.
+367 pages available in user pool.
+Calibrating timer...  471,040,000 loops/s.
+hd0:0: detected 161 sector (80 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 108 sector (54 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Boot complete.
+Putting 'lg-full' into the file system...
+Executing 'lg-full':
+(lg-full) begin
+(lg-full) create "quux"
+(lg-full) open "quux"
+(lg-full) writing "quux"
+(lg-full) close "quux"
+(lg-full) open "quux" for verification
+(lg-full) verified contents of "quux"
+(lg-full) close "quux"
+(lg-full) end
+lg-full: exit(0)
+Execution of 'lg-full' complete.
+Timer: 84 ticks
+Thread: 0 idle ticks, 69 kernel ticks, 15 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 1213 reads, 522 writes
+hd1:0: 108 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 1065 characters output
+Keyboard: 0 keys pressed
+Exception: 23 page faults
+Powering off...

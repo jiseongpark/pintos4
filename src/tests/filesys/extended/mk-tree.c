@@ -49,7 +49,6 @@ do_mkdir (const char *format, ...)
   va_start (args, format);
   vsnprintf (dir, sizeof dir, format, args);
   va_end (args);
-
   CHECK (mkdir (dir), "mkdir \"%s\"", dir);
 }
 

@@ -7,6 +7,7 @@
 #include "threads/synch.h"
 #include "threads/interrupt.h"
 #include "filesys/file.h"
+#include "filesys/directory.h"
 #include <hash.h>
 /* States in a thread's life cycle. */
 enum thread_status
@@ -85,15 +86,16 @@ typedef int tid_t;
    blocked state is on a semaphore wait list. */
 struct thread
   {
-    /* Owned by thread.c. */
-    tid_t tid;                          /* Thread identifier. */
-    enum thread_status status;          /* Thread state. */
-    char name[16];                      /* Name (for debugging purposes). */
-    uint8_t *stack;                     /* Saved stack pointer. */
-    int priority;                       /* Priority. */
-
     /* Shared between thread.c and synch.c. */
     struct list_elem elem;              /* List element. */
+
+    /* Owned by thread.c. */
+    uint8_t *stack;                     /* Saved stack pointer. */
+    enum thread_status status;          /* Thread state. */
+    tid_t tid;                          /* Thread identifier. */
+    char name[16];                      /* Name (for debugging purposes). */
+    
+    int priority;                       /* Priority. */
 
 #ifdef USERPROG
     /* Owned by userprog/process.c. */
@@ -108,6 +110,7 @@ struct thread
     int executable;                     /* flag for executable file */
     char* exec;                         /*execuatable file for load */ 
     uint32_t* stack_end;
+    int wait_num;
 #endif
 
     /* Owned by thread.c. */
@@ -116,6 +119,8 @@ struct thread
     struct hash st;                     /* Swap table. */
     uint32_t *esp;                      /* Saved ESP register value */
     struct list mmf_list;               /* memory mapped file list */
+
+    struct dir * pwd;                   /* present working directroy */            
   };
 
 
@@ -151,4 +156,5 @@ void thread_set_nice (int);
 int thread_get_recent_cpu (void);
 int thread_get_load_avg (void);
 
+struct thread* read_ahead_thread;
 #endif /* threads/thread.h */

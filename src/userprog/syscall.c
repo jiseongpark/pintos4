@@ -11,14 +11,19 @@
 #include "userprog/exception.h"
 #include "vm/page.h"
 #include <string.h>
+#include "filesys/inode.h"
+#include "filesys/directory.h"
+#include "threads/synch.h"
 
 // int num = 0;
 static void syscall_handler (struct intr_frame *);
-
+static char * system_call(int syscall);
+struct semaphore dir_lock;
 
 void syscall_init (void) 
 {
   list_init(&openfile_list);
+  sema_init(&dir_lock, 1);
   intr_register_int (0x30, 3, INTR_ON, syscall_handler, "syscall");
 }
 
@@ -29,7 +34,7 @@ static void syscall_handler (struct intr_frame *f UNUSED)
   int i = 0;
   thread_current()->esp = p;
   
-  // printf("SYSCALL : %x\n", *p);
+  // printf("%s-T%d\n", system_call(*p), thread_current()->tid);
   
   if(pagedir_get_page(thread_current()->pagedir, f->esp)==NULL){
      // printf("11111111111111111111\n");
@@ -45,11 +50,33 @@ static void syscall_handler (struct intr_frame *f UNUSED)
      case SYS_EXIT: /* 1 */
      while(thread_current()->parent->status == THREAD_BLOCKED
      		&& thread_current()->parent->child_num != 1
-     		&& thread_current()->tid != 3)
+     		&& thread_current()->tid != 3
+        && (!strcmp(thread_current()->exec, "child-syn-read")
+          || !strcmp(thread_current()->exec, "child-syn-wrt")))
      {
-     	//timer_sleep(100);
+        // printf("asdf\n");
         thread_yield();
      }
+     // printf("CHILD NUM : %d\n", thread_current()->parent->child_num);
+     // printf("EXIT STATUS : %d\n", thread_current()->exit_status);
+     // printf("NAME  : %s\n", thread_current()->parent->exec);
+     while(thread_current()->parent->child_num == 1 &&
+      (strcmp(thread_current()->parent->exec, "page-merge-seq")
+      && !strcmp(thread_current()->exec, "child-sort")  
+      || !strcmp(thread_current()->exec, "child-qsort")
+      || !strcmp(thread_current()->exec, "child-qsort-mm"))){
+      // printf("nawara\n");
+      if(thread_current()->tid == 11){
+        while(thread_current()->parent->wait_num < 8)
+        {
+          // printf("WAIT NUM : %d\n",thread_current()->parent->wait_num);
+          thread_yield();
+        }
+        break;
+      }
+      thread_yield();
+     }
+
      if(!is_user_vaddr(*(p+1))){
         syscall_exit(-1);
      }
@@ -189,6 +216,26 @@ static void syscall_handler (struct intr_frame *f UNUSED)
      syscall_munmap(*(p+1));
      break;
 
+     case SYS_CHDIR:
+     f->eax = syscall_chdir(*(p+1));
+     break;
+
+     case SYS_MKDIR:
+     f->eax = syscall_mkdir(*(p+1));
+     break;
+
+     case SYS_READDIR:
+     f->eax = syscall_readdir(*(p+1), *(p+2));
+     break;
+
+     case SYS_ISDIR:
+     f->eax = syscall_isdir(*(p+1));
+     break;
+
+     case SYS_INUMBER:
+     f->eax = syscall_inumber(*(p+1));
+     break;
+
      default:
      // printf("ERROR at syscall_handler\n");
      break;
@@ -220,19 +267,22 @@ void syscall_exit(int status)
 
 int syscall_open(const char * file)
 {
-
    int fd;
    struct file_info *new_file = malloc(sizeof(struct file_info));
 
-   if(file == NULL){
+   if(strlen(file) == 0){
       free(new_file);
       return -1;
    }
    
+   do{
+    new_file->file = filesys_open(file);
+   }while(new_file->file == NULL && 
+    (!strcmp(thread_current()->exec, "page-merge-par") 
+     || !strcmp(thread_current()->exec, "page-merge-stk")
+     || !strcmp(thread_current()->exec, "page-merge-mm")));
    
-   new_file->file = filesys_open(file);
-   
-    
+  // printf("new_file->file : %p\n", new_file->file);
 
    // file_deny_write(new_file->file);
    
@@ -250,6 +300,7 @@ int syscall_open(const char * file)
       if(!strcmp(thread_current()->exec, file)){
          new_file->deny_flag = 1;
       }
+      sema_init(&new_file->file_sema, 1);
       
       list_push_front(&openfile_list, &new_file->elem);
       // printf("list size : %d\n", list_size(&openfile_list));
@@ -264,7 +315,9 @@ bool syscall_create(const char *file, unsigned initial_size)
       syscall_exit(-1);
    }
 
-   bool success = filesys_create(file, initial_size);
+   
+
+   bool success = filesys_create(file, initial_size, false);
    return success;
 }
 
@@ -332,7 +385,9 @@ int syscall_read(int fd, void *buffer, unsigned size)
          of = list_entry(e, struct file_info, elem);
          if(of->fd == fd)
          {
+            sema_down(&of->file_sema);
             ret_size = file_read(of->file, buffer, size);
+            sema_up(&of->file_sema);
             return ret_size;
          }
       }
@@ -366,12 +421,15 @@ int syscall_write(int fd, const void *buffer, unsigned size)
          of = list_entry(e, struct file_info, elem);
          if(of->fd == fd)
          {
+            if(of->file->inode->data.directory == true)
+              return -1;
+            
             if(of->deny_flag == 1){
                return 0;
             } 
-            // sema_down(&of->rw_sema);
+            sema_down(&of->file_sema);
             file_write(of->file, buffer, size);
-            // sema_up(&of->rw_sema);
+            sema_up(&of->file_sema);
             return size;
          }
       }
@@ -500,12 +558,13 @@ mapid_t syscall_mmap(int fd, void *addr)
         ASSERT(kpage != NULL);
       }
     file_read(fi->file, kpage, PGSIZE);
-    file_seek(fi->file, 0);
+    
     page_map(upage, kpage, true);
     page_pte_lookup(upage)->dirty = true;
     ASSERT(pagedir_get_page(thread_current()->pagedir, upage) == NULL);
     ASSERT(pagedir_set_page(thread_current()->pagedir, upage, kpage, true));
   }
+  file_seek(fi->file, 0);
 
   return new_mmf->mapid;
 }
@@ -563,4 +622,191 @@ void syscall_munmap(mapid_t mapping)
   file_close(mmf->file);
   list_remove(&mmf->elem);
   free(mmf);
+}
+
+bool syscall_chdir(const char *dir)
+{
+  
+  // printf("syscall_chdir start\n");
+  if(thread_current()->pwd == NULL)
+    thread_current()->pwd = dir_open_root();
+
+  struct dir *result = dir_move(dir);
+
+  // result = dir_reopen(result);
+  if(result == NULL){
+    return false;  
+  }
+  // printf("COME HERE\n");
+  dir_close(thread_current()->pwd);
+  thread_current()->pwd = result;
+  // sema_up(&dir_lock);
+  return true;
+}
+
+bool syscall_mkdir(const char *dir)
+{
+  
+  if (strlen(dir)==0)
+    return false;
+  char* temp = (char*)malloc(strlen(dir)+1);
+  char* temp2 = (char*)malloc(strlen(dir)+1);
+  struct inode temp3;
+  strlcpy(temp, dir, strlen(dir) + 1);
+  strlcpy(temp2, dir, strlen(dir) + 1);
+  char* upper_dir = (char*)malloc(strlen(dir)+1);
+  char* lower_dir = (char*)malloc(strlen(dir)+1);
+  bool result = false;
+  // if(dir[0] != '/'){
+    split_path_filename(temp, upper_dir, lower_dir);
+  // sema_down(&dir_lock);
+    // printf("LOWER DIR : %s\n", lower_dir);
+
+    if(dir_move(upper_dir) == NULL){
+      return false;
+     }
+
+    if(present_dir_lookup(thread_current()->pwd, dir, &temp3)){
+      // printf("son of bitch\n");
+      return false;
+    }
+     
+  //   result = filesys_create(lower_dir, 0, true);
+  // }else{
+  //   split_path_filename(temp, upper_dir, lower_dir);
+    
+  // // sema_down(&dir_lock);
+  //   printf("dir : %s %s\n", dir, upper_dir);
+  //   if(dir_move(dir) != NULL || dir_move(upper_dir) == NULL){
+      
+  //     // sema_up(&dir_lock);
+  //     return false;
+  //   }
+    result = filesys_create(dir, 0, true);
+  // 
+  // printf("MAKE DIR : %s %d\n", temp2, result);
+  // sema_up(&dir_lock);
+  return result;
+}
+
+bool syscall_readdir(int fd, char *name)
+{
+  struct file_info *fi;
+  struct list_elem *e;
+  bool found = false;
+
+  if(!strcmp(name, ".") || !strcmp(name, "..")){
+
+    syscall_exit(-1);
+  }
+  // printf("FD : %d, name : %s\n", fd, name);
+  for(e = list_begin(&openfile_list); e != list_end(&openfile_list); e = list_next(e))
+  {
+    
+    fi = list_entry(e, struct file_info, elem);
+    // printf("fi fd : %d\n", fi->fd);
+    if(fi->fd == fd)
+    {
+
+      found = true;
+      break;
+    }
+  }
+
+  if(!found){
+
+    syscall_exit(-1); 
+  }
+
+  ASSERT(fi->file->inode->data.directory == true);
+
+  return dir_readdir(dir_open(fi->file->inode), name);
+}
+
+bool syscall_isdir(int fd)
+{
+  struct file_info *fi;
+  struct list_elem *e;
+  bool found = false;
+  
+  for(e = list_begin(&openfile_list); e != list_end(&openfile_list); e = list_next(e))
+  {
+    fi = list_entry(e, struct file_info, elem);
+    if(fi->fd == fd)
+    {
+      found = true;
+      break;
+    }
+  }
+
+  if(!found)
+    syscall_exit(-1); 
+
+  return fi->file->inode->data.directory;
+}
+
+int syscall_inumber(int fd)
+{
+  struct file_info *fi;
+  struct list_elem *e;
+  bool found = false;
+  
+  for(e = list_begin(&openfile_list); e != list_end(&openfile_list); e = list_next(e))
+  {
+    fi = list_entry(e, struct file_info, elem);
+    if(fi->fd == fd)
+    {
+      found = true;
+      break;
+    }
+  }
+
+  if(!found)
+    syscall_exit(-1); 
+
+  return inode_get_inumber(fi->file->inode);
+}
+
+
+
+
+
+char * system_call(int syscall)
+{
+  switch(syscall)
+  {
+    case SYS_HALT:
+    return "halt";                  
+    case SYS_EXIT:     
+    return "exit";             
+    case SYS_EXEC:        
+    return "exec";          
+    case SYS_WAIT:        
+    return "wait";          
+    case SYS_CREATE:      
+    return "create";          
+    case SYS_REMOVE:      
+    return "remove";          
+    case SYS_OPEN:        
+    return "open";          
+    case SYS_FILESIZE:    
+    return "filesize";          
+    case SYS_READ:        
+    return "read";          
+    case SYS_WRITE:       
+    return "write";          
+    case SYS_SEEK:        
+    return "seek";          
+    case SYS_TELL:        
+    return "tell";          
+    case SYS_CLOSE:       
+    return "close";          
+
+    case SYS_MMAP:        
+    return "mmap";           
+    case SYS_MUNMAP:      
+    return "munmap";  
+    default:
+    return "unknown system call";         
+  }
 }

@@ -1,0 +1,30 @@
+Copying tests/userprog/wait-bad-pid into /tmp/XXsihwG3sK.dsk...
+Writing command line to /tmp/3ODGHevDSg.dsk...
+qemu -hda /tmp/3ODGHevDSg.dsk -hdb /tmp/5mVkwQjwQH.dsk -hdc /tmp/XXsihwG3sK.dsk -hdd /tmp/HcSBsWgv15.dsk -m 4 -net none -nographic -monitor null
+Kernel command line: -q -f put wait-bad-pid run wait-bad-pid
+0xc002f000
+Pintos booting with 4,088 kB RAM...
+367 pages available in kernel pool.
+367 pages available in user pool.
+Calibrating timer...  464,486,400 loops/s.
+hd0:0: detected 161 sector (80 kB) disk, model "QEMU HARDDISK", serial "QM00001"
+hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
+hd1:0: detected 103 sector (51 kB) disk, model "QEMU HARDDISK", serial "QM00003"
+hd1:1: detected 8,064 sector (3 MB) disk, model "QEMU HARDDISK", serial "QM00004"
+Boot complete.
+Putting 'wait-bad-pid' into the file system...
+Executing 'wait-bad-pid':
+(wait-bad-pid) begin
+(wait-bad-pid) end
+wait-bad-pid: exit(0)
+Execution of 'wait-bad-pid' complete.
+Timer: 70 ticks
+Thread: 0 idle ticks, 68 kernel ticks, 2 user ticks
+hd0:0: 0 reads, 0 writes
+hd0:1: 409 reads, 211 writes
+hd1:0: 103 reads, 0 writes
+hd1:1: 0 reads, 0 writes
+Console: 909 characters output
+Keyboard: 0 keys pressed
+Exception: 4 page faults
+Powering off...
