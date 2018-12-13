@@ -52,6 +52,7 @@ test_main (void)
         }
 
       /* Check for file and directory. */
+
       CHECK ((fd = open (".")) > 1, "open \".\"");
       CHECK (readdir (fd, name[0]), "readdir \".\"");
       CHECK (readdir (fd, name[1]), "readdir \".\"");

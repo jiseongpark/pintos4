@@ -7,9 +7,9 @@ userprog/exception.o: ../../userprog/exception.c \
   ../../threads/interrupt.h ../../filesys/file.h ../../filesys/off_t.h \
   ../../filesys/directory.h ../../devices/disk.h ../../lib/kernel/hash.h \
   ../../lib/kernel/list.h ../../userprog/syscall.h ../../lib/syscall-nr.h \
-  ../../lib/ctype.h ../../filesys/file.h ../../threads/vaddr.h \
-  ../../threads/loader.h ../../userprog/process.h ../../vm/page.h \
-  ../../threads/init.h ../../vm/frame.h ../../threads/thread.h \
-  ../../threads/synch.h ../../threads/palloc.h ../../userprog/pagedir.h \
-  ../../threads/vaddr.h ../../vm/swap.h ../../vm/page.h \
-  ../../filesys/off_t.h ../../devices/disk.h
+  ../../lib/ctype.h ../../filesys/file.h ../../filesys/directory.h \
+  ../../threads/vaddr.h ../../threads/loader.h ../../userprog/process.h \
+  ../../vm/page.h ../../threads/init.h ../../vm/frame.h \
+  ../../threads/thread.h ../../threads/synch.h ../../threads/palloc.h \
+  ../../userprog/pagedir.h ../../threads/vaddr.h ../../vm/swap.h \
+  ../../vm/page.h ../../filesys/off_t.h ../../devices/disk.h

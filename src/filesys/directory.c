@@ -190,7 +190,7 @@ struct dir * dir_move(char* dir_path)
   
 
   if(thread_current()->pwd == NULL){
-    // ////printf("dir_path : %s\n", dir_path);
+    // printf("dir_path : %s\n", dir_path);
     thread_current()->pwd = dir_open_root();
   }
 
@@ -296,9 +296,10 @@ dir_lookup (const struct dir *dir, const char *name,
       *inode = NULL;
       return false;
     }
-    struct dir_entry parent;
-    inode_read_at(thread_current()->pwd->inode, &parent,sizeof(struct dir_entry), 0);
-    *inode = inode_open(parent.inode_sector);
+
+    // struct dir_entry parent;
+    // inode_read_at(thread_current()->pwd->inode, &parent,sizeof(struct dir_entry), 0);
+    *inode = inode_reopen(dir->inode->parent);
 
   }
   else if(strlen(dir_path) == 0 && !(strcmp(filename, "/") + 1))
@@ -331,9 +332,12 @@ bool present_dir_lookup (const struct dir *dir, const char *name, struct inode *
   }
   else if(!strcmp(name, ".."))
   {
-    struct dir_entry parent;
-    inode_read_at(dir->inode, &parent,sizeof(struct dir_entry), 0);
-    *inode = inode_open(parent.inode_sector);
+
+    // struct dir_entry parent;
+    // inode_read_at(dir->inode, &parent,sizeof(struct dir_entry), 0);
+    // *inode = inode_open(parent.inode_sector);
+    *inode = inode_reopen(dir->inode->parent);
+
   }
   else if (lookup (dir, name, &e, NULL))
   {
@@ -395,7 +399,11 @@ dir_add (struct dir *dir, const char *name, disk_sector_t inode_sector, bool dir
   if (lookup (dir, filename, NULL, NULL))
     goto done;
 
-
+  if(directory)
+  {
+    struct dir *child = dir_open(inode_open(inode_sector));
+    child->inode->parent = dir->inode;
+  }
   
   /* Set OFS to offset of free slot.
      If there are no free slots, then it will be set to the
@@ -437,7 +445,7 @@ dir_remove (struct dir *dir, const char *name)
 
   ASSERT (dir != NULL);
   ASSERT (name != NULL);
-  // printf("NAME : %s\n", thread_current()->exec);
+  // printf("NAME : %s\n", name);
 
   
 
@@ -487,10 +495,13 @@ dir_readdir (struct dir *dir, char name[NAME_MAX + 1])
 
   while (inode_read_at (dir->inode, &e, sizeof e, dir->pos) == sizeof e) 
     {
+
       dir->pos += sizeof e;
       if (e.in_use)
         {
+          // printf("dir->pos : %d\n", dir->pos);
           strlcpy (name, e.name, NAME_MAX + 1);
+          // printf("DIR READ NAME : %s\n", name);
           return true;
         } 
     }

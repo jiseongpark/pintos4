@@ -4,6 +4,7 @@
 #include "threads/thread.h"
 #include "userprog/exception.h"
 #include <stdbool.h>
+#include "filesys/directory.h"
 
 
 #define STDIN 0   /* Standard input. */
@@ -17,6 +18,7 @@ struct file_info{
 	int opener;            /* process which open the file*/ 
 	int deny_flag;            /* deny_flag */
 	struct semaphore file_sema;
+	struct dir *dir;
 };
 
 struct list openfile_list;

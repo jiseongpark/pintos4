@@ -1,13 +1,13 @@
-Copying tests/vm/mmap-null into /tmp/n5WEQo2H3G.dsk...
-Copying ../../tests/vm/sample.txt into /tmp/n5WEQo2H3G.dsk...
-Writing command line to /tmp/ARaRXLd4ME.dsk...
-qemu -hda /tmp/ARaRXLd4ME.dsk -hdb /tmp/Lw1gMAsz1s.dsk -hdc /tmp/n5WEQo2H3G.dsk -hdd /tmp/_3RBfg2xaI.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/mmap-null into /tmp/NAZbjqBEH1.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/NAZbjqBEH1.dsk...
+Writing command line to /tmp/SnMgHQsJLZ.dsk...
+qemu -hda /tmp/SnMgHQsJLZ.dsk -hdb /tmp/r8JNNnEUaa.dsk -hdc /tmp/NAZbjqBEH1.dsk -hdd /tmp/eiBbOqdSC_.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put mmap-null put sample.txt run mmap-null
 0xc002f000
 Pintos booting with 4,088 kB RAM...
 367 pages available in kernel pool.
 367 pages available in user pool.
-Calibrating timer...  419,020,800 loops/s.
+Calibrating timer...  419,430,400 loops/s.
 hd0:0: detected 161 sector (80 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 107 sector (53 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -22,8 +22,8 @@ Executing 'mmap-null':
 (mmap-null) end
 mmap-null: exit(0)
 Execution of 'mmap-null' complete.
-Timer: 65 ticks
-Thread: 0 idle ticks, 65 kernel ticks, 0 user ticks
+Timer: 77 ticks
+Thread: 0 idle ticks, 76 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 443 reads, 218 writes
 hd1:0: 107 reads, 0 writes

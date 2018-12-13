@@ -8,7 +8,7 @@ threads/thread.o: ../../threads/thread.c ../../threads/thread.h \
   ../../lib/string.h ../../threads/flags.h ../../threads/intr-stubs.h \
   ../../threads/palloc.h ../../threads/switch.h ../../threads/vaddr.h \
   ../../threads/loader.h ../../userprog/process.h ../../threads/thread.h \
-  ../../userprog/exception.h ../../vm/frame.h ../../threads/init.h \
-  ../../threads/thread.h ../../threads/synch.h ../../threads/palloc.h \
-  ../../userprog/pagedir.h ../../threads/vaddr.h ../../vm/swap.h \
-  ../../vm/page.h ../../filesys/off_t.h ../../vm/page.h
+  ../../userprog/exception.h ../../filesys/directory.h ../../vm/frame.h \
+  ../../threads/init.h ../../threads/thread.h ../../threads/synch.h \
+  ../../threads/palloc.h ../../userprog/pagedir.h ../../threads/vaddr.h \
+  ../../vm/swap.h ../../vm/page.h ../../filesys/off_t.h ../../vm/page.h

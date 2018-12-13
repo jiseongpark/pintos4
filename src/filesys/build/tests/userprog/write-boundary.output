@@ -1,7 +1,7 @@
-Copying tests/userprog/write-boundary into /tmp/H8FA4sWhJF.dsk...
-Copying ../../tests/userprog/sample.txt into /tmp/H8FA4sWhJF.dsk...
-Writing command line to /tmp/3iMIylMlfQ.dsk...
-qemu -hda /tmp/3iMIylMlfQ.dsk -hdb /tmp/QzZx95qAWS.dsk -hdc /tmp/H8FA4sWhJF.dsk -hdd /tmp/9ZbMNoPfmZ.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/write-boundary into /tmp/CojWtz5ktN.dsk...
+Copying ../../tests/userprog/sample.txt into /tmp/CojWtz5ktN.dsk...
+Writing command line to /tmp/mVeXtIO4Ne.dsk...
+qemu -hda /tmp/mVeXtIO4Ne.dsk -hdb /tmp/wa137rgCxj.dsk -hdc /tmp/CojWtz5ktN.dsk -hdd /tmp/xqzNBE6c_V.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put write-boundary put sample.txt run write-boundary
 0xc002f000
 Pintos booting with 4,088 kB RAM...
@@ -21,10 +21,10 @@ Executing 'write-boundary':
 (write-boundary) end
 write-boundary: exit(0)
 Execution of 'write-boundary' complete.
-Timer: 66 ticks
-Thread: 0 idle ticks, 66 kernel ticks, 0 user ticks
+Timer: 65 ticks
+Thread: 0 idle ticks, 64 kernel ticks, 2 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 468 reads, 226 writes
+hd0:1: 468 reads, 225 writes
 hd1:0: 110 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 1020 characters output

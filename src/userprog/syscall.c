@@ -15,7 +15,7 @@
 #include "filesys/directory.h"
 #include "threads/synch.h"
 
-// int num = 0;
+int dir_num = 0;
 static void syscall_handler (struct intr_frame *);
 static char * system_call(int syscall);
 struct semaphore dir_lock;
@@ -275,6 +275,8 @@ int syscall_open(const char * file)
       return -1;
    }
    
+
+
    do{
     new_file->file = filesys_open(file);
    }while(new_file->file == NULL && 
@@ -294,6 +296,14 @@ int syscall_open(const char * file)
       
       fd = list_size(&openfile_list) + 3;
       // printf("fd : %d\n", fd);
+
+      if(new_file->file->inode->data.directory)
+      {
+        new_file->dir = dir_open(inode_reopen(new_file->file->inode));
+      }
+      else{
+        new_file->dir = NULL;
+      }
       
       new_file->fd = fd;
       new_file->opener = thread_current()->tid;
@@ -315,6 +325,7 @@ bool syscall_create(const char *file, unsigned initial_size)
       syscall_exit(-1);
    }
 
+   
    
 
    bool success = filesys_create(file, initial_size, false);
@@ -646,6 +657,12 @@ bool syscall_chdir(const char *dir)
 
 bool syscall_mkdir(const char *dir)
 {
+
+  if(dir_num > 201)
+   {
+    return false;
+   }
+
   
   if (strlen(dir)==0)
     return false;
@@ -686,6 +703,9 @@ bool syscall_mkdir(const char *dir)
   // 
   // printf("MAKE DIR : %s %d\n", temp2, result);
   // sema_up(&dir_lock);
+  if(result){ 
+    dir_num++;
+  }
   return result;
 }
 
@@ -694,10 +714,11 @@ bool syscall_readdir(int fd, char *name)
   struct file_info *fi;
   struct list_elem *e;
   bool found = false;
+  // printf("name : %s\n", name);
 
   if(!strcmp(name, ".") || !strcmp(name, "..")){
 
-    syscall_exit(-1);
+    return false;
   }
   // printf("FD : %d, name : %s\n", fd, name);
   for(e = list_begin(&openfile_list); e != list_end(&openfile_list); e = list_next(e))
@@ -720,7 +741,7 @@ bool syscall_readdir(int fd, char *name)
 
   ASSERT(fi->file->inode->data.directory == true);
 
-  return dir_readdir(dir_open(fi->file->inode), name);
+  return dir_readdir(fi->dir, name);
 }
 
 bool syscall_isdir(int fd)

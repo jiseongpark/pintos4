@@ -1,6 +1,6 @@
-Copying tests/userprog/multi-recurse into /tmp/i1f7Kcz70l.dsk...
-Writing command line to /tmp/YoNqmG3GB5.dsk...
-qemu -hda /tmp/YoNqmG3GB5.dsk -hdb /tmp/I_ZgbdGG45.dsk -hdc /tmp/i1f7Kcz70l.dsk -hdd /tmp/aGjcV972dR.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/multi-recurse into /tmp/CWxog607Tq.dsk...
+Writing command line to /tmp/qNBMfCvY0Q.dsk...
+qemu -hda /tmp/qNBMfCvY0Q.dsk -hdb /tmp/58VeeQE3UJ.dsk -hdc /tmp/CWxog607Tq.dsk -hdd /tmp/3JtWIadDqH.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put multi-recurse run 'multi-recurse 15'
 0xc002f000
 Pintos booting with 4,088 kB RAM...
@@ -78,8 +78,8 @@ multi-recurse: exit(14)
 (multi-recurse) end 15
 multi-recurse: exit(15)
 Execution of 'multi-recurse 15' complete.
-Timer: 95 ticks
-Thread: 0 idle ticks, 78 kernel ticks, 17 user ticks
+Timer: 93 ticks
+Thread: 0 idle ticks, 75 kernel ticks, 18 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 1773 reads, 237 writes
 hd1:0: 116 reads, 0 writes

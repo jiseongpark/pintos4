@@ -1,13 +1,13 @@
-Copying tests/userprog/wait-twice into /tmp/AfW9sAGOcB.dsk...
-Copying tests/userprog/child-simple into /tmp/AfW9sAGOcB.dsk...
-Writing command line to /tmp/O_Zofn6loL.dsk...
-qemu -hda /tmp/O_Zofn6loL.dsk -hdb /tmp/mHaMMhqpKK.dsk -hdc /tmp/AfW9sAGOcB.dsk -hdd /tmp/nXHS1nmT_K.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/wait-twice into /tmp/b8db3vGUeC.dsk...
+Copying tests/userprog/child-simple into /tmp/b8db3vGUeC.dsk...
+Writing command line to /tmp/rn2v7czXoF.dsk...
+qemu -hda /tmp/rn2v7czXoF.dsk -hdb /tmp/hXhN9s616S.dsk -hdc /tmp/b8db3vGUeC.dsk -hdd /tmp/7EmStzySgw.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put wait-twice put child-simple run wait-twice
 0xc002f000
 Pintos booting with 4,088 kB RAM...
 367 pages available in kernel pool.
 367 pages available in user pool.
-Calibrating timer...  471,040,000 loops/s.
+Calibrating timer...  420,249,600 loops/s.
 hd0:0: detected 161 sector (80 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 207 sector (103 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -24,10 +24,10 @@ child-simple: exit(81)
 (wait-twice) end
 wait-twice: exit(0)
 Execution of 'wait-twice' complete.
-Timer: 79 ticks
-Thread: 0 idle ticks, 79 kernel ticks, 1 user ticks
+Timer: 84 ticks
+Thread: 0 idle ticks, 81 kernel ticks, 3 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 826 reads, 420 writes
+hd0:1: 826 reads, 421 writes
 hd1:0: 207 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 1062 characters output

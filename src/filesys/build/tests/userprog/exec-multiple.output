@@ -1,7 +1,7 @@
-Copying tests/userprog/exec-multiple into /tmp/xGqwmRt3BZ.dsk...
-Copying tests/userprog/child-simple into /tmp/xGqwmRt3BZ.dsk...
-Writing command line to /tmp/khmKXo3fCa.dsk...
-qemu -hda /tmp/khmKXo3fCa.dsk -hdb /tmp/6Tex_usxz2.dsk -hdc /tmp/xGqwmRt3BZ.dsk -hdd /tmp/aVYdtKwGLe.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/exec-multiple into /tmp/5JPZ9qu6Fu.dsk...
+Copying tests/userprog/child-simple into /tmp/5JPZ9qu6Fu.dsk...
+Writing command line to /tmp/zp7KA7ufsp.dsk...
+qemu -hda /tmp/zp7KA7ufsp.dsk -hdb /tmp/zS5dXf4scq.dsk -hdc /tmp/5JPZ9qu6Fu.dsk -hdd /tmp/LyLvR9Tb3G.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put exec-multiple put child-simple run exec-multiple
 0xc002f000
 Pintos booting with 4,088 kB RAM...
@@ -28,10 +28,10 @@ child-simple: exit(81)
 (exec-multiple) end
 exec-multiple: exit(0)
 Execution of 'exec-multiple' complete.
-Timer: 81 ticks
-Thread: 0 idle ticks, 76 kernel ticks, 5 user ticks
+Timer: 82 ticks
+Thread: 0 idle ticks, 78 kernel ticks, 4 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 1066 reads, 421 writes
+hd0:1: 1066 reads, 420 writes
 hd1:0: 207 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 1151 characters output

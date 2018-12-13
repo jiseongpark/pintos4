@@ -1,2 +1,14 @@
 FAIL
-file system extraction run: TIMEOUT after 6 seconds of wall-clock time - load average: 0.76, 0.37, 0.20
+Extracted file system contents are not correct.
+tar is missing from the file system.
+
+Actual contents of file system:
+a: directory
+a/b: directory
+dir-rm-parent: 54319-byte file
+
+Expected contents of file system:
+a: directory
+a/b: directory
+dir-rm-parent: 54319-byte file
+tar: 59609-byte file

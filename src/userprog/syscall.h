@@ -7,6 +7,7 @@
 #include <ctype.h>
 #include <stdint.h>
 #include "filesys/file.h"
+#include "filesys/directory.h"
 
 typedef int pid_t;
 typedef int mapid_t;

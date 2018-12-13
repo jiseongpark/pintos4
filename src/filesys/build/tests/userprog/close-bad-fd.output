@@ -1,12 +1,12 @@
-Copying tests/userprog/close-bad-fd into /tmp/jBFc3IPvQd.dsk...
-Writing command line to /tmp/6Rrv0VL1XI.dsk...
-qemu -hda /tmp/6Rrv0VL1XI.dsk -hdb /tmp/eJHNQxdK2e.dsk -hdc /tmp/jBFc3IPvQd.dsk -hdd /tmp/x00u3E1bYS.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/close-bad-fd into /tmp/_QGY4eLCVQ.dsk...
+Writing command line to /tmp/HMXhKdaSMm.dsk...
+qemu -hda /tmp/HMXhKdaSMm.dsk -hdb /tmp/U3Pyc_TY6q.dsk -hdc /tmp/_QGY4eLCVQ.dsk -hdd /tmp/zDibvH8lVh.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put close-bad-fd run close-bad-fd
 0xc002f000
 Pintos booting with 4,088 kB RAM...
 367 pages available in kernel pool.
 367 pages available in user pool.
-Calibrating timer...  419,020,800 loops/s.
+Calibrating timer...  209,510,400 loops/s.
 hd0:0: detected 161 sector (80 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 103 sector (51 kB) disk, model "QEMU HARDDISK", serial "QM00003"

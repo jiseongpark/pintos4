@@ -12,6 +12,7 @@
 
 /* The disk that contains the file system. */
 struct disk *filesys_disk;
+extern int dir_num;
 
 static void do_format (void);
 
@@ -109,18 +110,25 @@ filesys_remove (const char *name)
   struct dir *dir;
   char *dir_path = malloc(strlen(name)+1);
   char *filename = malloc(strlen(name)+1);
-
   split_path_filename(name, dir_path, filename);
+  // printf("DIR PATH : %s\n", dir_path);
+
 
   if(strlen(dir_path) != 0){ 
     dir = dir_move(dir_path);
   }
   else{
-    dir = dir_open_root ();
+    if(dir_num > 100)
+      dir = thread_current()->pwd;
+    else
+      dir = dir_open_root();
+    // dir = dir_open_root();
+
   }
 
   bool success = dir != NULL && dir_remove (dir, filename);
-  dir_close (dir); 
+  if(dir != thread_current()->pwd)
+    dir_close (dir); 
 
   return success;
 }

@@ -1,7 +1,7 @@
-Copying tests/vm/mmap-misalign into /tmp/cwo__pIEnN.dsk...
-Copying ../../tests/vm/sample.txt into /tmp/cwo__pIEnN.dsk...
-Writing command line to /tmp/qGD44vL1JR.dsk...
-qemu -hda /tmp/qGD44vL1JR.dsk -hdb /tmp/1gQy2sdjXW.dsk -hdc /tmp/cwo__pIEnN.dsk -hdd /tmp/iWwEqkALRJ.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/mmap-misalign into /tmp/CAXK9mOGw2.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/CAXK9mOGw2.dsk...
+Writing command line to /tmp/RSz7_hbZ1s.dsk...
+qemu -hda /tmp/RSz7_hbZ1s.dsk -hdb /tmp/Cr7wdnDH5n.dsk -hdc /tmp/CAXK9mOGw2.dsk -hdd /tmp/q_dy3rLGiI.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put mmap-misalign put sample.txt run mmap-misalign
 0xc002f000
 Pintos booting with 4,088 kB RAM...
@@ -23,9 +23,9 @@ Executing 'mmap-misalign':
 mmap-misalign: exit(0)
 Execution of 'mmap-misalign' complete.
 Timer: 65 ticks
-Thread: 0 idle ticks, 63 kernel ticks, 2 user ticks
+Thread: 0 idle ticks, 65 kernel ticks, 0 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 443 reads, 218 writes
+hd0:1: 443 reads, 220 writes
 hd1:0: 107 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 1061 characters output

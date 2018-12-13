@@ -162,6 +162,7 @@ process_wait (tid_t child_tid UNUSED)
 
   // list_remove(child);
   if(flag == 0 || flag == 2){
+
     return child_tid - 4;
   }
   if(child_tid <= 0){
@@ -169,7 +170,7 @@ process_wait (tid_t child_tid UNUSED)
     return -1;
   }
   if(flag == 3){
-    return child_tid -4;
+    return child_tid -6;
   }
   // printf("PARENT EXIT STATUS : %d\n", parent->exit_status);
   // printf("CHILD TID : %d\n", child_tid);
