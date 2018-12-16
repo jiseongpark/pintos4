@@ -1,12 +1,12 @@
-Copying tests/userprog/halt into /tmp/DoNvB8Shd1.dsk...
-Writing command line to /tmp/2clNGenxz_.dsk...
-qemu -hda /tmp/2clNGenxz_.dsk -hdb /tmp/lcYrdBO9Y3.dsk -hdc /tmp/DoNvB8Shd1.dsk -hdd /tmp/uqF9pdr1pl.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/halt into /tmp/iFQA0AM9vS.dsk...
+Writing command line to /tmp/iXu2OJ5hDU.dsk...
+qemu -hda /tmp/iXu2OJ5hDU.dsk -hdb /tmp/u6NVp_OMkc.dsk -hdc /tmp/iFQA0AM9vS.dsk -hdd /tmp/lCyBoySGfF.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put halt run halt
 0xc002f000
 Pintos booting with 4,088 kB RAM...
 367 pages available in kernel pool.
 367 pages available in user pool.
-Calibrating timer...  457,932,800 loops/s.
+Calibrating timer...  419,020,800 loops/s.
 hd0:0: detected 161 sector (80 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 103 sector (51 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -15,8 +15,8 @@ Boot complete.
 Putting 'halt' into the file system...
 Executing 'halt':
 (halt) begin
-Timer: 69 ticks
-Thread: 0 idle ticks, 69 kernel ticks, 0 user ticks
+Timer: 63 ticks
+Thread: 0 idle ticks, 62 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 392 reads, 211 writes
 hd1:0: 103 reads, 0 writes

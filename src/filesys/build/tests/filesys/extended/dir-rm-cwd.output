@@ -1,13 +1,13 @@
-Copying tests/filesys/extended/dir-rm-cwd into /tmp/AsTUGr3Yk8.dsk...
-Copying tests/filesys/extended/tar into /tmp/AsTUGr3Yk8.dsk...
-Writing command line to /tmp/uC5gfGhvSZ.dsk...
-qemu -hda /tmp/uC5gfGhvSZ.dsk -hdb tmp.dsk -hdc /tmp/AsTUGr3Yk8.dsk -hdd /tmp/lzBrRjbooT.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/dir-rm-cwd into /tmp/ZmhMC5l817.dsk...
+Copying tests/filesys/extended/tar into /tmp/ZmhMC5l817.dsk...
+Writing command line to /tmp/1aYLehxIHv.dsk...
+qemu -hda /tmp/1aYLehxIHv.dsk -hdb tmp.dsk -hdc /tmp/ZmhMC5l817.dsk -hdd /tmp/d9Nd0f6i4s.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put dir-rm-cwd put tar run dir-rm-cwd
 0xc002f000
 Pintos booting with 4,088 kB RAM...
 367 pages available in kernel pool.
 367 pages available in user pool.
-Calibrating timer...  458,752,000 loops/s.
+Calibrating timer...  471,040,000 loops/s.
 hd0:0: detected 161 sector (80 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 230 sector (115 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -33,8 +33,8 @@ Executing 'dir-rm-cwd':
 (dir-rm-cwd) end
 dir-rm-cwd: exit(0)
 Execution of 'dir-rm-cwd' complete.
-Timer: 84 ticks
-Thread: 0 idle ticks, 81 kernel ticks, 3 user ticks
+Timer: 80 ticks
+Thread: 0 idle ticks, 76 kernel ticks, 4 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 860 reads, 472 writes
 hd1:0: 230 reads, 0 writes

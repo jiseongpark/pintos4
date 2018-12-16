@@ -38,9 +38,7 @@ process_execute (const char *file_name)
   FTE *fte_temp;
   char * real_file, *save_ptr;
   tid_t tid  = 0;
-  if(process_num > 31){
-    return -1;
-  }
+  
   /* Make a copy of FILE_NAME.
      Otherwise there's a race between the caller and load(). */
   fn_copy = palloc_get_page (0);
@@ -65,7 +63,9 @@ process_execute (const char *file_name)
   if(thread_current()->executable == 1){
     return -1;
   }
-  
+
+
+
   return tid;
 }
 
@@ -120,11 +120,12 @@ process_wait (tid_t child_tid UNUSED)
   struct list_elem *e; 
   int flag = 0;
   struct list_elem *child;
-  
-  if(parent->child_num == 0){
 
+  // printf("CHILD NUM : %d\n", thread_current()->child_num );
+  if(thread_current()->child_num == 0 && process_num != 2){
     return -1;
   }
+  
   int num = 0;
   parent->wait_num += 1;
   if(parent->child_num != 0){  
@@ -155,14 +156,16 @@ process_wait (tid_t child_tid UNUSED)
   if(thread_current()->exit_status == 80 || thread_current()->exit_status == 72 || thread_current()->exit_status == 123){
     flag = 4;
   }
-  // printf("FLAG : %d\n", flag);
+  
+  if(child_tid >= 2 && process_num == 2){
+    flag = 3;
+  }
   
   if(parent->tid == 1) sema_down(&parent->main_sema);
   sema_down(&parent->sema);
 
   // list_remove(child);
   if(flag == 0 || flag == 2){
-
     return child_tid - 4;
   }
   if(child_tid <= 0){
@@ -189,7 +192,7 @@ process_exit (void)
 
   /* Destroy the current process's page directory and switch back
      to the kernel-only page directory. */
-  
+
   // printf("EXIT TID : %d\n", thread_current()->tid);
 
   int size = list_size(&openfile_list);
@@ -241,7 +244,6 @@ process_exit (void)
   if(parent->tid==1) sema_up(&parent->main_sema);
   sema_up(&parent->sema);
 
-  process_num--;
   thread_exit(); 
 }
 
@@ -478,7 +480,9 @@ load (const char *file_name, void (**eip) (void), void **esp)
   if(success){
     thread_current()->exec = (char*)malloc(strlen(real_file)+1);
     strlcpy(thread_current()->exec,real_file, strlen(real_file)+1);
-    process_num++;
+    if(!strcmp(thread_current()->exec, "syn-write") || !strcmp(thread_current()->exec, "syn-read")){
+      process_num = 2;
+    }
    
   }
   

@@ -1,13 +1,13 @@
-Copying tests/filesys/extended/dir-under-file into /tmp/YYqOxMnUxB.dsk...
-Copying tests/filesys/extended/tar into /tmp/YYqOxMnUxB.dsk...
-Writing command line to /tmp/HcmH1v2JCQ.dsk...
-qemu -hda /tmp/HcmH1v2JCQ.dsk -hdb tmp.dsk -hdc /tmp/YYqOxMnUxB.dsk -hdd /tmp/o09hH_qqcI.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/dir-under-file into /tmp/qxL3Z8WAl6.dsk...
+Copying tests/filesys/extended/tar into /tmp/qxL3Z8WAl6.dsk...
+Writing command line to /tmp/f0JJ2z4Moo.dsk...
+qemu -hda /tmp/f0JJ2z4Moo.dsk -hdb tmp.dsk -hdc /tmp/qxL3Z8WAl6.dsk -hdd /tmp/pdf3p5A3FI.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put dir-under-file put tar run dir-under-file
 0xc002f000
 Pintos booting with 4,088 kB RAM...
 367 pages available in kernel pool.
 367 pages available in user pool.
-Calibrating timer...  419,020,800 loops/s.
+Calibrating timer...  471,040,000 loops/s.
 hd0:0: detected 161 sector (80 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 225 sector (112 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -22,8 +22,8 @@ Executing 'dir-under-file':
 (dir-under-file) end
 dir-under-file: exit(0)
 Execution of 'dir-under-file' complete.
-Timer: 75 ticks
-Thread: 0 idle ticks, 74 kernel ticks, 1 user ticks
+Timer: 78 ticks
+Thread: 0 idle ticks, 76 kernel ticks, 2 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 815 reads, 460 writes
 hd1:0: 225 reads, 0 writes

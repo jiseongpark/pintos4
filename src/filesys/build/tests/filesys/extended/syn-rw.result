@@ -1,2 +1,2 @@
 FAIL
-run: 8 bytes read starting at offset 0 in "logfile" differ from expected: FAILED
+run: TIMEOUT after 21 seconds of wall-clock time - load average: 0.65, 0.63, 0.60

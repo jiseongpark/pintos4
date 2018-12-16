@@ -1,7 +1,7 @@
-Copying tests/userprog/rox-child into /tmp/2i_W6eYj49.dsk...
-Copying tests/userprog/child-rox into /tmp/2i_W6eYj49.dsk...
-Writing command line to /tmp/Dp6qp_Ejv4.dsk...
-qemu -hda /tmp/Dp6qp_Ejv4.dsk -hdb /tmp/Y3CeOM8OQQ.dsk -hdc /tmp/2i_W6eYj49.dsk -hdd /tmp/dYwNvJ_Qg_.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/rox-child into /tmp/ilL4FeFsaL.dsk...
+Copying tests/userprog/child-rox into /tmp/ilL4FeFsaL.dsk...
+Writing command line to /tmp/UV3BQxVHWp.dsk...
+qemu -hda /tmp/UV3BQxVHWp.dsk -hdb /tmp/jXWSoNvHtS.dsk -hdc /tmp/ilL4FeFsaL.dsk -hdd /tmp/d7QKyS5Tma.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put rox-child put child-rox run rox-child
 0xc002f000
 Pintos booting with 4,088 kB RAM...
@@ -26,17 +26,16 @@ Executing 'rox-child':
 (child-rox) try to write "child-rox"
 (child-rox) end
 child-rox: exit(12)
-(rox-child) write "child-rox"
-(rox-child) end
-rox-child: exit(0)
+(rox-child) wait for child: FAILED
+rox-child: exit(1)
 Execution of 'rox-child' complete.
-Timer: 76 ticks
-Thread: 0 idle ticks, 75 kernel ticks, 1 user ticks
+Timer: 65 ticks
+Thread: 0 idle ticks, 63 kernel ticks, 2 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 844 reads, 452 writes
+hd0:1: 843 reads, 450 writes
 hd1:0: 222 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1221 characters output
+Console: 1210 characters output
 Keyboard: 0 keys pressed
 Exception: 9 page faults
 Powering off...

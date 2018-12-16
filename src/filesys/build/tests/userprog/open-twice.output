@@ -1,7 +1,7 @@
-Copying tests/userprog/open-twice into /tmp/jI1PpDI_Mm.dsk...
-Copying ../../tests/userprog/sample.txt into /tmp/jI1PpDI_Mm.dsk...
-Writing command line to /tmp/Bwx_oVHXxH.dsk...
-qemu -hda /tmp/Bwx_oVHXxH.dsk -hdb /tmp/_GhavMwowA.dsk -hdc /tmp/jI1PpDI_Mm.dsk -hdd /tmp/TdQ1e_xp1v.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/open-twice into /tmp/4wWUK81JFf.dsk...
+Copying ../../tests/userprog/sample.txt into /tmp/4wWUK81JFf.dsk...
+Writing command line to /tmp/8a9jnVCQvo.dsk...
+qemu -hda /tmp/8a9jnVCQvo.dsk -hdb /tmp/bob9OHTsSZ.dsk -hdc /tmp/4wWUK81JFf.dsk -hdd /tmp/bpQijQ6Wcn.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put open-twice put sample.txt run open-twice
 0xc002f000
 Pintos booting with 4,088 kB RAM...
@@ -23,9 +23,9 @@ Executing 'open-twice':
 open-twice: exit(0)
 Execution of 'open-twice' complete.
 Timer: 65 ticks
-Thread: 0 idle ticks, 64 kernel ticks, 1 user ticks
+Thread: 0 idle ticks, 63 kernel ticks, 2 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 432 reads, 218 writes
+hd0:1: 432 reads, 217 writes
 hd1:0: 106 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 1026 characters output

@@ -1,6 +1,6 @@
-Copying tests/vm/pt-grow-bad into /tmp/Va38mKLe6z.dsk...
-Writing command line to /tmp/__GIevC94E.dsk...
-qemu -hda /tmp/__GIevC94E.dsk -hdb /tmp/_UDpaEps2g.dsk -hdc /tmp/Va38mKLe6z.dsk -hdd /tmp/RYt975zIRd.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/pt-grow-bad into /tmp/TLCO4SxWyX.dsk...
+Writing command line to /tmp/qNtXg0V1Ux.dsk...
+qemu -hda /tmp/qNtXg0V1Ux.dsk -hdb /tmp/v9gSRJj3rh.dsk -hdc /tmp/TLCO4SxWyX.dsk -hdd /tmp/V1mQ1LdHfa.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put pt-grow-bad run pt-grow-bad
 0xc002f000
 Pintos booting with 4,088 kB RAM...
@@ -17,13 +17,13 @@ Executing 'pt-grow-bad':
 (pt-grow-bad) begin
 pt-grow-bad: exit(-1)
 Execution of 'pt-grow-bad' complete.
-Timer: 74 ticks
-Thread: 0 idle ticks, 74 kernel ticks, 0 user ticks
+Timer: 113 ticks
+Thread: 0 idle ticks, 113 kernel ticks, 0 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 395 reads, 213 writes
+hd0:1: 395 reads, 212 writes
 hd1:0: 104 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 884 characters output
+Console: 886 characters output
 Keyboard: 0 keys pressed
 Exception: 5 page faults
 Powering off...

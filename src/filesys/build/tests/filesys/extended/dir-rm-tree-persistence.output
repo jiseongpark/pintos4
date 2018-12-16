@@ -1,5 +1,5 @@
-Writing command line to /tmp/2QeKjwURKO.dsk...
-qemu -hda /tmp/2QeKjwURKO.dsk -hdb tmp.dsk -hdc /tmp/3kCugjYBtP.dsk -hdd /tmp/EQ3S8aPgEe.dsk -m 4 -net none -nographic -monitor null
+Writing command line to /tmp/Htp8LHeSMN.dsk...
+qemu -hda /tmp/Htp8LHeSMN.dsk -hdb tmp.dsk -hdc /tmp/b3dEPUdtxh.dsk -hdd /tmp/Wl_vMnsetY.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q run 'tar fs.tar /' get fs.tar
 0xc002f000
 Pintos booting with 4,088 kB RAM...
@@ -15,8 +15,8 @@ Executing 'tar fs.tar /':
 tar: exit(0)
 Execution of 'tar fs.tar /' complete.
 Getting 'fs.tar' from the file system...
-Timer: 91 ticks
-Thread: 0 idle ticks, 74 kernel ticks, 17 user ticks
+Timer: 92 ticks
+Thread: 0 idle ticks, 82 kernel ticks, 10 user ticks
 hd0:0: 0 reads, 0 writes
 hd0:1: 1799 reads, 244 writes
 hd1:0: 0 reads, 236 writes
@@ -25,4 +25,4 @@ Console: 853 characters output
 Keyboard: 0 keys pressed
 Exception: 4 page faults
 Powering off...
-Copying tests/filesys/extended/dir-rm-tree.tar out of /tmp/3kCugjYBtP.dsk...
+Copying tests/filesys/extended/dir-rm-tree.tar out of /tmp/b3dEPUdtxh.dsk...

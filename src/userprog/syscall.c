@@ -77,6 +77,7 @@ static void syscall_handler (struct intr_frame *f UNUSED)
       thread_yield();
      }
 
+
      if(!is_user_vaddr(*(p+1))){
         syscall_exit(-1);
      }
@@ -651,7 +652,7 @@ bool syscall_chdir(const char *dir)
   // printf("COME HERE\n");
   dir_close(thread_current()->pwd);
   thread_current()->pwd = result;
-  // sema_up(&dir_lock);
+  
   return true;
 }
 

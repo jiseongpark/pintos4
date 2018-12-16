@@ -1,13 +1,13 @@
-Copying tests/vm/mmap-over-code into /tmp/6bx63flXzP.dsk...
-Copying ../../tests/vm/sample.txt into /tmp/6bx63flXzP.dsk...
-Writing command line to /tmp/Yr8jW4wMcA.dsk...
-qemu -hda /tmp/Yr8jW4wMcA.dsk -hdb /tmp/hdaoUlUPPX.dsk -hdc /tmp/6bx63flXzP.dsk -hdd /tmp/QialwcYWZm.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/mmap-over-code into /tmp/aCHkah_h4L.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/aCHkah_h4L.dsk...
+Writing command line to /tmp/w3ZqRYz0ze.dsk...
+qemu -hda /tmp/w3ZqRYz0ze.dsk -hdb /tmp/_X0XmJ1FFd.dsk -hdc /tmp/aCHkah_h4L.dsk -hdd /tmp/xoNHTkxott.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put mmap-over-code put sample.txt run mmap-over-code
 0xc002f000
 Pintos booting with 4,088 kB RAM...
 367 pages available in kernel pool.
 367 pages available in user pool.
-Calibrating timer...  419,020,800 loops/s.
+Calibrating timer...  471,040,000 loops/s.
 hd0:0: detected 161 sector (80 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 107 sector (53 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -22,10 +22,10 @@ Executing 'mmap-over-code':
 (mmap-over-code) end
 mmap-over-code: exit(0)
 Execution of 'mmap-over-code' complete.
-Timer: 65 ticks
-Thread: 0 idle ticks, 64 kernel ticks, 1 user ticks
+Timer: 97 ticks
+Thread: 1 idle ticks, 91 kernel ticks, 6 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 428 reads, 220 writes
+hd0:1: 428 reads, 219 writes
 hd1:0: 107 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 1067 characters output

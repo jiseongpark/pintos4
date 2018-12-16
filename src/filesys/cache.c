@@ -178,10 +178,6 @@ void read_ahead(disk_sector_t sector)
 	// sema_down(&cache_sema);
 	disk_read(disk_get(0,1), sector, read_ahead_buffer);
 	read_ahead_flag = 2;
-	// printf("나와라 씨발새끼야 %p\n", read_ahead_thread);
-	// printf("magic : 0xcd6abf4b, tmagic : %p\n", read_ahead_thread->magic);
-	// printf("%s\n", read_ahead_thread->magic == 0xcd6abf4b ? "맞아 씨발" : "ㄴㄴ");
-	// printf("TID : %s\n", read_ahead_thread->status);
 	
 	// free(read_ahead_buffer);
 	// sema_up(&cache_sema);

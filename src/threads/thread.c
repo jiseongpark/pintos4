@@ -483,7 +483,6 @@ init_thread (struct thread *t, const char *name, int priority)
   t->executable = 0;
   t->exec = NULL;
   t->stack_end = NULL;
-  
 
   list_init(&t->child_list);
   sema_init(&t->sema, 0);
