@@ -372,8 +372,7 @@ load (const char *file_name, void (**eip) (void), void **esp)
   
   if (file == NULL) 
     {
-      // printf("NULL GASAGGI\n");
-
+      printf ("load: %s: open failed\n", file_name);
       parent->executable = 1;
       goto done; 
     }
@@ -489,7 +488,7 @@ load (const char *file_name, void (**eip) (void), void **esp)
  if(thread_current()->parent->tid==1) sema_up(&thread_current()->parent->main_sema);
   sema_up(&thread_current()->sema);
   free(fn_copy);
-  filesys_remove(temp);
+  // filesys_remove(temp);
   free(temp);
   return success;
 }

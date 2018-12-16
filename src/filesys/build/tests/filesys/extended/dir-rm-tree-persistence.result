@@ -1,10 +1,1 @@
-FAIL
-Extracted file system contents are not correct.
-tar is missing from the file system.
-
-Actual contents of file system:
-dir-rm-tree: 58321-byte file
-
-Expected contents of file system:
-dir-rm-tree: 58321-byte file
-tar: 59609-byte file
+PASS

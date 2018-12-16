@@ -1,7 +1,7 @@
-Copying tests/vm/page-merge-mm into /tmp/CZu6BU3LIM.dsk...
-Copying tests/vm/child-qsort-mm into /tmp/CZu6BU3LIM.dsk...
-Writing command line to /tmp/KKjMrrRNYq.dsk...
-qemu -hda /tmp/KKjMrrRNYq.dsk -hdb /tmp/ZX7jawI1zy.dsk -hdc /tmp/CZu6BU3LIM.dsk -hdd /tmp/g5smV8D_bT.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-merge-mm into /tmp/vyrJIgfBeI.dsk...
+Copying tests/vm/child-qsort-mm into /tmp/vyrJIgfBeI.dsk...
+Writing command line to /tmp/dF3bguFyEY.dsk...
+qemu -hda /tmp/dF3bguFyEY.dsk -hdb /tmp/En9tF9Uzwn.dsk -hdc /tmp/vyrJIgfBeI.dsk -hdd /tmp/drF_xkcD7I.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-merge-mm put child-qsort-mm run page-merge-mm
 0xc002f000
 Pintos booting with 4,088 kB RAM...
@@ -32,16 +32,18 @@ child-qsort-mm: exit(80)
 (page-merge-mm) sort chunk 6
 (page-merge-mm) sort chunk 7
 child-qsort-mm: exit(80)
+load: chil: open failed
+chil: exit(-1)
 (page-merge-mm) exec "child-qsort-mm buf7": FAILED
 page-merge-mm: exit(1)
 Execution of 'page-merge-mm' complete.
-Timer: 439 ticks
-Thread: 51 idle ticks, 106 kernel ticks, 282 user ticks
+Timer: 458 ticks
+Thread: 60 idle ticks, 100 kernel ticks, 298 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 19217 reads, 6149 writes
+hd0:1: 18970 reads, 6148 writes
 hd1:0: 225 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1428 characters output
+Console: 1467 characters output
 Keyboard: 0 keys pressed
-Exception: 290 page faults
+Exception: 291 page faults
 Powering off...

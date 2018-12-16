@@ -1,12 +1,1 @@
-FAIL
-Extracted file system contents are not correct.
-tar is missing from the file system.
-
-Actual contents of file system:
-abc: directory
-dir-over-file: 54167-byte file
-
-Expected contents of file system:
-abc: directory
-dir-over-file: 54167-byte file
-tar: 59609-byte file
+PASS

@@ -1,7 +1,7 @@
-Copying tests/filesys/extended/grow-root-lg into /tmp/nCGYw3EKfJ.dsk...
-Copying tests/filesys/extended/tar into /tmp/nCGYw3EKfJ.dsk...
-Writing command line to /tmp/i_HEqiR8Ib.dsk...
-qemu -hda /tmp/i_HEqiR8Ib.dsk -hdb tmp.dsk -hdc /tmp/nCGYw3EKfJ.dsk -hdd /tmp/UunAiqpyP5.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/grow-root-lg into /tmp/mn8DDpCuZW.dsk...
+Copying tests/filesys/extended/tar into /tmp/mn8DDpCuZW.dsk...
+Writing command line to /tmp/_Khb7oxyPD.dsk...
+qemu -hda /tmp/_Khb7oxyPD.dsk -hdb tmp.dsk -hdc /tmp/mn8DDpCuZW.dsk -hdd /tmp/0FnWXKC727.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put grow-root-lg put tar run grow-root-lg
 0xc002f000
 Pintos booting with 4,088 kB RAM...
@@ -70,10 +70,10 @@ Executing 'grow-root-lg':
 (grow-root-lg) end
 grow-root-lg: exit(0)
 Execution of 'grow-root-lg' complete.
-Timer: 184 ticks
-Thread: 0 idle ticks, 128 kernel ticks, 56 user ticks
+Timer: 194 ticks
+Thread: 0 idle ticks, 132 kernel ticks, 62 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 8192 reads, 601 writes
+hd0:1: 8175 reads, 606 writes
 hd1:0: 227 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 3250 characters output

@@ -1,7 +1,7 @@
-Copying tests/filesys/extended/dir-open into /tmp/fuoC_afIeU.dsk...
-Copying tests/filesys/extended/tar into /tmp/fuoC_afIeU.dsk...
-Writing command line to /tmp/IgxChPJ1oA.dsk...
-qemu -hda /tmp/IgxChPJ1oA.dsk -hdb tmp.dsk -hdc /tmp/fuoC_afIeU.dsk -hdd /tmp/tChcUEqyT1.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/dir-open into /tmp/9RODEKGbtv.dsk...
+Copying tests/filesys/extended/tar into /tmp/9RODEKGbtv.dsk...
+Writing command line to /tmp/abIYyQGyhB.dsk...
+qemu -hda /tmp/abIYyQGyhB.dsk -hdb tmp.dsk -hdc /tmp/9RODEKGbtv.dsk -hdd /tmp/jlrGvBtahP.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put dir-open put tar run dir-open
 0xc002f000
 Pintos booting with 4,088 kB RAM...
@@ -24,10 +24,10 @@ Executing 'dir-open':
 (dir-open) end
 dir-open: exit(0)
 Execution of 'dir-open' complete.
-Timer: 76 ticks
-Thread: 0 idle ticks, 75 kernel ticks, 1 user ticks
+Timer: 75 ticks
+Thread: 1 idle ticks, 71 kernel ticks, 3 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 851 reads, 461 writes
+hd0:1: 834 reads, 461 writes
 hd1:0: 226 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 1053 characters output

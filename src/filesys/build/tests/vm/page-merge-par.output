@@ -1,7 +1,7 @@
-Copying tests/vm/page-merge-par into /tmp/snZz4yU0Gq.dsk...
-Copying tests/vm/child-sort into /tmp/snZz4yU0Gq.dsk...
-Writing command line to /tmp/hkTS57p3La.dsk...
-qemu -hda /tmp/hkTS57p3La.dsk -hdb /tmp/RcgFWcCCE0.dsk -hdc /tmp/snZz4yU0Gq.dsk -hdd /tmp/sh6PTtIZaC.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-merge-par into /tmp/ALvWbkA0Sj.dsk...
+Copying tests/vm/child-sort into /tmp/ALvWbkA0Sj.dsk...
+Writing command line to /tmp/gzkHgkEK46.dsk...
+qemu -hda /tmp/gzkHgkEK46.dsk -hdb /tmp/iCuftcim41.dsk -hdc /tmp/ALvWbkA0Sj.dsk -hdd /tmp/vzsESQshqj.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-merge-par put child-sort run page-merge-par
 0xc002f000
 Pintos booting with 4,088 kB RAM...
@@ -32,16 +32,18 @@ child-sort: exit(123)
 (page-merge-par) sort chunk 6
 (page-merge-par) sort chunk 7
 child-sort: exit(123)
+load: chil: open failed
+chil: exit(-1)
 (page-merge-par) exec "child-sort buf7": FAILED
 page-merge-par: exit(1)
 Execution of 'page-merge-par' complete.
-Timer: 437 ticks
-Thread: 31 idle ticks, 164 kernel ticks, 242 user ticks
+Timer: 421 ticks
+Thread: 60 idle ticks, 102 kernel ticks, 259 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 19529 reads, 6414 writes
+hd0:1: 19262 reads, 6402 writes
 hd1:0: 220 reads, 0 writes
 hd1:1: 0 reads, 0 writes
-Console: 1415 characters output
+Console: 1454 characters output
 Keyboard: 0 keys pressed
-Exception: 514 page faults
+Exception: 515 page faults
 Powering off...

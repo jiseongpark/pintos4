@@ -1,7 +1,7 @@
-Copying tests/vm/mmap-over-code into /tmp/f3uYY7WBt4.dsk...
-Copying ../../tests/vm/sample.txt into /tmp/f3uYY7WBt4.dsk...
-Writing command line to /tmp/MZwV6t0y27.dsk...
-qemu -hda /tmp/MZwV6t0y27.dsk -hdb /tmp/cGYgRTnHZd.dsk -hdc /tmp/f3uYY7WBt4.dsk -hdd /tmp/7Uh1bnm2Oy.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/mmap-over-code into /tmp/6bx63flXzP.dsk...
+Copying ../../tests/vm/sample.txt into /tmp/6bx63flXzP.dsk...
+Writing command line to /tmp/Yr8jW4wMcA.dsk...
+qemu -hda /tmp/Yr8jW4wMcA.dsk -hdb /tmp/hdaoUlUPPX.dsk -hdc /tmp/6bx63flXzP.dsk -hdd /tmp/QialwcYWZm.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put mmap-over-code put sample.txt run mmap-over-code
 0xc002f000
 Pintos booting with 4,088 kB RAM...
@@ -22,10 +22,10 @@ Executing 'mmap-over-code':
 (mmap-over-code) end
 mmap-over-code: exit(0)
 Execution of 'mmap-over-code' complete.
-Timer: 66 ticks
-Thread: 0 idle ticks, 65 kernel ticks, 1 user ticks
+Timer: 65 ticks
+Thread: 0 idle ticks, 64 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 443 reads, 220 writes
+hd0:1: 428 reads, 220 writes
 hd1:0: 107 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 1067 characters output

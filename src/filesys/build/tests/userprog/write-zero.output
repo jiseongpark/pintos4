@@ -1,7 +1,7 @@
-Copying tests/userprog/write-zero into /tmp/dXp6IAKtyq.dsk...
-Copying ../../tests/userprog/sample.txt into /tmp/dXp6IAKtyq.dsk...
-Writing command line to /tmp/LqhgAfngQr.dsk...
-qemu -hda /tmp/LqhgAfngQr.dsk -hdb /tmp/4ZqmLROqZB.dsk -hdc /tmp/dXp6IAKtyq.dsk -hdd /tmp/0R7kbKG10c.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/write-zero into /tmp/TvZTyH3okS.dsk...
+Copying ../../tests/userprog/sample.txt into /tmp/TvZTyH3okS.dsk...
+Writing command line to /tmp/mVq314n5j9.dsk...
+qemu -hda /tmp/mVq314n5j9.dsk -hdb /tmp/1O76PLiHpQ.dsk -hdc /tmp/TvZTyH3okS.dsk -hdd /tmp/ciDFBDkc0C.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put write-zero put sample.txt run write-zero
 0xc002f000
 Pintos booting with 4,088 kB RAM...
@@ -21,10 +21,10 @@ Executing 'write-zero':
 (write-zero) end
 write-zero: exit(0)
 Execution of 'write-zero' complete.
-Timer: 58 ticks
-Thread: 0 idle ticks, 58 kernel ticks, 1 user ticks
+Timer: 64 ticks
+Thread: 0 idle ticks, 63 kernel ticks, 1 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 441 reads, 216 writes
+hd0:1: 426 reads, 217 writes
 hd1:0: 106 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 984 characters output

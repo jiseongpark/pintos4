@@ -1,14 +1,1 @@
-FAIL
-Extracted file system contents are not correct.
-tar is missing from the file system.
-
-Actual contents of file system:
-a: 8143-byte file
-b: 8143-byte file
-grow-two-files: 55949-byte file
-
-Expected contents of file system:
-a: 8143-byte file
-b: 8143-byte file
-grow-two-files: 55949-byte file
-tar: 59609-byte file
+PASS

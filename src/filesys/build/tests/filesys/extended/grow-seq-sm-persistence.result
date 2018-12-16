@@ -1,12 +1,1 @@
-FAIL
-Extracted file system contents are not correct.
-tar is missing from the file system.
-
-Actual contents of file system:
-grow-seq-sm: 54375-byte file
-testme: 5678-byte file
-
-Expected contents of file system:
-grow-seq-sm: 54375-byte file
-tar: 59609-byte file
-testme: 5678-byte file
+PASS

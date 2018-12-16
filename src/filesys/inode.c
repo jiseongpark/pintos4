@@ -11,6 +11,7 @@
 
 
 
+
 /* Returns the number of sectors to allocate for an inode SIZE
    bytes long. */
 static inline size_t
@@ -29,7 +30,7 @@ static bool inode_disk_allocate(struct inode_disk *inode_disk, size_t sectors);
    INODE.
    Returns -1 if INODE does not contain data for a byte at offset
    POS. */
-static disk_sector_t
+disk_sector_t
 byte_to_sector (const struct inode *inode, off_t pos) 
 {
   ASSERT (inode != NULL);
@@ -187,6 +188,7 @@ inode_get_inumber (const struct inode *inode)
 void
 inode_close (struct inode *inode) 
 {
+  
   /* Ignore null pointer. */
   if (inode == NULL)
     return;
@@ -312,6 +314,7 @@ inode_write_at (struct inode *inode, const void *buffer_, off_t size,
       disk_sector_t sector_idx = byte_to_sector (inode, offset);
       int sector_ofs = offset % DISK_SECTOR_SIZE;
 
+
       /* Bytes left in inode, bytes left in sector, lesser of the two. */
       off_t inode_left = inode_length (inode) - offset;
       int sector_left = DISK_SECTOR_SIZE - sector_ofs;
@@ -413,7 +416,6 @@ static bool inode_disk_allocate(struct inode_disk *inode_disk, size_t sectors)
 
   /* single indirect */
   size_t idi = sectors - 123 > 128 ? 128 : sectors - 123;
-
   if(! inode_indirect_alloc(inode_disk, idi, 0))
       return false;
 
@@ -423,7 +425,6 @@ static bool inode_disk_allocate(struct inode_disk *inode_disk, size_t sectors)
   /* doubly indirect */
   size_t didi = sectors - 123 - 128;
   ASSERT(didi <= 128*128);
-
   if(!inode_indirect_alloc(inode_disk, didi, 1))
     return false;
 
@@ -440,7 +441,7 @@ static bool inode_indirect_alloc(struct inode_disk *inode_disk, size_t sectors, 
   static char zeros[DISK_SECTOR_SIZE];
 
   // printf("new\n");
-
+  // printf("SECTORS : %d %d\n", sectors, level);
   if(level == 0)
   {
     if(inode_disk->indirect != 0){
@@ -481,8 +482,14 @@ A:
 
   if(level == 1)
   {
+    int i = 0, j = 0;
     // printf("entered here mangham\n");
     // printf("dindirect : %x\n", inode_disk->dindirect);
+    if(inode_disk->dindirect != 0){
+      buffer_cache_read(inode_disk->dindirect, iid);
+      goto B;
+    }
+
     buffer_cache_write(inode_disk->dindirect, zeros);
     if(!free_map_allocate(1, &inode_disk->dindirect)){
       free(iid);
@@ -490,23 +497,27 @@ A:
       return false;
     }
     // buffer_cache_write(inode_disk->dindirect, zeros);
-
-    int i = 0, j = 0;
+B:
     
     
-    buffer_cache_read(inode_disk->dindirect, (void*) iid);
+    // printf("IID : %d\n", inode_disk->dindirect);
+    // buffer_cache_read(inode_disk->dindirect, (void*) iid);
 
     for(; i < sectors / 128 + 1; i++)
     {
       
       // buffer_cache_write(iid->sec_num[i], zeros);
-      if(!free_map_allocate(1, &iid->sec_num[i])){
-        free(iid);
-        free(diid);
-        return false;
+      if(iid->sec_num[i] == 0){
+
+        if(!free_map_allocate(1, &iid->sec_num[i])){
+          free(iid);
+          free(diid);
+          return false;
+        }
+        buffer_cache_write(iid->sec_num[i], zeros);
       }
       // printf("IID SEC : %d\n",iid->sec_num[i]);
-      buffer_cache_write(iid->sec_num[i], zeros);
+      
       buffer_cache_read(iid->sec_num[i], (void*) diid);
       int wtf = i == sectors/128 ? sectors%128 : 128;
       // printf("WTH : %d\n", wtf);
@@ -575,6 +586,7 @@ static void inode_indirect_free(struct inode_disk *inode_disk, size_t sectors, i
 
     buffer_cache_read(inode_disk->indirect, (void*) iid);
     for(; i < sectors; i++){
+      // printf("SEC NUM : %d\n", iid->sec_num[i]);
       free_map_release(iid->sec_num[i], 1);
     }
   }
@@ -583,10 +595,10 @@ static void inode_indirect_free(struct inode_disk *inode_disk, size_t sectors, i
   {
     int i = 0, j = 0;
     buffer_cache_read(inode_disk->indirect, (void*) iid);
-    for(; i < sectors / 128; i++)
+    for(; i < sectors / 128 + 1; i++)
     {
       buffer_cache_read(iid->sec_num[j], (void*) diid);
-      int wtf = i == sectors/128 -1 ? sectors%128 : 128;
+      int wtf = i == sectors/128 ? sectors%128 : 128;
       for(j = 0; j < wtf; j++)
       {
         free_map_release(diid->sec_num[j], 1);

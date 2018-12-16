@@ -1,7 +1,7 @@
-Copying tests/userprog/exec-once into /tmp/EEosnlLUfy.dsk...
-Copying tests/userprog/child-simple into /tmp/EEosnlLUfy.dsk...
-Writing command line to /tmp/z070eH9gNN.dsk...
-qemu -hda /tmp/z070eH9gNN.dsk -hdb /tmp/6KKxWOyjPo.dsk -hdc /tmp/EEosnlLUfy.dsk -hdd /tmp/ze169pCXNF.dsk -m 4 -net none -nographic -monitor null
+Copying tests/userprog/exec-once into /tmp/lI5QV3UQgV.dsk...
+Copying tests/userprog/child-simple into /tmp/lI5QV3UQgV.dsk...
+Writing command line to /tmp/kFemqDBHq7.dsk...
+qemu -hda /tmp/kFemqDBHq7.dsk -hdb /tmp/4K6dmtpvoV.dsk -hdc /tmp/lI5QV3UQgV.dsk -hdd /tmp/dQc72pfvrj.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put exec-once put child-simple run exec-once
 0xc002f000
 Pintos booting with 4,088 kB RAM...
@@ -23,9 +23,9 @@ child-simple: exit(81)
 exec-once: exit(0)
 Execution of 'exec-once' complete.
 Timer: 73 ticks
-Thread: 0 idle ticks, 70 kernel ticks, 3 user ticks
+Thread: 0 idle ticks, 71 kernel ticks, 2 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 826 reads, 420 writes
+hd0:1: 792 reads, 421 writes
 hd1:0: 207 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 992 characters output

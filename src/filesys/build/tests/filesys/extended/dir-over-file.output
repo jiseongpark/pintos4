@@ -1,13 +1,13 @@
-Copying tests/filesys/extended/dir-over-file into /tmp/LMOuZMWY90.dsk...
-Copying tests/filesys/extended/tar into /tmp/LMOuZMWY90.dsk...
-Writing command line to /tmp/md0h_ENAJd.dsk...
-qemu -hda /tmp/md0h_ENAJd.dsk -hdb tmp.dsk -hdc /tmp/LMOuZMWY90.dsk -hdd /tmp/Mv8xzbhQFs.dsk -m 4 -net none -nographic -monitor null
+Copying tests/filesys/extended/dir-over-file into /tmp/KZf2rAqO8H.dsk...
+Copying tests/filesys/extended/tar into /tmp/KZf2rAqO8H.dsk...
+Writing command line to /tmp/wbu2uvZE48.dsk...
+qemu -hda /tmp/wbu2uvZE48.dsk -hdb tmp.dsk -hdc /tmp/KZf2rAqO8H.dsk -hdd /tmp/K_3qJpI0KU.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put dir-over-file put tar run dir-over-file
 0xc002f000
 Pintos booting with 4,088 kB RAM...
 367 pages available in kernel pool.
 367 pages available in user pool.
-Calibrating timer...  419,430,400 loops/s.
+Calibrating timer...  419,020,800 loops/s.
 hd0:0: detected 161 sector (80 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 225 sector (112 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -22,10 +22,10 @@ Executing 'dir-over-file':
 (dir-over-file) end
 dir-over-file: exit(0)
 Execution of 'dir-over-file' complete.
-Timer: 86 ticks
-Thread: 0 idle ticks, 85 kernel ticks, 1 user ticks
+Timer: 75 ticks
+Thread: 0 idle ticks, 73 kernel ticks, 2 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 851 reads, 461 writes
+hd0:1: 834 reads, 461 writes
 hd1:0: 225 reads, 0 writes
 hd1:1: 0 reads, 0 writes
 Console: 1041 characters output

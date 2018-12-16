@@ -1,13 +1,13 @@
-Copying tests/vm/page-merge-seq into /tmp/tXWBcAwelK.dsk...
-Copying tests/vm/child-sort into /tmp/tXWBcAwelK.dsk...
-Writing command line to /tmp/8LmTZ79gIP.dsk...
-qemu -hda /tmp/8LmTZ79gIP.dsk -hdb /tmp/fFQShtMQFg.dsk -hdc /tmp/tXWBcAwelK.dsk -hdd /tmp/56jeqF8ay8.dsk -m 4 -net none -nographic -monitor null
+Copying tests/vm/page-merge-seq into /tmp/CYFFKWnYOC.dsk...
+Copying tests/vm/child-sort into /tmp/CYFFKWnYOC.dsk...
+Writing command line to /tmp/YdXcZahWQB.dsk...
+qemu -hda /tmp/YdXcZahWQB.dsk -hdb /tmp/U8tH1ekUVg.dsk -hdc /tmp/CYFFKWnYOC.dsk -hdd /tmp/ygk9qNeTK2.dsk -m 4 -net none -nographic -monitor null
 Kernel command line: -q -f put page-merge-seq put child-sort run page-merge-seq
 0xc002f000
 Pintos booting with 4,088 kB RAM...
 367 pages available in kernel pool.
 367 pages available in user pool.
-Calibrating timer...  471,040,000 loops/s.
+Calibrating timer...  419,430,400 loops/s.
 hd0:0: detected 161 sector (80 kB) disk, model "QEMU HARDDISK", serial "QM00001"
 hd0:1: detected 4,032 sector (1 MB) disk, model "QEMU HARDDISK", serial "QM00002"
 hd1:0: detected 218 sector (109 kB) disk, model "QEMU HARDDISK", serial "QM00003"
@@ -56,10 +56,10 @@ child-sort: exit(123)
 (page-merge-seq) end
 page-merge-seq: exit(0)
 Execution of 'page-merge-seq' complete.
-Timer: 361 ticks
-Thread: 11 idle ticks, 200 kernel ticks, 150 user ticks
+Timer: 354 ticks
+Thread: 15 idle ticks, 208 kernel ticks, 131 user ticks
 hd0:0: 0 reads, 0 writes
-hd0:1: 12739 reads, 4602 writes
+hd0:1: 12452 reads, 4604 writes
 hd1:0: 218 reads, 0 writes
 hd1:1: 544 reads, 1688 writes
 Console: 1950 characters output
